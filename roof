@@ -1,0 +1,12 @@
+local m = {}
+
+function round(n, d)
+local mult = 10 ^ (d or 0)
+return math.floor(n * mult + 0.5) / mult
+end
+
+function m.dec_to_in(d, f)
+local d, f = d, f
+if (d >= 1) then
+local w = round(d)
+d = d - w
