@@ -1,7 +1,6 @@
 # import package and making objects
 import turtle
 
-
 sc=turtle.Screen()
 trtl=turtle.Turtle()
 

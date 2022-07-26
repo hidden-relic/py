@@ -1,24 +1,22 @@
-from pytube import YouTube, Search
+from pytube import YouTube, Search, Playlist
 from pytube.cli import on_progress
 from validators import url as is_url
 from time import sleep
 from sys import exit as ex
 import datetime
 
-
 def red(t):
     return "\033[91m {}\033[00m".format(t)
-
 
 def green(t):
     return "\033[92m {}\033[00m".format(t)
 
-
 def get_vid(query, title):
     yt = YouTube(query, on_progress_callback=on_progress)
-    yt.streams.filter(only_audio=True).first().download(output_path='C:\giz')
+    yt.streams.filter(only_audio=True).first().download(output_path='C:\giz\music')
     print('Getting '+title+'...', '(:')
 
+Playlist.
 
 def main():
 
