@@ -4,39 +4,39 @@ from os.path import exists as file_exists
 
 def convert(m):
     dec_ft = m/12
-    ret_ft = int(m/12)
-    dec_in = (dec_ft-ret_ft)*12
-    ret_in = int(dec_in)
-    ret_fr = fractions.Fraction(dec_in-ret_in)
-    ret_fr = ret_fr.limit_denominator(8)
-    if ret_fr == 0:
-        ret_fr = ''
-    return ret_ft, ret_in, ret_fr
+ret_ft = int(m/12)
+dec_in = (dec_ft-ret_ft)*12
+ret_in = int(dec_in)
+ret_fr = fractions.Fraction(dec_in-ret_in)
+ret_fr = ret_fr.limit_denominator(8)
+if ret_fr == 0:
+ret_fr = ''
+return ret_ft, ret_in, ret_fr
 
 def bounds(vert=0, horz=0):
-    top = ['top', 't']
-    bot = ['bottom', 'b']
-    left = ['left', 'l']
-    right = ['right', 'r']
-    if vert in top:
-        vert = 700
-    elif vert in bot:
-        vert = -50
-    elif vert in left:
-        vert = 0
-    elif vert in right:
-        vert = 1200
-    if horz in left:
-        horz = 0
-    elif horz in right:
-        horz = 1200
-    if vert != 0 and horz == 0:
-        return vert
-    if vert != 0 and horz != 0:
-        return (horz, vert)
-    if vert == 0 and horz != 0:
-        return horz
-    return (horz, vert)
+top = ['top', 't']
+bot = ['bottom', 'b']
+left = ['left', 'l']
+right = ['right', 'r']
+if vert in top:
+vert = 700
+elif vert in bot:
+vert = -50
+elif vert in left:
+vert = 0
+elif vert in right:
+vert = 1200
+if horz in left:
+horz = 0
+elif horz in right:
+horz = 1200
+if vert != 0 and horz == 0:
+return vert
+if vert != 0 and horz != 0:
+return (horz, vert)
+if vert == 0 and horz != 0:
+return horz
+return (horz, vert)
 
 # class log:
 # current_pos_x = 0
@@ -111,33 +111,33 @@ class deck:
         self.inch = 8*self.scale
 #self.log('SCALED\tinch: ' + str(self.inch) + ' width: ' + str(self.width*self.inch) + ' length: ' + str(self.length*self.inch) + ' material: ' + str(self.material*self.inch) + ' overhang: ' + str(self.overhang*self.inch) + ' gap: ' + str(self.gap*self.inch))
 
-    def f(self, n):
-        self.t.forward(self.inch*n)
+def f(self, n):
+self.t.forward(self.inch*n)
 #self.log()
 
-    def b(self, n):
-        self.t.backward(self.inch*n)
+def b(self, n):
+self.t.backward(self.inch*n)
 #self.log()
 
-    def l(self, d):
-        self.t.left(d)
-    def r(self, d):
-    self.t.right(d)
-    def g(self, xy):
-    self.u()
-    self.t.goto(xy)
-    #self.log()
-    self.d()
-    def u(self):
-    self.t.penup()
-    def d(self):
-    self.t.pendown()
-    def x(self, n):
-    self.g((self.t.xcor()+(n*self.inch), self.t.ycor()))
-    def y(self, n):
-    self.g((self.t.xcor(), self.t.ycor()+(n*self.inch)))
-    def w(self, arg, align='center', font='Verdana', fontsize=6):
-    self.t.write(arg, align=align, font=(font, fontsize))
+def l(self, d):
+self.t.left(d)
+def r(self, d):
+self.t.right(d)
+def g(self, xy):
+self.u()
+self.t.goto(xy)
+#self.log()
+self.d()
+def u(self):
+self.t.penup()
+def d(self):
+self.t.pendown()
+def x(self, n):
+self.g((self.t.xcor()+(n*self.inch), self.t.ycor()))
+def y(self, n):
+self.g((self.t.xcor(), self.t.ycor()+(n*self.inch)))
+def w(self, arg, align='center', font='Verdana', fontsize=6):
+self.t.write(arg, align=align, font=(font, fontsize))
 
 def setMaterial(self, n):
 self.mat_width = n

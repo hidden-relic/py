@@ -1,22 +1,40 @@
-from pytube import YouTube, Search, Playlist
+from pytube import YouTube, Search
 from pytube.cli import on_progress
 from validators import url as is_url
+from os.path import exists as file_exists
 from time import sleep
 from sys import exit as ex
 import datetime
 
+music_dir = '/storage/emulated/0/Music/'
+
 def red(t):
     return "\033[91m {}\033[00m".format(t)
+
 
 def green(t):
     return "\033[92m {}\033[00m".format(t)
 
-def get_vid(query, title):
-    yt = YouTube(query, on_progress_callback=on_progress)
-    yt.streams.filter(only_audio=True).first().download(output_path='C:\giz\music')
-    print('Getting '+title+'...', '(:')
 
-Playlist.
+def get_vid(query, title):
+    
+    def on_complete(stream, file_path):
+    	print('<< GOT: '+file_path)
+    	print('<< Roll the dice on lyrics? [Y]es or [N]o')
+    	caption=yt.captions.get_by_language_code['en'] if input() == 'y' else False
+    	if caption:
+    		file = music_dir+title+'.txt'
+    		lyrics = caption.generate_srt_captions()
+    		mode = 'w' if file_exists(file) else 'c'
+    		f = open(file, mode)
+    		f.write(lyrics)
+    		f.close()
+    		print('<< GOT: '+title+' lyrics')
+
+    print('<< GET: '+title+'...', '(:')
+    yt = YouTube(query, on_progress_callback=on_progress, on_complete_callback=on_complete)
+    yt.streams.filter(only_audio=True).first().download(output_path=music_dir)
+    
 
 def main():
 
@@ -27,8 +45,8 @@ def main():
     while t:
         lucky = 'ON' if luck else 'OFF'
 
-        print('<< Enter a valid YouTube URL or the title of a video',
-              '<< [D]ownload the list or [Q]uit')
+        print('<< Enter a valid YouTube URL or the title of a video')
+        print('<< [D]ownload the list or [Q]uit')
         print('<< Feeling Lucky is '+lucky+' ([L]ucky Toggle)')
         query = input('>> ')
 

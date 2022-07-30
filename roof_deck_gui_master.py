@@ -1,7 +1,17 @@
+#pylint:disable=R0902
+#pylint:disable=R1705
+#pylint:disable=C0103
+#pylint:disable=C0301
+#pylint:disable=R0915
+#pylint:disable=E1101
+#pylint:disable=W0602
+#pylint:disable=C0116
+#pylint:disable=E0001
 import math
 import fractions
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk
+from tkinter import messagebox
 from turtle import RawTurtle
 
 myfont = ('Verdana', 10)

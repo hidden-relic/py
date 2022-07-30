@@ -1,5 +1,6 @@
 import turtle as turt
 
+turt.tracer(8, 0)
 screen = {}
 
 def rgb_to_hex(rgb):
@@ -20,30 +21,27 @@ def gradient(n):
     return rgb_codes
     
 def main():
-        global screen
-        t = turt.Turtle()
-        turt.tracer(50, 50)
-        info = turt.Turtle()
-        screen = t.getscreen()
-        info.speed(0)
-        info.pu()
-        info.ht()
-        t.speed(0)
-        t.ht()
-        steps = int(turt.numinput("iterations", "how many lines?"))
-        t.pu()
-        t.goto(-steps, steps)
-        t.pd()
-        angle = int(turt.numinput("angle", "angle to turn after each line"))
-        colors = gradient(steps)
-        for i in range(0, steps):
-                t.color(colors[i])
-                for face in range(0, 7):
-                        info.clear()
-                        info.write("line: " + str(i+1) + "\nface: "+str(face+1)+"\ncolor: " + str(colors[i]))
-                        t.forward(steps-i)
-                        t.right(angle)
-        screen.onclick(done)
-        screen.mainloop()
+	global screen
+	t = turt.Turtle()
+	# info = turt.Turtle()
+	screen = t.getscreen()
+	# info.speed(0)
+	# info.pu()
+	# info.goto(-300, 600)
+	# info.ht()
+	t.speed(0)
+	t.ht()
+	steps = int(turt.numinput("iterations", "how many lines?"))
+	angle = int(turt.numinput("angle", "angle to turn after each line"))
+	colors = gradient(steps)
+	# t.setx(t.xcor()-steps/2)
+	for i in range(0, steps):
+		# info.clear()
+		# info.write("line: " + str(i+1) + "\ncolor: " + str(colors[i]))
+		t.color(colors[i])
+		t.circle(steps-i)
+		t.right(angle)
+	screen.onclick(done)
+	screen.mainloop()
 	
 main()

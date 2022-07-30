@@ -12,12 +12,12 @@ i = 0
 # start i out at 0
 while i < 500:		# ------- start of loop --------
 	turt.forward(i)  # draw a line whose length
-			# is the current value of i
+								 # is the current value of i
 	turt.right(91)	 # turn right 91 degrees, so we
-	 		# never fully make a square
-	i += 5	  	# set i to itself plus whatever
-		 	   # (5 here) for next iteration
-			 # ------- end of loop --------
+						 		# never fully make a square
+	i += 5			   	# set i to itself plus whatever
+						  	   # (5 here) for next iteration
+								 # ------- end of loop --------
 turtle.mainloop()
 # this just keeps the script running
 # when its finished instead of closing
