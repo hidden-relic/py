@@ -2,7 +2,7 @@ import tkinter as tk, threading
 import imageio
 from PIL import Image, ImageTk
 
-video_name = "/storage/emulated/0/DCIM/Camera/20220713_231436_001.mp4" #This is your video file path
+video_name = "" #This is your video file path
 video = imageio.get_reader(video_name)
 
 def stream(label):

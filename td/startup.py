@@ -11,8 +11,8 @@ class Player():
         self.score = 0
         self.wave = 0
         self.enemyCount = 0
-        self.diesound = pygame.mixer.Sound(os.path.join ('data', 'laugh.ogg'))
-        self.cheerSound = pygame.mixer.Sound(os.path.join ('data', 'cheer.ogg'))
+        self.diesound = pygame.mixer.Sound(os.path.join ('td\data', 'laugh.ogg'))
+        self.cheerSound = pygame.mixer.Sound(os.path.join ('td\data', 'cheer.ogg'))
 
 class MapChoice(pygame.sprite.Sprite):
     def __init__(self,x,y,type):
@@ -29,7 +29,7 @@ class MapChoice(pygame.sprite.Sprite):
         self.selected = 0
 
     def imgLoad(self):
-        imgbutt = pygame.image.load(os.path.join ('data', 'buttons.png'))
+        imgbutt = pygame.image.load(os.path.join ('td\data', 'buttons.png'))
 
         self.imgList = []
 

@@ -1,5 +1,3 @@
-import os
-print(os.getcwd())
 import pygame, enemySprites, mapbuilder, towerSprites
 from startup import *
 pygame.mixer.init()
@@ -10,11 +8,11 @@ def main():
 
     #Sounds
     pygame.mixer.stop()
-    backSound = pygame.mixer.Sound(os.path.join ('data', 'hifi.ogg'))
-    backSound2 = pygame.mixer.Sound(os.path.join ('data', 'crim.ogg'))
+    backSound = pygame.mixer.Sound(os.path.join ('td\data', 'hifi.ogg'))
+    backSound2 = pygame.mixer.Sound(os.path.join ('td\data', 'crim.ogg'))
     backSound.set_volume(1)
 ##    backSound2.set_volume(1)
-    shootSound = pygame.mixer.Sound(os.path.join ('data', 'gun.ogg'))
+    shootSound = pygame.mixer.Sound(os.path.join ('td\data', 'gun.ogg'))
     shootSound.set_volume(0.3)
 
     backSound.play(-1) # loop the background music

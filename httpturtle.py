@@ -14,10 +14,9 @@ f.close()
 f=open('C:\\giz\\'+filename, 'a')
 
 urls=[]
-for link in soup.find_all('a'):
-    urls.append(link.get('href'))
+for link in soup.find('div', 'sphinxsidebar', True).find_all('a'):
+    urls.append(link.get('href')) if (((urls.count(link.get('href')) < 1) and ('..' not in link.get('href'))) and ('.html' not in link.get('href'))) and ('.rst' not in link.get('href')) else ''
 
-urls = set(urls)
 count=0
 for link in urls:
     count+=1
@@ -26,7 +25,7 @@ for link in urls:
     reqs=requests.get(biglink)
     soup=BeautifulSoup(reqs.text, 'html.parser')
     # f.write(str(soup.get_text())+'\n')
-    page=str(soup.get_text().encode('utf-8'))
-    mytable=page.maketrans('\n', chr(32))
-    f.write('**********************'+link.translate(link.maketrans('', '', '#'))+'**********************\n\n'+page.translate(mytable)+'\n\n')
+    page=str(soup.find('section').get_text()).encode('utf-8').decode('ascii', 'ignore')
+    # mytable=page.maketrans('\n', chr(32))
+    f.write('**********************'+link.translate(link.maketrans('', '', '#'))+'**********************\n\n'+page+'\n\n')
 f.close()

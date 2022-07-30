@@ -6,7 +6,7 @@ t.tracer(56, 0)
 
 length=1
 a_or_b='b'
-dept=5
+dept=37
 turtle1 = t.Turtle()
 turtle2 = t.Turtle()
 log = t.Turtle()

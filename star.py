@@ -1,28 +1,36 @@
-from turtle import *
-import turtle
 
-turtle.tracer(8, 0)
+root=tkinter.Tk()
+# tracer(8, 0)
 
-tur = turtle.Turtle()
-tur.speed(6)
+tur = Turtle()
+cap=tkcap.CAP(root)
 tur.getscreen().bgcolor("black")
-tur.color("cyan")
-tur.penup()
-tur.goto((-200, -500))
-tur.pendown()
+# tur.penup()
+# tur.goto((-200, -500))
+# tur.pendown()
 
 def star(turtle, size):
     if size <= 10:
         return
     else:
+        turtle.write(turtle.pos())
         for i in range(8):
             
-
+            sleep(1)
             turtle.forward(size)
-            star(turtle, size/2.5)
+            star(turtle, size/3)
   
 
             turtle.left(45)
- 
-star(tur, 240)
-turtle.done()
+for i in range(0, 1000, 100):
+    print(i)
+    tur.speed(0)
+    tur.color("cyan")
+    tur.penup()
+    tur.sety(tur.ycor()-200)
+    tur.pendown()
+    star(tur, i)
+    # sleep(1)
+    cap.capture('C:\giz\SS.jpg')
+    tur.reset()
+tur.done()

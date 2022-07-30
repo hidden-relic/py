@@ -1,0 +1,7 @@
+{
+     "name": "data-raw",
+     "version": "0.0.1",
+     "title": "Data.raw grabber",
+     "author": "hidden_relic",
+     "factorio_version": ">= 1.1"
+   }
