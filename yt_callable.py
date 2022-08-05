@@ -4,10 +4,10 @@ from pytube.cli import on_progress
 from validators import url as is_url
 from time import sleep
 from sys import exit as ex
+from sys import platform as pf
 import datetime
 
-music_dir = '\\storage\\emulated\\o\\audio'  # Android
-music_dir = 'C:\\giz\\Music'  # PC
+music_dir = '\\storage\\emulated\\0\\audio' if pf == 'linux' else 'C:\\giz\\Music'
 
 
 def red(t):
@@ -28,7 +28,7 @@ def get_vid(query, title):
 def main():
 
     t = True
-    luck = True
+    luck = False
     queries = []
 
     while t:
