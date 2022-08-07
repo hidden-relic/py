@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import ttk
-from turtle import RawTurtle
-
+from tkinter import ttk, messagebox
+from turtle import Canvas, RawTurtle, TurtleScreen
+import fractions
+import math
 
 class Framing:
 	def __init__(self):
@@ -10,21 +11,59 @@ class Framing:
 		self.myfont = ("Verdana", 10)
 		self.infofont = ("Verdana", 8)
 		self.root = tk.Tk()
+		self.root.geometry(str(self.root.winfo_screenwidth())+'x'+str(self.root.winfo_screenheight())+'+0+0')
 		self.vals = {"ft": [], "in": []}
 		for i in range(0, 500):
 			self.vals["ft"].append(i)
 			if i < 12:
 				self.vals["in"].append(i)
 		self.myStyle=ttk.Style()
-		self.myStyle.configure('TNotebook.Tab', padding=[12, 12], font=('Helvetica', 10))
+		self.myStyle.configure('Main.TNotebook.Tab', padding=[52, 8], font=self.myfont)
+		self.myStyle.configure('Sub.TNotebook.Tab', padding=[27, 4], font=self.myfont)
 		# self.myStyle.configure('TNotebook', tabposition='wn')
+		self.offset=16
+		self.roof_data=[]
+		self.deck_data=[]
+		self.resetData()
+
 		self.buildNotebooks()
 		self.buildRoofTab()
 		self.buildDeckTab()
 
+	def applyOffset(self, t):
+		return (t[0]+self.offset, t[1]-self.offset)
+	def applyScale(self, t):
+		return (t[0]*self.scale, t[1]*self.scale)
+	def fix(self, t):
+		return self.applyOffset(self.applyScale(t))
 
 
-	def buildMeasurementInput(self, parent, text, ft=True, inch=True, fr=True):
+	def f(self, n):
+		self.t.forward(self.fix(n))
+	def b(self, n):
+		self.t.backward(self.fix(n))
+			
+	def l(self, d):
+		self.t.left(d)
+	def r(self, d):
+		self.t.right(d)
+	
+	def g(self, x, y):
+		self.u()
+		self.t.goto(x, y)
+		self.d()
+
+	def u(self):
+		self.t.penup()
+	def d(self):
+		self.t.pendown()
+	
+	def x(self, n):
+		self.g(self.t.xcor()+n, self.t.ycor())
+	def y(self, n):
+		self.g(self.t.xcor(), self.t.ycor()+n)
+
+	def buildMeasurementInput(self, parent, text, ft=True, inch=True, fr=True, defFt=0, defIn=0):
 		o = {"ft": False, "in": False, "fr": False}
 		base_frame=tk.Frame(parent)
 		base_frame.pack(ipady=6)
@@ -40,7 +79,7 @@ class Framing:
 			tk.Label(ft_frame, text="ft.", font=self.myfont).pack(padx=6, ipadx=6)
 			ft = ttk.Combobox(ft_frame, height=20, width=6, values=tuple(self.vals["ft"]), font=self.myfont, state="readonly")
 			ft.pack(padx=6, pady=6, ipadx=6)
-			ft.set(10)
+			ft.set(defFt)
 			return ft
 
 		def buildMIn(self):
@@ -50,7 +89,7 @@ class Framing:
 			tk.Label(in_frame, text="in.", font=self.myfont).pack(padx=6, ipadx=6)
 			inch = ttk.Combobox(in_frame, height=20, width=6, values=tuple(self.vals["in"]), font=self.myfont, state="readonly")
 			inch.pack(padx=6, pady=6, ipadx=6)
-			inch.set(0)
+			inch.set(defIn)
 			return inch
 
 		def buildMFr(self):
@@ -75,10 +114,63 @@ class Framing:
 
 	def buildSep(self, parent):
 		ttk.Separator(parent, orient="horizontal").pack(fill="both", pady=12)
+
+	def resetRoofData(self):
+		if bool(self.roof_data):
+			del self.roof_data
+		self.roof_data=[]
+
+	def resetDeckData(self):
+		if bool(self.deck_data):
+			del self.deck_data
+		self.deck_data=[]
+
+	def resetData(self):
+		self.resetRoofData()
+		self.resetDeckData()
+
+	def addRoofData(self, var):
+		row=0 if not bool(self.roof_data) else len(self.roof_data)
+		data=tk.StringVar()
+		lbl_name=tk.Label(self.roof_data_frame, text=var, font=self.myfont).grid(column=0, row=row)
+		lbl_data=tk.Label(self.roof_data_frame, textvariable=data, font=self.myfont).grid(column=1, row=row)
+		self.roof_data.append([lbl_name, lbl_data])
+		return data
+
+	def addDeckData(self, var):
+		col=0 if bool(self.deck_data) else len(self.deck_data)
+		data=tk.StringVar()
+		lbl_name=tk.Label(self.deck_data_frame, text=var, font=self.myfont).grid(column=col, row=0)
+		lbl_data=tk.Label(self.deck_data_frame, textvariable=data, font=self.myfont).grid(column=col, row=1)
+		self.deck_data.append([lbl_name, lbl_data])
+		return data
+
+	def toInch(self, o):
+		ret = (float(o["ft"].get())*12) if bool(o["ft"]) else 0.0
+		ret += (float(o["in"].get())) if bool(o["in"]) else 0.0
+		ret += (float(fractions.Fraction(o["fr"].get()))) if bool(o["fr"]) else 0.0
+		return ret
+
+	def fromInch(self, i):
+		string=''
+		i_int = int(i)
+		string+=str(math.floor(i_int/12))+"' " if math.floor(i_int/12) > 0 else ''
+		string+=str(round(i_int % 12))+' '
+		string+=str(fractions.Fraction(i-i_int).limit_denominator(16))+' "' if fractions.Fraction(i-i_int).limit_denominator(16) != (0, 1) else ' "'
+		return string
+
+	def toDegree(self, pitch):
+		return math.degrees(math.atan(pitch/12))
+
+	def supplementary(self, degree):
+		return 90 - degree
 	
+	def getLeg(self, a, b):
+		return math.sqrt((a**2)+(b**2))
+
 	def buildNotebooks(self):
 		def mainNotebook(self):
-			self.main_notebook=ttk.Notebook(self.root)
+			self.main_notebook=ttk.Notebook(self.root, style='Main.TNotebook')
 			self.main_notebook.pack(fill='both')
 			self.roof_tab=tk.Frame(self.main_notebook)
 			self.roof_tab.pack(pady=6, ipady=6, fill='x')
@@ -89,7 +181,7 @@ class Framing:
    
 		def subNotebook(self):
 			def subRoofTab(self):
-				self.sub_notebook_roof=ttk.Notebook(self.roof_tab, style='TNotebook')
+				self.sub_notebook_roof=ttk.Notebook(self.roof_tab, style='Sub.TNotebook')
 				self.sub_notebook_roof.pack(fill='both')
 				self.roof_input_tab=tk.Frame(self.sub_notebook_roof)
 				self.roof_input_tab.pack()
@@ -98,10 +190,10 @@ class Framing:
 				self.roof_data_tab.pack()
 				self.sub_notebook_roof.add(self.roof_data_tab, text='Data')
 				self.roof_draw_tab=tk.Frame(self.sub_notebook_roof)
-				self.roof_draw_tab.pack(fill='both')
+				self.roof_draw_tab.pack(fill='both', expand=True)
 				self.sub_notebook_roof.add(self.roof_draw_tab, text='Draw')
 			def subDeckTab(self):
-				self.sub_notebook_deck=ttk.Notebook(self.deck_tab)
+				self.sub_notebook_deck=ttk.Notebook(self.deck_tab, style='Sub.TNotebook')
 				self.sub_notebook_deck.pack(fill='both')
 				self.deck_input_tab=tk.Frame(self.sub_notebook_deck)
 				self.deck_input_tab.pack()
@@ -123,27 +215,40 @@ class Framing:
 
 	def buildRoofTab(self):
 		def buildRoofInput(self):
-			self.buildSep(self.roof_input_tab)
-			self.roof_width=self.buildMeasurementInput(self.roof_input_tab, "Width of Building")
-			self.buildSep(self.roof_input_tab)
-			self.roof_depth=self.buildMeasurementInput(self.roof_input_tab, "Depth of Building")
-			self.buildSep(self.roof_input_tab)
+			self.roof_input_measurement_grid=tk.Frame(self.roof_input_tab)
+			self.roof_input_measurement_grid.grid(column=0, row=0)
+			self.roof_width=self.buildMeasurementInput(self.roof_input_measurement_grid, "Width of Building", defFt=8)
+			self.buildSep(self.roof_input_measurement_grid)
+			self.roof_depth=self.buildMeasurementInput(self.roof_input_measurement_grid, "Depth of Building", defFt=10)
+			self.buildSep(self.roof_input_measurement_grid)
+			self.roof_ridge=self.buildMeasurementInput(self.roof_input_measurement_grid, "Ridge Thickness", ft=False, defIn=1)
+			self.roof_input_other_grid=tk.Frame(self.roof_input_tab)
+			self.roof_input_other_grid.grid(column=1, row=0)
 
 			def buildOther(self):
-				self.roof_pitch=self.buildMeasurementInput(self.roof_input_tab, "Depth of Building")
+				self.buildSep(self.roof_input_other_grid)
+				self.roof_pitch=self.buildMeasurementInput(self.roof_input_other_grid, 'Roof Pitch [Rise over 12" Run]', defFt=1)
+				self.buildSep(self.roof_input_other_grid)
+				self.roof_soffit=self.buildMeasurementInput(self.roof_input_other_grid, 'Horizontal Soffit [Off Building]', defFt=1)
+				self.buildSep(self.roof_input_other_grid)
 
 			buildOther(self)
- 
+			self.roof_go_btn = tk.Button(self.roof_input_tab, text = "GO", command = self.roofClicked)
+			self.roof_go_btn.grid(column=0, row=1, columnspan=2)
+
 		def buildRoofData(self):
-			pass
-		
+			self.roof_data_frame=tk.Frame(self.roof_data_tab)
+			self.roof_data_frame.pack(fill='both', expand=True)
+
 		def buildRoofDraw(self):
 			self.roof_draw_frame=tk.Frame(self.roof_draw_tab)
 			self.roof_draw_frame.pack(fill='both', expand=True)
-			self.roof_canvas=tk.Canvas(self.roof_draw_frame, width=1.0, height=0.5)
+			self.roof_canvas=tk.Canvas(self.roof_draw_frame, width=1.0, height=1.0)
 			self.roof_canvas.pack(fill='both', expand=True)
 			self.t=RawTurtle(self.roof_canvas)
 			self.screen=self.t.getscreen()
+			self.cv=self.screen.getcanvas()
+
 			self.screen.reset()
 			self.t.reset()
 		buildRoofInput(self)
@@ -151,37 +256,71 @@ class Framing:
 		buildRoofDraw(self)
 
 	def roofClicked(self):
+		
+		self.roof_width_inches=self.toInch(self.roof_width)
+		self.roof_depth_inches=self.toInch(self.roof_depth)
+		self.roof_ridge_inches=self.toInch(self.roof_ridge)
+		self.roof_pitch_inches=self.toInch(self.roof_pitch)
+		self.roof_soffit_inches=self.toInch(self.roof_soffit)
+
+		self.run=(self.roof_width_inches/2)-(self.roof_ridge_inches/2)
+		self.rise=(self.run/12)*self.roof_pitch_inches
+		self.leg=self.getLeg(self.run, self.rise)
+		
+		self.wall=9*12
+		self.axis_ratio=self.root.winfo_screenwidth()/self.root.winfo_screenheight()
+		self.cv_width=self.root.winfo_screenwidth()/self.roof_width_inches
+		self.cv_height=self.root.winfo_screenheight()/(self.wall+self.rise)
+		self.scale=self.cv_width if self.cv_width/self.cv_height >= self.axis_ratio else self.cv_height
+
+		self.roof_data_run=self.addRoofData("Pitch")
+		self.roof_data_run.set(str(self.fromInch(self.roof_pitch_inches)))
+		self.roof_data_run=self.addRoofData("Degrees")
+		self.roof_data_run.set(str(round(self.toDegree(self.roof_pitch_inches), 2)))
+		self.roof_data_run=self.addRoofData("Run")
+		self.roof_data_run.set(str(self.fromInch(self.run)))
+		self.roof_data_rise=self.addRoofData("Rise")
+		self.roof_data_rise.set(str(self.fromInch(self.rise)))
+		self.roof_data_leg=self.addRoofData("Leg")
+		self.roof_data_leg.set(str(self.fromInch(self.leg)))
+
+	def roofDraw(self):
 		pass
 
 	################
 
 	def buildDeckTab(self):
 		def buildDeckInput(self):
-			self.buildSep(self.deck_input_tab)
-			self.deck_width=self.buildMeasurementInput(self.deck_input_tab, "Width of Deck [across building]")
-			self.buildSep(self.deck_input_tab)
-			self.deck_length=self.buildMeasurementInput(self.deck_input_tab, "Length of Deck [from building]")
-			self.buildSep(self.deck_input_tab)
-			
+			self.deck_input_measurement_grid=tk.Frame(self.deck_input_tab)
+			self.deck_input_measurement_grid.grid(column=0, row=0)
+			self.buildSep(self.deck_input_measurement_grid)
+			self.deck_width=self.buildMeasurementInput(self.deck_input_measurement_grid, "Width of Deck [across building]")
+			self.buildSep(self.deck_input_measurement_grid)
+			self.deck_length=self.buildMeasurementInput(self.deck_input_measurement_grid, "Length of Deck [from building]")
+			self.buildSep(self.deck_input_measurement_grid)
+			self.deck_input_other_grid=tk.Frame(self.deck_input_tab)
+			self.deck_input_other_grid.grid(column=1, row=0)
 			
 			def buildOther(self):
-				self.deck_other_frame = tk.Frame(self.deck_input_tab)
-				self.decking=self.buildMeasurementInput(self.deck_other_frame, "Material width:", False, True, True)
-				self.overhang=self.buildMeasurementInput(self.deck_other_frame, "Overhang:", False, True, True)
-				self.gap=self.buildMeasurementInput(self.deck_other_frame, "Gap:", False, False, True)
-				self.deck_other_frame.pack(fill='x', padx=12)
-				self.deck_go_btn = tk.Button(self.deck_input_tab, text = "GO", command = self.deckClicked)
-				self.deck_go_btn.pack
+				# self.buildSep(self.deck_input_other_grid)
+				self.decking=self.buildMeasurementInput(self.deck_input_other_grid, "Material width:", False, True, True)
+				# self.buildSep(self.deck_input_other_grid)
+				self.overhang=self.buildMeasurementInput(self.deck_input_other_grid, "Overhang:", False, True, True)
+				# self.buildSep(self.deck_input_other_grid)
+				self.gap=self.buildMeasurementInput(self.deck_input_other_grid, "Gap:", False, False, True)
+				# self.buildSep(self.deck_input_other_grid)
 			
 			buildOther(self)
- 
+			self.deck_go_btn = tk.Button(self.deck_input_tab, text = "GO", command = self.deckClicked)
+			self.deck_go_btn.grid(column=0, row=1, columnspan=2)
+
 		def buildDeckData(self):
 			pass
 		
 		def buildDeckDraw(self):
 			self.deck_draw_frame=tk.Frame(self.deck_draw_tab)
 			self.deck_draw_frame.pack(fill='both', expand=True)
-			self.deck_canvas=tk.Canvas(self.deck_draw_frame, width=1.0, height=0.5)
+			self.deck_canvas=tk.Canvas(self.deck_draw_frame, width=1.0, height=1.0)
 			self.deck_canvas.pack(fill='both', expand=True)
 			self.t=RawTurtle(self.deck_canvas)
 			self.screen=self.t.getscreen()
@@ -202,7 +341,6 @@ class Framing:
 		self.y-=8
 		self.t.goto(self.x, self.y)
 		self.t.write(str(self.x)+' '+str(self.y), align='left', font=('Verdana', 6))
-
 
 f = Framing()
 f.screen.onclick(f.onClick)
