@@ -37,32 +37,6 @@ class Framing:
 	def fix(self, t):
 		return self.applyOffset(self.applyScale(t))
 
-
-	def f(self, n):
-		self.t.forward(self.fix(n))
-	def b(self, n):
-		self.t.backward(self.fix(n))
-			
-	def l(self, d):
-		self.t.left(d)
-	def r(self, d):
-		self.t.right(d)
-	
-	def g(self, x, y):
-		self.u()
-		self.t.goto(x, y)
-		self.d()
-
-	def u(self):
-		self.t.penup()
-	def d(self):
-		self.t.pendown()
-	
-	def x(self, n):
-		self.g(self.t.xcor()+n, self.t.ycor())
-	def y(self, n):
-		self.g(self.t.xcor(), self.t.ycor()+n)
-
 	def buildMeasurementInput(self, parent, text, ft=True, inch=True, fr=True, defFt=0, defIn=0):
 		o = {"ft": False, "in": False, "fr": False}
 		base_frame=tk.Frame(parent)
