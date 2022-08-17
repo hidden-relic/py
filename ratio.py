@@ -44,7 +44,7 @@ class ratio:
 		print('[3]', 'assembling machine 3')
 		assembler_lvl=int(input('assembling machine lvl: '))
 		if not assembler_lvl or assembler_lvl not in [1, 2, 3]:
-			assembler_lvl=get_input_assembler()
+			assembler_lvl=get_issembler()
 		return assembling_machines[assembler_lvl-1]
 
 	def get_real_production(self):
