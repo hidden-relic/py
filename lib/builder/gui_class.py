@@ -11,7 +11,7 @@ class Framing:
 		self.myfont = ("Verdana", 10)
 		self.infofont = ("Verdana", 8)
 		self.root = tk.Tk()
-		self.root.geometry(str(self.root.winfo_screenwidth())+'x'+str(self.root.winfo_screenheight())+'+0+0')
+		# self.root.geometry(str(self.root.winfo_screenwidth())+'x'+str(self.root.winfo_screenheight())+'+0+0')
 		self.vals = {"ft": [], "in": []}
 		for i in range(0, 500):
 			self.vals["ft"].append(i)
@@ -24,7 +24,7 @@ class Framing:
 		self.offset=16
 		self.roof_data=[]
 		self.deck_data=[]
-	;	self.resetData()
+		self.resetData()
 
 		self.buildNotebooks()
 		self.buildRoofTab()
@@ -236,26 +236,21 @@ class Framing:
 
 	def buildRoofTab(self):
 		def buildRoofInput(self):
-			self.roof_input_measurement_grid=tk.Frame(self.roof_input_tab)
-			self.roof_input_measurement_grid.grid(column=0, row=0)
-			self.roof_width=self.buildMeasurementInput(self.roof_input_measurement_grid, "Width of Building", defFt=8)
-			self.buildSep(self.roof_input_measurement_grid)
-			self.roof_depth=self.buildMeasurementInput(self.roof_input_measurement_grid, "Depth of Building", defFt=10)
-			self.buildSep(self.roof_input_measurement_grid)
-			self.roof_ridge=self.buildMeasurementInput(self.roof_input_measurement_grid, "Ridge Thickness", ft=False, defIn=1)
-			self.roof_input_other_grid=tk.Frame(self.roof_input_tab)
-			self.roof_input_other_grid.grid(column=1, row=0)
+			self.roof_input_frame=tk.Frame(self.roof_input_tab)
+			self.roof_input_frame.pack(side='left')
+			self.roof_width=self.buildMeasurementInput(self.roof_input_frame, "Width of Building", defFt=8)
+			self.buildSep(self.roof_input_frame)
+			self.roof_depth=self.buildMeasurementInput(self.roof_input_frame, "Depth of Building", defFt=10)
+			self.buildSep(self.roof_input_frame)
+			self.roof_ridge=self.buildMeasurementInput(self.roof_input_frame, "Ridge Thickness", ft=False, defIn=1)
+			self.buildSep(self.roof_input_frame)
+			self.roof_pitch=self.buildMeasurementInput(self.roof_input_frame, 'Roof Pitch [Rise over 12" Run]', defFt=1)
+			self.buildSep(self.roof_input_frame)
+			self.roof_soffit=self.buildMeasurementInput(self.roof_input_frame, 'Horizontal Soffit [Off Building]', defFt=1)
+			self.buildSep(self.roof_input_frame)
 
-			def buildOther(self):
-				self.buildSep(self.roof_input_other_grid)
-				self.roof_pitch=self.buildMeasurementInput(self.roof_input_other_grid, 'Roof Pitch [Rise over 12" Run]', defFt=1)
-				self.buildSep(self.roof_input_other_grid)
-				self.roof_soffit=self.buildMeasurementInput(self.roof_input_other_grid, 'Horizontal Soffit [Off Building]', defFt=1)
-				self.buildSep(self.roof_input_other_grid)
-
-			buildOther(self)
-			self.roof_go_btn = tk.Button(self.roof_input_tab, text = "GO", command = self.roofClicked)
-			self.roof_go_btn.grid(column=0, row=1, columnspan=2)
+			self.roof_go_btn = tk.Button(self.roof_input_frame, text = "GO", command = self.roofClicked)
+			self.roof_go_btn.pack()
 
 		def buildRoofData(self):
 			self.roof_data_frame=tk.Frame(self.roof_data_tab)
@@ -282,7 +277,7 @@ class Framing:
 		self.roof_depth_inches=self.toInch(self.roof_depth)
 		self.roof_ridge_inches=self.toInch(self.roof_ridge)
 		self.roof_pitch_inches=self.toInch(self.roof_pitch)
-		self.roof_soff/******************+++++++++++++++++++++++++++++++++++++++++++++++++++++++++9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990o///////////////////////////////////////////it_inches=self.toInch(self.roof_soffit)
+		self.roof_soffit_inches=self.toInch(self.roof_soffit)
 
 		self.run=(self.roof_width_inches/2)-(self.roof_ridge_inches/2)
 		self.rise=(self.run/12)*self.roof_pitch_inches
@@ -313,28 +308,22 @@ class Framing:
 
 	def buildDeckTab(self):
 		def buildDeckInput(self):
-			self.deck_input_measurement_grid=tk.Frame(self.deck_input_tab)
-			self.deck_input_measurement_grid.grid(column=0, row=0)
-			self.buildSep(self.deck_input_measurement_grid)
-			self.deck_width=self.buildMeasurementInput(self.deck_input_measurement_grid, "Width of Deck [across building]")
-			self.buildSep(self.deck_input_measurement_grid)
-			self.deck_length=self.buildMeasurementInput(self.deck_input_measurement_grid, "Length of Deck [from building]")
-			self.buildSep(self.deck_input_measurement_grid)
-			self.deck_input_other_grid=tk.Frame(self.deck_input_tab)
-			self.deck_input_other_grid.grid(column=1, row=0)
-			
-			def buildOther(self):
-				# self.buildSep(self.deck_input_other_grid)
-				self.decking=self.buildMeasurementInput(self.deck_input_other_grid, "Material width:", False, True, True)
-				# self.buildSep(self.deck_input_other_grid)
-				self.overhang=self.buildMeasurementInput(self.deck_input_other_grid, "Overhang:", False, True, True)
-				# self.buildSep(self.deck_input_other_grid)
-				self.gap=self.buildMeasurementInput(self.deck_input_other_grid, "Gap:", False, False, True)
-				# self.buildSep(self.deck_input_other_grid)
-			
-			buildOther(self)
-			self.deck_go_btn = tk.Button(self.deck_input_tab, text = "GO", command = self.deckClicked)
-			self.deck_go_btn.grid(column=0, row=1, columnspan=2)
+			self.deck_input_frame=tk.Frame(self.deck_input_tab)
+			self.deck_input_frame.pack(side='left')
+			self.buildSep(self.deck_input_frame)
+			self.deck_width=self.buildMeasurementInput(self.deck_input_frame, "Width of Deck [across building]")
+			self.buildSep(self.deck_input_frame)
+			self.deck_length=self.buildMeasurementInput(self.deck_input_frame, "Length of Deck [from building]")
+			self.buildSep(self.deck_input_frame)
+			self.decking=self.buildMeasurementInput(self.deck_input_frame, "Material width:", False, True, True)
+			self.buildSep(self.deck_input_frame)
+			self.overhang=self.buildMeasurementInput(self.deck_input_frame, "Overhang:", False, True, True)
+			self.buildSep(self.deck_input_frame)
+			self.gap=self.buildMeasurementInput(self.deck_input_frame, "Gap:", False, False, True)
+			self.buildSep(self.deck_input_frame)
+		
+			self.deck_go_btn = tk.Button(self.deck_input_frame, text = "GO", command = self.deckClicked)
+			self.deck_go_btn.pack()
 
 		def buildDeckData(self):
 			pass
