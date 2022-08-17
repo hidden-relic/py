@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="warning" href="warning.html" />
+    <link rel="prev" title="tile" href="tile.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data/entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Reference</a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-draftsman.utils">
+<span id="utils"></span><h1><a class="reference internal" href="#module-draftsman.utils" title="draftsman.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><a class="headerlink" href="#module-draftsman.utils" title="Permalink to this heading"></a></h1>
+<p>Provides a number of common utility functions. These are primarily used 
+internally by Draftsman, but can be useful outside of that scope and are 
+provided to the user as-is.</p>
+<section id="abstract-shape-classes">
+<h2>Abstract Shape Classes<a class="headerlink" href="#abstract-shape-classes" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="draftsman.utils.Shape">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="classes/vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">Vector</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#draftsman.utils.Shape" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract Shape class. Must be overwritten with an implementation. Contains a
+single attribute, a PrimitiveVector <code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.Shape.overlaps">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">overlaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><span class="pre">Shape</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.Shape.overlaps" title="Permalink to this definition"></a></dt>
+<dd><p>Determines if this <a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> overlaps with another
+<a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – The other <a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> to check for intersection.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the two shapes overlap, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="draftsman.utils.AABB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AABB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="classes/vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">Vector</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0,</span> <span class="pre">0]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#draftsman.utils.AABB" title="Permalink to this definition"></a></dt>
+<dd><p>Axis-Aligned Bounding-Box abstraction class. Contains a <code class="xref py py-attr docutils literal notranslate"><span class="pre">top_left</span></code>
+point and a <code class="xref py py-attr docutils literal notranslate"><span class="pre">bot_right</span></code> point, as well as an offset position.
+Provides an abstraction for <a class="reference internal" href="classes/collisionset.html#draftsman.classes.collisionset.CollisionSet" title="draftsman.classes.collisionset.CollisionSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollisionSet</span></code></a> and a number of
+convenience functions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.from_other">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_other</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aabb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></span><a class="headerlink" href="#draftsman.utils.AABB.from_other" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a <code class="docutils literal notranslate"><span class="pre">PrimitiveAABB</span></code> to an <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>aabb</strong> – A <code class="docutils literal notranslate"><span class="pre">PrimitiveAABB</span></code> to convert from.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.get_bounding_box">
+<span class="sig-name descname"><span class="pre">get_bounding_box</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></span><a class="headerlink" href="#draftsman.utils.AABB.get_bounding_box" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the minimum-encompassing bounding box around this AABB, which
+happens to be an new AABB offset by this AABB’s position. Used for
+broadphase collision-checking in <a class="reference internal" href="classes/spatial_data_structure.html#draftsman.classes.spatial_data_structure.SpatialDataStructure" title="draftsman.classes.spatial_data_structure.SpatialDataStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpatialDataStructure</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> object with it’s top left and bottom
+right offset by this AABB’s position, and the new AABB’s position at
+<code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.get_points">
+<span class="sig-name descname"><span class="pre">get_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="classes/vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">draftsman.classes.vector.Vector</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.utils.AABB.get_points" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all 4 points associated with the corners of the AABB, used for
+determining collision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">list</span></code> of 4 <a class="reference internal" href="classes/vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a> objects for each of the
+AABB corners.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.overlaps">
+<span class="sig-name descname"><span class="pre">overlaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><span class="pre">Shape</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.AABB.overlaps" title="Permalink to this definition"></a></dt>
+<dd><p>Determines if this <a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> overlaps with another
+<a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – The other <a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> to check for intersection.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the two shapes overlap, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.rotate">
+<span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></span><a class="headerlink" href="#draftsman.utils.AABB.rotate" title="Permalink to this definition"></a></dt>
+<dd><p>Rotates the <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> by increments of 90 degrees and returns a
+new transformed instance.</p>
+<p><code class="docutils literal notranslate"><span class="pre">amt</span></code> is expressed in increments of <code class="xref py py-data docutils literal notranslate"><span class="pre">Direction</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">2</span></code> is a rotation of 90 degrees clockwise and <code class="docutils literal notranslate"><span class="pre">-2</span></code> is a rotation of
+90 degrees counter-clockwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">amt</span></code> is odd, as AABB’s cannot be rotated by
+45 degrees.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>amt</strong> – The amount to rotate, expressed as an increments of 45
+degrees.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.world_bot_right">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">world_bot_right</span></span><a class="headerlink" href="#draftsman.utils.AABB.world_bot_right" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the bottom right of the <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a>, as offset by it’s
+<code class="docutils literal notranslate"><span class="pre">position</span></code>. As the attribute suggests, this is typically the top-left
+of the box in world space. Read only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>PrimitiveVector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.utils.AABB.world_top_left">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">world_top_left</span></span><a class="headerlink" href="#draftsman.utils.AABB.world_top_left" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the top left of the <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a>, as offset by it’s <code class="docutils literal notranslate"><span class="pre">position</span></code>.
+As the attribute suggests, this is typically the top-left of the box in
+world space. Read only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>PrimitiveVector</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="draftsman.utils.Rectangle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Rectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="classes/vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">Vector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#draftsman.utils.Rectangle" title="Permalink to this definition"></a></dt>
+<dd><p>A rotate-able rectangle abstraction class, distinguished from
+<a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a>. Specified as a <code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">height</span></code>, an <code class="docutils literal notranslate"><span class="pre">angle</span></code>, and a
+<code class="docutils literal notranslate"><span class="pre">position</span></code> (it’s center).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.Rectangle.get_bounding_box">
+<span class="sig-name descname"><span class="pre">get_bounding_box</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></span><a class="headerlink" href="#draftsman.utils.Rectangle.get_bounding_box" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the minimum-encompassing bounding box around this Rectangle.
+Used for broadphase collision-checking in <a class="reference internal" href="classes/spatial_data_structure.html#draftsman.classes.spatial_data_structure.SpatialDataStructure" title="draftsman.classes.spatial_data_structure.SpatialDataStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpatialDataStructure</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> object that circumscribes this
+Rectangle, with the returned AABB’s position at <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.Rectangle.get_points">
+<span class="sig-name descname"><span class="pre">get_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Sequence[float,</span> <span class="pre">float]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.utils.Rectangle.get_points" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all 4 points associated with the corners of the Rectangle, used
+for determining collision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">list</span></code> of 4 <a class="reference internal" href="classes/vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a> objects for each of the
+Rectangle’s corners.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.Rectangle.overlaps">
+<span class="sig-name descname"><span class="pre">overlaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><span class="pre">Shape</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.Rectangle.overlaps" title="Permalink to this definition"></a></dt>
+<dd><p>Determines if this <a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> overlaps with another
+<a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – The other <a class="reference internal" href="#draftsman.utils.Shape" title="draftsman.utils.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> to check for intersection.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the two shapes overlap, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.utils.Rectangle.rotate">
+<span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#draftsman.utils.Rectangle" title="draftsman.utils.Rectangle"><span class="pre">Rectangle</span></a></span></span><a class="headerlink" href="#draftsman.utils.Rectangle.rotate" title="Permalink to this definition"></a></dt>
+<dd><p>Rotates the <a class="reference internal" href="#draftsman.utils.Rectangle" title="draftsman.utils.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a> by increments of 45 degrees and
+returns a new transformed instance.</p>
+<p><code class="docutils literal notranslate"><span class="pre">amt</span></code> is expressed in increments of <code class="xref py py-data docutils literal notranslate"><span class="pre">Direction</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">2</span></code> is a rotation of 90 degrees clockwise and <code class="docutils literal notranslate"><span class="pre">-2</span></code> is a rotation of
+90 degrees counter-clockwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>amt</strong> – The amount to rotate, expressed as an increments of 45
+degrees.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="encoding-decoding-operations">
+<h2>Encoding/Decoding Operations<a class="headerlink" href="#encoding-decoding-operations" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.string_to_JSON">
+<span class="sig-name descname"><span class="pre">string_to_JSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#draftsman.utils.string_to_JSON" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes a Factorio Blueprint string to a readable JSON Dict. Follows the
+data format specification <a class="reference external" href="https://wiki.factorio.com/Blueprint_string_format">here</a>.</p>
+<p>For the inverse operation, see <a class="reference internal" href="#draftsman.utils.JSON_to_string" title="draftsman.utils.JSON_to_string"><code class="xref py py-func docutils literal notranslate"><span class="pre">JSON_to_string()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> – The input Factorio blueprint string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A JSON <code class="docutils literal notranslate"><span class="pre">dict</span></code> with the blueprint’s components as keys.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="error.html#draftsman.error.MalformedBlueprintStringError" title="draftsman.error.MalformedBlueprintStringError"><strong>MalformedBlueprintStringError</strong></a> – If the input string is not
+decodable to a JSON object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.JSON_to_string">
+<span class="sig-name descname"><span class="pre">JSON_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">JSON</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#draftsman.utils.JSON_to_string" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a JSON dict to a Factorio-readable blueprint string.</p>
+<p>Follows the data format specification <a class="reference external" href="https://wiki.factorio.com/Blueprint_string_format">here</a>.</p>
+<p>For the inverse operation, see <a class="reference internal" href="#draftsman.utils.string_to_JSON" title="draftsman.utils.string_to_JSON"><code class="xref py py-func docutils literal notranslate"><span class="pre">string_to_JSON()</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function does not verify the data before encoding it. Attempting
+to import an incorrectly formatted blueprint <code class="docutils literal notranslate"><span class="pre">dict</span></code> will usually
+result with an error in Factorio. If you need format validation,
+consider using <a class="reference internal" href="classes/blueprint.html#draftsman.classes.blueprint.Blueprint" title="draftsman.classes.blueprint.Blueprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Blueprint</span></code></a> instead.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>JSON</strong> – The input JSON <code class="docutils literal notranslate"><span class="pre">dict</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="docutils literal notranslate"><span class="pre">str</span></code> which can be imported into Factorio.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.encode_version">
+<span class="sig-name descname"><span class="pre">encode_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">major</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_ver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#draftsman.utils.encode_version" title="Permalink to this definition"></a></dt>
+<dd><p>Converts version components to version number.</p>
+<p>Encodes 4 16-bit version numbers into a 64 bit unsigned integer used
+to specify the version of a Factorio Blueprint or Blueprint Book.</p>
+<p>For the inverse operation, see <a class="reference internal" href="#draftsman.utils.decode_version" title="draftsman.utils.decode_version"><code class="xref py py-func docutils literal notranslate"><span class="pre">decode_version()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>major</strong> – Major version number.</p></li>
+<li><p><strong>minor</strong> – Minor version number.</p></li>
+<li><p><strong>patch</strong> – Patch version number.</p></li>
+<li><p><strong>dev_ver</strong> – Development version number, used internally by Factorio.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A 64 bit <code class="docutils literal notranslate"><span class="pre">int</span></code> with all components specified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.decode_version">
+<span class="sig-name descname"><span class="pre">decode_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.utils.decode_version" title="Permalink to this definition"></a></dt>
+<dd><p>Converts version number to version components.
+Decodes a 64 bit unsigned integer into 4 unsigned shorts and returns them
+as a 4-length tuple, which is usually more readable than the combined
+format.</p>
+<p>For the inverse operation, see <a class="reference internal" href="#draftsman.utils.encode_version" title="draftsman.utils.encode_version"><code class="xref py py-func docutils literal notranslate"><span class="pre">encode_version()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>version_number</strong> – The version number to decode.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a 4 length tuple in the format <code class="docutils literal notranslate"><span class="pre">(major,</span> <span class="pre">minor,</span> <span class="pre">patch,</span> <span class="pre">dev_ver)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.version_string_to_tuple">
+<span class="sig-name descname"><span class="pre">version_string_to_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#draftsman.utils.version_string_to_tuple" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a version string to a tuple.</p>
+<p>Used extensively when parsing mod versions when updating the package’s data,
+provided to the user for convinience. Splits a string by the dot character
+and converts each component to an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>For the inverse operation, see <a class="reference internal" href="#draftsman.utils.version_tuple_to_string" title="draftsman.utils.version_tuple_to_string"><code class="xref py py-func docutils literal notranslate"><span class="pre">version_tuple_to_string()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>version_string</strong> – The version string to separate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A n-length tuple of the format <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code> from <code class="docutils literal notranslate"><span class="pre">&quot;a.b.c&quot;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.version_tuple_to_string">
+<span class="sig-name descname"><span class="pre">version_tuple_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version_tuple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#draftsman.utils.version_tuple_to_string" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a version tuple to a string.</p>
+<p>Converts each element of the tuple to a string and then joins them with the
+‘.’ character.</p>
+<p>For the inverse operation, see, <a class="reference internal" href="#draftsman.utils.version_string_to_tuple" title="draftsman.utils.version_string_to_tuple"><code class="xref py py-func docutils literal notranslate"><span class="pre">version_string_to_tuple()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>version_tuple</strong> – The n-length tuple to interpret.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A str of the format <code class="docutils literal notranslate"><span class="pre">&quot;a.b.c&quot;</span></code> from <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="vector-operations">
+<h2>Vector Operations<a class="headerlink" href="#vector-operations" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#draftsman.utils.distance" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the Euclidean distance between two points. This is mostly just for
+Python 2 compatability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>point1</strong> – The first point to check between.</p></li>
+<li><p><strong>point2</strong> – The first point to check between.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The distance between.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.rotate_vector">
+<span class="sig-name descname"><span class="pre">rotate_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PrimitiveVector</span></span></span><a class="headerlink" href="#draftsman.utils.rotate_vector" title="Permalink to this definition"></a></dt>
+<dd><p>Rotate a given vector by <code class="docutils literal notranslate"><span class="pre">angle</span></code> radians around the origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – The vector to rotate.</p></li>
+<li><p><strong>angle</strong> – The angle to rotate, in radians.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new PrimitiveVector with the resultant rotation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.dot_product">
+<span class="sig-name descname"><span class="pre">dot_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#draftsman.utils.dot_product" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the dot product between two 2D vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a</strong> – The first vector.</p>
+</dd>
+<dt class="field-even">Parma b</dt>
+<dd class="field-even"><p>The second vector.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The dot product of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.magnitude">
+<span class="sig-name descname"><span class="pre">magnitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#draftsman.utils.magnitude" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the magnitude of a point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a</strong> – The input vector to get the magnitude of.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The distance from the origin of point <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PrimitiveVector</span></span></span><a class="headerlink" href="#draftsman.utils.normalize" title="Permalink to this definition"></a></dt>
+<dd><p>Normalizes a vector such that it’s magnitude is equal to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a</strong> – The input vector to normalize.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new PrimitiveVector equivalent to normalized <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.perpendicular">
+<span class="sig-name descname"><span class="pre">perpendicular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PrimitiveVector</span></span></span><a class="headerlink" href="#draftsman.utils.perpendicular" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a perpendicular 2D vector from another vector. Used to generate
+normal vectors for the Separating Axis Theorem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a</strong> – The original vector to calculate from.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A perpendicular vector to <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="collision-functions">
+<h2>Collision Functions<a class="headerlink" href="#collision-functions" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.point_in_aabb">
+<span class="sig-name descname"><span class="pre">point_in_aabb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.point_in_aabb" title="Permalink to this definition"></a></dt>
+<dd><p>Checks to see if a PrimitiveVector <code class="docutils literal notranslate"><span class="pre">p</span></code> is located inside AABB <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> – A <code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code> with a first and second element.</p></li>
+<li><p><strong>a</strong> – An <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> with the region to check against.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the point is inside the box, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.aabb_overlaps_aabb">
+<span class="sig-name descname"><span class="pre">aabb_overlaps_aabb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.aabb_overlaps_aabb" title="Permalink to this definition"></a></dt>
+<dd><p>Checks to see if AABB <code class="docutils literal notranslate"><span class="pre">a</span></code> overlaps AABB <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – 2-Dimensional list where the first pair is the minimum coordinate
+and the second pair is the maximum coordinate.</p></li>
+<li><p><strong>b</strong> – Another AABB of the same format as <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if they overlap, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.point_in_circle">
+<span class="sig-name descname"><span class="pre">point_in_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.point_in_circle" title="Permalink to this definition"></a></dt>
+<dd><p>Checks to see if a point <code class="docutils literal notranslate"><span class="pre">p</span></code> lies within radius <code class="docutils literal notranslate"><span class="pre">r</span></code> centered around
+point <code class="docutils literal notranslate"><span class="pre">c</span></code>. If <code class="docutils literal notranslate"><span class="pre">c</span></code> is not provided, the origin is assumed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> – A point sequence with a first and second element.</p></li>
+<li><p><strong>r</strong> – The radius of the circle.</p></li>
+<li><p><strong>c</strong> – A point sequence with a first and second element.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the point is within the circle, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.aabb_overlaps_circle">
+<span class="sig-name descname"><span class="pre">aabb_overlaps_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PrimitiveVector</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.aabb_overlaps_circle" title="Permalink to this definition"></a></dt>
+<dd><p>Checks to see if an AABB <code class="docutils literal notranslate"><span class="pre">a</span></code> overlaps a circle with radius <code class="docutils literal notranslate"><span class="pre">r</span></code> at point
+<code class="docutils literal notranslate"><span class="pre">c</span></code>. Algorithm pulled from <a class="reference external" href="https://stackoverflow.com/a/402010/8167625">https://stackoverflow.com/a/402010/8167625</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – 2-Dimensional list where the first pair is the minimum coordinate
+and the second pair is the maximum coordinate.</p></li>
+<li><p><strong>r</strong> – The radius of the circle.</p></li>
+<li><p><strong>c</strong> – The center of the circle. Defaults to the origin if not specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the two shapes overlap, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.rect_overlaps_rect">
+<span class="sig-name descname"><span class="pre">rect_overlaps_rect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.Rectangle" title="draftsman.utils.Rectangle"><span class="pre">Rectangle</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.Rectangle" title="draftsman.utils.Rectangle"><span class="pre">Rectangle</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#draftsman.utils.rect_overlaps_rect" title="Permalink to this definition"></a></dt>
+<dd><p>Checks to see whether or not two (rotatable) <code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangles</span></code>
+intersect with each other. Sourced from:
+<a class="reference external" href="https://github.com/qwertyquerty/collision/blob/master/collision/util.py">https://github.com/qwertyquerty/collision/blob/master/collision/util.py</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – The first <code class="xref py py-class docutils literal notranslate"><span class="pre">Recangle</span></code> to check.</p></li>
+<li><p><strong>b</strong> – The second <code class="xref py py-class docutils literal notranslate"><span class="pre">Recangle</span></code> to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the two shapes overlap, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.extend_aabb">
+<span class="sig-name descname"><span class="pre">extend_aabb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.utils.extend_aabb" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the minimum AABB that encompasses two other bounding boxes. Used to
+‘grow’ the size of a bounding box to encompass both inputs.
+If one of the inputs is <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the opposite is returned; if both are
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, then <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – The first <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> to extend.</p></li>
+<li><p><strong>b</strong> – The second <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> to extend.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The minumum bounding <a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a> between the two inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.aabb_to_dimensions">
+<span class="sig-name descname"><span class="pre">aabb_to_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aabb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.utils.aabb_to_dimensions" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the tile-dimensions of an AABB, or the minimum number of tiles across
+each axis that the box would have to take up. If the input <cite>aabb</cite> is None,
+the function returns (0, 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>aabb</strong> – 2-Dimensional list where the first pair is the minimum coordinate
+and the second pair is the maximum coordinate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of the form <code class="docutils literal notranslate"><span class="pre">(tile_width,</span> <span class="pre">tile_height)</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.flatten_entities">
+<span class="sig-name descname"><span class="pre">flatten_entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entities</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#draftsman.utils.flatten_entities" title="Permalink to this definition"></a></dt>
+<dd><p>Iterates over a list of entities with nested structures and returns a 1D,
+“flattened” list of those entities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entities</strong> – The list of entities to flatten.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="docutils literal notranslate"><span class="pre">list</span></code> containing all the entities in depth-first sequence.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.utils.reissue_warnings">
+<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-name descname"><span class="pre">reissue_warnings</span></span><a class="headerlink" href="#draftsman.utils.reissue_warnings" title="Permalink to this definition"></a></dt>
+<dd><p>Function decorator that catches all warnings issued from a function and
+re-issues them to the calling function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> – The function who’s errors are caught and re-issued.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result of the function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tile.html" class="btn btn-neutral float-left" title="tile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="warning.html" class="btn btn-neutral float-right" title="warning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

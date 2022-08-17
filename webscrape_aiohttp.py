@@ -1,9 +1,10 @@
 import asyncio
 import pathlib
+import h
 
 from aiohttp import ClientSession
 
-
+/html/body/div[2]/div/div/div[2]/div[1]/div[2]/ul
 async def main():
     url = 'https://docs.python.org/3/library/tk.htmlrc'
     async with ClientSession() as session:

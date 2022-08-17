@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>collection &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="collisionset" href="collisionset.html" />
+    <link rel="prev" title="blueprintbook" href="blueprintbook.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../handbook/index.html">Handbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data/entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+          <li><a href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/classes/collection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="module-draftsman.classes.collection"></span><section id="collection">
+<h1><a class="reference internal" href="#module-draftsman.classes.collection" title="draftsman.classes.collection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a><a class="headerlink" href="#collection" title="Permalink to this heading"></a></h1>
+<p>Hosts the <code class="docutils literal notranslate"><span class="pre">EntityCollection</span></code> and <code class="docutils literal notranslate"><span class="pre">TileCollection</span></code>, which are used as parent
+classes for others, such as <a class="reference internal" href="blueprint.html#draftsman.classes.blueprint.Blueprint" title="draftsman.classes.blueprint.Blueprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Blueprint</span></code></a>
+and <a class="reference internal" href="group.html#draftsman.classes.group.Group" title="draftsman.classes.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EntityCollection</span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract class used to describe an object that can contain a list of
+<a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityLike</span></code></a> instances.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.add_circuit_connection">
+<span class="sig-name descname"><span class="pre">add_circuit_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.add_circuit_connection" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a circuit wire connection between two entities. Each entity
+can be either a reference to the original entity to connect, the index
+of the entity in the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list, or it’s string ID. Color
+specifies the color of the wire to make the connection with, and is
+either <code class="docutils literal notranslate"><span class="pre">&quot;red&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;green&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">side1</span></code> specifies which side of the
+first entity to connect to (if applicable), and <code class="docutils literal notranslate"><span class="pre">side2</span></code> specifies
+which side of the second entity to connect to (if applicable). Does
+nothing if the connection already exists.</p>
+<p>Raises <a class="reference internal" href="../warning.html#draftsman.warning.ConnectionSideWarning" title="draftsman.warning.ConnectionSideWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectionSideWarning</span></code></a> if the side
+of either of the entities is <code class="docutils literal notranslate"><span class="pre">2</span></code> when the entity is not
+dual-circuit-connectable.</p>
+<p>Raises <code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectionRangeWarning</span></code> if the
+distance between the two entities exceeds the maximum wire distance
+between the two.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – Color of the wire to make the connection with. Must be
+either <code class="docutils literal notranslate"><span class="pre">&quot;red&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;green&quot;</span></code>.</p></li>
+<li><p><strong>id1</strong> – ID or index of the first entity to join.</p></li>
+<li><p><strong>id2</strong> – ID or index of the second entity to join.</p></li>
+<li><p><strong>side1</strong> – Which side of the first dual-circuit-entity to connect to,
+where <code class="docutils literal notranslate"><span class="pre">1</span></code> is “input” and <code class="docutils literal notranslate"><span class="pre">2</span></code> is “output”. Only used when the
+first entity is dual-circuit-connectable. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><strong>side2</strong> – Which side of the second dual-circuit-entity to connect
+to, where <code class="docutils literal notranslate"><span class="pre">1</span></code> is “input” and <code class="docutils literal notranslate"><span class="pre">2</span></code> is “output”. Only used when the
+second entity is dual-circuit-connectable. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong><strong>, </strong><strong>IndexError</strong> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code> are invalid
+ID’s or indices to the parent Collection.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidAssociationError" title="draftsman.error.InvalidAssociationError"><strong>InvalidAssociationError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code>
+are not inside the parent Collection.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidWireTypeError" title="draftsman.error.InvalidWireTypeError"><strong>InvalidWireTypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">color</span></code> is neither <code class="docutils literal notranslate"><span class="pre">&quot;red&quot;</span></code> nor
+<code class="docutils literal notranslate"><span class="pre">&quot;green&quot;</span></code>.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidConnectionSideError" title="draftsman.error.InvalidConnectionSideError"><strong>InvalidConnectionSideError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">side1</span></code> or <code class="docutils literal notranslate"><span class="pre">side2</span></code> are
+neither <code class="docutils literal notranslate"><span class="pre">1</span></code> nor <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.EntityNotCircuitConnectableError" title="draftsman.error.EntityNotCircuitConnectableError"><strong>EntityNotCircuitConnectableError</strong></a> – If either <cite>entity_1</cite> or
+<cite>entity_2</cite> do not have the capability to be circuit wire connected.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.add_power_connection">
+<span class="sig-name descname"><span class="pre">add_power_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.add_power_connection" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a copper wire power connection between two entities. Each entity
+can be either a reference to the original entity to connect, the index
+of the entity in the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list, or it’s string ID. Tuples of
+strings and ints mean to recursively search through
+<a class="reference internal" href="#draftsman.classes.collection.EntityCollection" title="draftsman.classes.collection.EntityCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityCollection</span></code></a> instances in the base level, following the
+logic of <code class="xref py py-meth docutils literal notranslate"><span class="pre">EntityList.__getitem__()</span></code>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;small-electric-pole&quot;</span><span class="p">)</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span> <span class="c1"># Type of EntityCollection</span>
+<span class="n">group</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;small-electric-pole&quot;</span><span class="p">,</span> <span class="n">tile_position</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+<span class="c1"># Add a connection between the first power pole and the first entity</span>
+<span class="c1"># in the group</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">add_power_connection</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Side specifies which side to connect to when establishing a
+connection to a dual-power-connectable entity (usually a power-switch).
+Does nothing if the connection already exists.</p>
+<p>Raises <code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectionRangeWarning</span></code> if the
+distance between the two entities exceeds the maximum wire distance
+between the two.</p>
+<p>Raises <a class="reference internal" href="../warning.html#draftsman.warning.TooManyConnectionsWarning" title="draftsman.warning.TooManyConnectionsWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">TooManyConnectionsWarning</span></code></a> if
+either of the power poles exceed 5 connections when this connection is
+added.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">side</span></code> is in 1-based notation (1 and 2, input and output) which is
+identical to circuit connections. Internally, however, the
+connections are represented in 0-based notation as “Cu0” and “Cu1”
+respectively.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might notice that unlike <a class="reference internal" href="#draftsman.classes.collection.EntityCollection.add_circuit_connection" title="draftsman.classes.collection.EntityCollection.add_circuit_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_circuit_connection()</span></code></a>,
+there is only one <code class="docutils literal notranslate"><span class="pre">side</span></code> argument. This is because it is actually
+impossible to connect two dual-power-connectable entities with one
+another; they must be connected to a power pole in-between.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entity_1</strong> – EntityLike, ID, or index of the first entity to join.</p></li>
+<li><p><strong>entity_2</strong> – EntityLike, ID or index of the second entity to join.</p></li>
+<li><p><strong>side</strong> – Which side of a dual-power-connectable entity to connect
+to, where <code class="docutils literal notranslate"><span class="pre">1</span></code> is “input” and <code class="docutils literal notranslate"><span class="pre">2</span></code> is “output”. Only used when
+connecting a dual-power-connectable entity. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong><strong>, </strong><strong>IndexError</strong> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code> are
+invalid ID’s or indices to the parent Collection.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidAssociationError" title="draftsman.error.InvalidAssociationError"><strong>InvalidAssociationError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code>
+are not inside the parent Collection.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidConnectionSideError" title="draftsman.error.InvalidConnectionSideError"><strong>InvalidConnectionSideError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">side</span></code> is neither <code class="docutils literal notranslate"><span class="pre">1</span></code> nor
+<code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.EntityNotPowerConnectableError" title="draftsman.error.EntityNotPowerConnectableError"><strong>EntityNotPowerConnectableError</strong></a> – If either <cite>entity_1</cite> or
+<cite>entity_2</cite> do not have the capability to be copper wire connected.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.DraftsmanError" title="draftsman.error.DraftsmanError"><strong>DraftsmanError</strong></a> – If both <cite>entity_1</cite> and <cite>entity_2</cite> are
+dual-power-connectable, of which a connection is forbidden.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.find_entities">
+<span class="sig-name descname"><span class="pre">find_entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aabb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../utils.html#draftsman.utils.AABB" title="draftsman.utils.AABB"><span class="pre">AABB</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">draftsman.classes.entitylike.EntityLike</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.find_entities" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">list</span></code> of all entities within the area <code class="docutils literal notranslate"><span class="pre">aabb</span></code>. Works
+similiarly to
+<a class="reference external" href="https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.find_entities">LuaSurface.find_entities</a>.
+If no <code class="docutils literal notranslate"><span class="pre">aabb</span></code> is provided then the method simply returns all the
+entities in the blueprint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>aabb</strong> – An <a class="reference internal" href="../utils.html#draftsman.utils.AABB" title="draftsman.utils.AABB"><code class="xref py py-class docutils literal notranslate"><span class="pre">AABB</span></code></a>, or a <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> of 4 floats,
+usually a <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">tuple</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A regular <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">EntityLikes</span></code> whose <code class="docutils literal notranslate"><span class="pre">collision_box</span></code>
+overlaps the queried AABB.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.find_entities_filtered">
+<span class="sig-name descname"><span class="pre">find_entities_filtered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">draftsman.classes.entitylike.EntityLike</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.find_entities_filtered" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a filtered list of entities within the <code class="docutils literal notranslate"><span class="pre">Collection</span></code>. Works
+similarly to <a class="reference external" href="https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.find_entities_filtered">LuaSurface.find_entities_filtered</a>.</p>
+<p>Keywords are organized into two main categrories: <strong>region</strong> and
+<strong>criteria</strong>:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Region keywords</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">position</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector</span></code> or <code class="docutils literal notranslate"><span class="pre">PrimitiveVector</span></code></p></td>
+<td><p>Grid position to search.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">radius</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Radius of the circle around position to search.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">area</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AABB</span></code> or <code class="docutils literal notranslate"><span class="pre">PrimitiveAABB</span></code></p></td>
+<td><p>AABB to search in.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Criteria keywords</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">set{str}</span></code></p></td>
+<td><p>The name(s) of the entities that you want to search for.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">set{str}</span></code></p></td>
+<td><p>The type(s) of the entities that you want to search for.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">direction</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Direction</span></code> or <code class="docutils literal notranslate"><span class="pre">set{Direction}</span></code></p></td>
+<td><div class="line-block">
+<div class="line">The direction(s) of the entities that you want to search for.</div>
+<div class="line">Excludes entities that have no direction.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">limit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Limit the maximum size of the returned list to this amount.</div>
+<div class="line">Unlimited by default.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">invert</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Whether or not to return the inverse of the search.</div>
+<div class="line">False by default.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">radius</span></code> take precidence over <code class="docutils literal notranslate"><span class="pre">aabb</span></code> if all are
+specified. If no region keywords are specified, the entire Collection is
+searched.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.find_entity">
+<span class="sig-name descname"><span class="pre">find_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">Vector</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PrimitiveVector</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.find_entity" title="Permalink to this definition"></a></dt>
+<dd><p>Finds an entity with <code class="docutils literal notranslate"><span class="pre">name</span></code> at a position <code class="docutils literal notranslate"><span class="pre">position</span></code>. If multiple
+entities exist at the queried position, the one that was first placed is
+returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the entity to look for.</p></li>
+<li><p><strong>position</strong> – The position to search, either a PrimitiveVector or a
+<a class="reference internal" href="vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retuns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> at <code class="docutils literal notranslate"><span class="pre">position</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> of none were
+found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.find_entity_at_position">
+<span class="sig-name descname"><span class="pre">find_entity_at_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">Vector</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PrimitiveVector</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.find_entity_at_position" title="Permalink to this definition"></a></dt>
+<dd><p>Finds any entity at the position <code class="docutils literal notranslate"><span class="pre">position</span></code>. If multiple entities
+exist at the queried position, the one that was first placed is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> – The position to search, either a PrimitiveVector or a
+<a class="reference internal" href="vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a>.</p>
+</dd>
+<dt class="field-even">Retuns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> at <code class="docutils literal notranslate"><span class="pre">position</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> of none were
+found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.generate_power_connections">
+<span class="sig-name descname"><span class="pre">generate_power_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefer_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.generate_power_connections" title="Permalink to this definition"></a></dt>
+<dd><p>Automatically create power connections between all electric poles.</p>
+<p>The algorithm used is similar to demi-pixel’s <a class="reference external" href="https://github.com/demipixel/factorio-blueprint/blob/master/src/electrical-connections.ts">generateElectricalConnections()</a>
+function, but with some slight differences. Power poles are still
+prioritized closest first, but can be selected to prefer to connect
+neighbours on the same axis, as well as <em>only</em> connect to neighbours on
+the same axis. This function will only connect power poles that have
+less than 5 power connections already made, preserving power connections
+that were manually specified. This function does not generate
+connections between power-switches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prefer_axis</strong> – Determines whether or not to rank power-poles on the
+same x or y coordinate higher than poles that are closer, but not on
+either axis. Used to prefer creating neat, regular grids when
+possible.</p></li>
+<li><p><strong>only_axis</strong> – Removes any neighbour that does not lie on the same
+x or y axis from the candidate pool, preventing non-grid
+connections.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.on_entity_insert">
+<span class="sig-name descname"><span class="pre">on_entity_insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entitylike</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.on_entity_insert" title="Permalink to this definition"></a></dt>
+<dd><p>Function called when an <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> is inserted into this object’s
+<code class="docutils literal notranslate"><span class="pre">entities</span></code> list (assuming that the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list is a
+<code class="docutils literal notranslate"><span class="pre">EntityList</span></code>). By default, this function does nothing, but any
+child class can customize it’s functionality by overriding it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.on_entity_remove">
+<span class="sig-name descname"><span class="pre">on_entity_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entitylike</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.on_entity_remove" title="Permalink to this definition"></a></dt>
+<dd><p>Function called when an <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> is removed from this object’s
+<code class="docutils literal notranslate"><span class="pre">entities</span></code> list (assuming that the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list is a
+<code class="docutils literal notranslate"><span class="pre">EntityList</span></code>). By default, this function does nothing, but any
+child class can customize it’s functionality by overriding it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.on_entity_set">
+<span class="sig-name descname"><span class="pre">on_entity_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_entitylike</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_entitylike</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.on_entity_set" title="Permalink to this definition"></a></dt>
+<dd><p>Function called when an <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> is replaced with another in this
+object’s <code class="docutils literal notranslate"><span class="pre">entities</span></code> list (assuming that the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list is a
+<code class="docutils literal notranslate"><span class="pre">EntityList</span></code>). By default, this function does nothing, but any
+child class can customize it’s functionality by overriding it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.remove_circuit_connection">
+<span class="sig-name descname"><span class="pre">remove_circuit_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.remove_circuit_connection" title="Permalink to this definition"></a></dt>
+<dd><p>Removes a circuit wire connection between two entities. Each entity
+can be either a reference to the original entity to connect, the index
+of the entity in the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list, or it’s string ID. <code class="docutils literal notranslate"><span class="pre">side1</span></code>
+specifies which side of the first entity to remove the connection from
+(if applicable), and <code class="docutils literal notranslate"><span class="pre">side2</span></code> specifies which side of the second entity
+to remove the connection from (if applicable). Does nothing if the
+specified connection doesn’t exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – Color of the wire to remove. Either <code class="docutils literal notranslate"><span class="pre">&quot;red&quot;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">&quot;green&quot;</span></code>.</p></li>
+<li><p><strong>entity_1</strong> – ID or index of the first entity to remove the
+connection to.</p></li>
+<li><p><strong>entity_&#64;</strong> – ID or index of the second entity to remove the
+connection to.</p></li>
+<li><p><strong>side1</strong> – Which side of the first dual-circuit-connectable entity to
+remove the connection from, where <code class="docutils literal notranslate"><span class="pre">1</span></code> is “input” and <code class="docutils literal notranslate"><span class="pre">2</span></code> is
+“output”. Only used when disjoining a dual-circuit-connectable
+entity. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><strong>side2</strong> – Which side of the second dual-circuit-connectable entity
+to remove the connection from, where <code class="docutils literal notranslate"><span class="pre">1</span></code> is “input” and <code class="docutils literal notranslate"><span class="pre">2</span></code> is
+“output”. Only used when disjoining a dual-circuit-connectable
+entity. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong><strong>, </strong><strong>IndexError</strong> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code> are
+invalid ID’s or indices to the parent Collection.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidAssociationError" title="draftsman.error.InvalidAssociationError"><strong>InvalidAssociationError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code>
+are not inside the parent Collection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.remove_circuit_connections">
+<span class="sig-name descname"><span class="pre">remove_circuit_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.remove_circuit_connections" title="Permalink to this definition"></a></dt>
+<dd><p>Remove all circuit connections in the Collection. Recurses through all
+subgroups and removes circuit connections from them as well. Does
+nothing if there are no circuit connections in the Collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.remove_power_connection">
+<span class="sig-name descname"><span class="pre">remove_power_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="entitylike.html#draftsman.classes.entitylike.EntityLike" title="draftsman.classes.entitylike.EntityLike"><span class="pre">EntityLike</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.remove_power_connection" title="Permalink to this definition"></a></dt>
+<dd><p>Removes a copper wire power connection between two entities. Each entity
+can be either a reference to the original entity to connect, the index
+of the entity in the <code class="docutils literal notranslate"><span class="pre">entities</span></code> list, or it’s string ID. <code class="docutils literal notranslate"><span class="pre">side</span></code>
+specifies which side to remove the connection from when removing a
+connection to a dual-power-connectable entity (usually a power-switch).
+Does nothing if the specified connection does not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entity_1</strong> – EntityLike, ID or index of the first entity to remove
+the connection to.</p></li>
+<li><p><strong>entity_2</strong> – EntityLike, ID or index of the second entity to remove
+the connection to.</p></li>
+<li><p><strong>side</strong> – Which side of a dual-power-connectable entity to remove the
+connection from, where <code class="docutils literal notranslate"><span class="pre">1</span></code> is “input” and <code class="docutils literal notranslate"><span class="pre">2</span></code> is “output”. Only
+used when disjoining a dual-power-connectable entity. Defaults to
+<code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong><strong>, </strong><strong>IndexError</strong> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code> are
+invalid ID’s or indices to the parent Collection.</p></li>
+<li><p><a class="reference internal" href="../error.html#draftsman.error.InvalidAssociationError" title="draftsman.error.InvalidAssociationError"><strong>InvalidAssociationError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">entity_1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">entity_2</span></code>
+are not inside the parent Collection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.remove_power_connections">
+<span class="sig-name descname"><span class="pre">remove_power_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.remove_power_connections" title="Permalink to this definition"></a></dt>
+<dd><p>Remove all power connections in the Collection, including any power
+connections between power switches. Recurses through any subgroups, and
+removes power connections from them as well. Does nothing if there are
+no power connections in the Collection.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.entities">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entities</span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.entities" title="Permalink to this definition"></a></dt>
+<dd><p>Object that holds the <code class="docutils literal notranslate"><span class="pre">EntityLikes</span></code>, usually a <a class="reference internal" href="entitylist.html#draftsman.classes.entitylist.EntityList" title="draftsman.classes.entitylist.EntityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityList</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.entity_map">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entity_map</span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.entity_map" title="Permalink to this definition"></a></dt>
+<dd><p>Object that holds references to the entities organized by their spatial
+position. An implementation of <a class="reference internal" href="spatial_data_structure.html#draftsman.classes.spatial_data_structure.SpatialDataStructure" title="draftsman.classes.spatial_data_structure.SpatialDataStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpatialDataStructure</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.flippable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flippable</span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.flippable" title="Permalink to this definition"></a></dt>
+<dd><p>Whether or not this collection can be flipped or not. This is determined
+by whether or not any of the entities contained can be flipped or not.
+Read only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.classes.collection.EntityCollection.rotatable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rotatable</span></span><a class="headerlink" href="#draftsman.classes.collection.EntityCollection.rotatable" title="Permalink to this definition"></a></dt>
+<dd><p>Whether or not this collection can be rotated or not. Included for
+posterity; always returns True, even when containing entities that have
+no direction component. Read only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TileCollection</span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract class used to describe an object that can contain a list of
+<a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tile</span></code></a> instances.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.find_tile">
+<span class="sig-name descname"><span class="pre">find_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><span class="pre">Vector</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PrimitiveVector</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><span class="pre">Tile</span></a></span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.find_tile" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the tile at the tile coordinate <code class="docutils literal notranslate"><span class="pre">position</span></code>. If there are
+multiple tiles at that location, the entity that was inserted first is
+returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> – The position to search, either a PrimitiveVector or a
+<a class="reference internal" href="vector.html#draftsman.classes.vector.Vector" title="draftsman.classes.vector.Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The tile at <code class="docutils literal notranslate"><span class="pre">position</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is none.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.find_tiles_filtered">
+<span class="sig-name descname"><span class="pre">find_tiles_filtered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><span class="pre">draftsman.classes.tile.Tile</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.find_tiles_filtered" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a filtered list of tiles within the blueprint. Works
+similarly to
+<a class="reference external" href="https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.find_tiles_filtered">LuaSurface.find_tiles_filtered</a>.</p>
+<p>Keywords are organized into two main categrories: <strong>region</strong> and
+<strong>criteria</strong>:</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Region keywords</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">position</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector</span></code> or <code class="docutils literal notranslate"><span class="pre">PrimitiveVector</span></code></p></td>
+<td><p>Grid position to search.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">radius</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Radius of the circle around position to search.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">area</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AABB</span></code> or <code class="docutils literal notranslate"><span class="pre">PrimitiveAABB</span></code></p></td>
+<td><p>AABB to search in.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Criteria keywords</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">set{str}</span></code></p></td>
+<td><p>The name(s) of the entities that you want to search for.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">limit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Limit the maximum size of the returned list to this amount.</div>
+<div class="line">Unlimited by default.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">radius</span></code> take precidence over <code class="docutils literal notranslate"><span class="pre">aabb</span></code> if all are
+specified. If no region keywords are specified, the entire Collection is
+searched.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.on_tile_insert">
+<span class="sig-name descname"><span class="pre">on_tile_insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><span class="pre">Tile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><span class="pre">Tile</span></a></span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.on_tile_insert" title="Permalink to this definition"></a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.on_tile_remove">
+<span class="sig-name descname"><span class="pre">on_tile_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><span class="pre">Tile</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.on_tile_remove" title="Permalink to this definition"></a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.on_tile_set">
+<span class="sig-name descname"><span class="pre">on_tile_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_tile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tile.html#draftsman.classes.tile.Tile" title="draftsman.classes.tile.Tile"><span class="pre">Tile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_tile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.on_tile_set" title="Permalink to this definition"></a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.tile_map">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tile_map</span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.tile_map" title="Permalink to this definition"></a></dt>
+<dd><p>Object that holds the spatial information for the Tiles of this object,
+usually a <code class="xref py py-class docutils literal notranslate"><span class="pre">SpatialHashMap</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="draftsman.classes.collection.TileCollection.tiles">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tiles</span></span><a class="headerlink" href="#draftsman.classes.collection.TileCollection.tiles" title="Permalink to this definition"></a></dt>
+<dd><p>Object that holds the <code class="docutils literal notranslate"><span class="pre">Tiles</span></code>, usually a
+<a class="reference internal" href="tilelist.html#draftsman.classes.tilelist.TileList" title="draftsman.classes.tilelist.TileList"><code class="xref py py-class docutils literal notranslate"><span class="pre">TileList</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="blueprintbook.html" class="btn btn-neutral float-left" title="blueprintbook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="collisionset.html" class="btn btn-neutral float-right" title="collisionset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

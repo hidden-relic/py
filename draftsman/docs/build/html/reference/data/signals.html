@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>signals &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="tiles" href="tiles.html" />
+    <link rel="prev" title="recipes" href="recipes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../handbook/index.html">Handbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+          <li><a href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/data/signals.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="signals">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code><a class="headerlink" href="#signals" title="Permalink to this heading"></a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.signals.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><a class="headerlink" href="#draftsman.data.signals.raw" title="Permalink to this definition"></a></dt>
+<dd><p>An <code class="docutils literal notranslate"><span class="pre">OrderedDict</span></code> of all signals extracted from <code class="docutils literal notranslate"><span class="pre">data.raw</span></code>, sorted by the signal processing order.
+The signal processing order is the sorted virtual signals, followed by the sorted fluid signals, followed by all the sorted item signals.
+The order of signals in <code class="docutils literal notranslate"><span class="pre">signals.raw</span></code> can be considered equivalent to <code class="docutils literal notranslate"><span class="pre">signals.virtual</span> <span class="pre">+</span> <span class="pre">signals.fluid</span> <span class="pre">+</span> <span class="pre">signals.item</span></code>.
+The exact format of the data depends on what type of item/fluid/signal is being queried.
+Allows the user to iterate over all signals in order, and query specific properties about them, such as their order string for custom sorting orders.
+Order and content are dependent on loaded mods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">draftsman.data</span> <span class="kn">import</span> <span class="n">signals</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">signals</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="s2">&quot;iron-ore&quot;</span><span class="p">],</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="s2">&quot;e[iron-ore]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pictures&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="o">...</span> <span class="p">],</span>
+    <span class="s2">&quot;stack_size&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;item&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;icon_mipmaps&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;iron-ore&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;__base__/graphics/icons/iron-ore.png&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subgroup&quot;</span><span class="p">:</span> <span class="s2">&quot;raw-resource&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;icon_size&quot;</span><span class="p">:</span> <span class="mi">64</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.signals.type_of">
+<span class="sig-name descname"><span class="pre">type_of</span></span><a class="headerlink" href="#draftsman.data.signals.type_of" title="Permalink to this definition"></a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">dict</span></code> of all signals where the key is the name of the signal and the value is the <em>signal</em> type of the signal.
+Note that this value may differ from the value of <code class="docutils literal notranslate"><span class="pre">signals.raw[signal_name][&quot;type&quot;]</span></code>; this value is used specifically during the construction of <a class="reference internal" href="../signatures.html#draftsman.signatures.SIGNAL_ID" title="draftsman.signatures.SIGNAL_ID"><code class="xref py py-data docutils literal notranslate"><span class="pre">SIGNAL_ID</span></code></a>.
+The returned value can be one of <code class="docutils literal notranslate"><span class="pre">&quot;item&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;fluid&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;virtual&quot;</span></code>.
+Order is dependent on loaded mods.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This structure is <strong>unsorted</strong>. If you want to iterate over signals in order, consider using <code class="docutils literal notranslate"><span class="pre">signals.raw</span></code> instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draftsman.data</span> <span class="kn">import</span> <span class="n">signals</span>
+
+<span class="k">for</span> <span class="n">signal_name</span> <span class="ow">in</span> <span class="n">signals</span><span class="o">.</span><span class="n">raw</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">signals</span><span class="o">.</span><span class="n">type_of</span><span class="p">[</span><span class="n">signal_name</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.signals.item">
+<span class="sig-name descname"><span class="pre">item</span></span><a class="headerlink" href="#draftsman.data.signals.item" title="Permalink to this definition"></a></dt>
+<dd><p>A list of all item signal names, sorted by their Factorio order.
+Order and content are dependent on mods.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Possible contents</span>
+<span class="p">[</span>
+    <span class="s2">&quot;wooden-chest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;iron-chest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;steel-chest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;storage-tank&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;transport-belt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fast-transport-belt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;express-transport-belt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;underground-belt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fast-underground-belt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;express-underground-belt&quot;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.signals.fluid">
+<span class="sig-name descname"><span class="pre">fluid</span></span><a class="headerlink" href="#draftsman.data.signals.fluid" title="Permalink to this definition"></a></dt>
+<dd><p>A list of all fluid signal names, sorted by their Factorio order.
+Order and content are dependent on loaded mods.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Possible contents</span>
+<span class="p">[</span>
+    <span class="s2">&quot;water&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;crude-oil&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;steam&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;heavy-oil&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;light-oil&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;petroleum-gas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sulfuric-acid&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lubricant&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.signals.virtual">
+<span class="sig-name descname"><span class="pre">virtual</span></span><a class="headerlink" href="#draftsman.data.signals.virtual" title="Permalink to this definition"></a></dt>
+<dd><p>A list of all virtual signal names, sorted by their Factorio order.
+Order and content are dependent on loaded mods.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Possible contents</span>
+<span class="p">[</span>
+    <span class="s2">&quot;signal-everything&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-anything&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-each&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signal-6&quot;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">signals.virtual</span></code> contains the signals in <code class="docutils literal notranslate"><span class="pre">signals.pure_virtual</span></code>,
+as illustrated above.</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.signals.pure_virtual">
+<span class="sig-name descname"><span class="pre">pure_virtual</span></span><a class="headerlink" href="#draftsman.data.signals.pure_virtual" title="Permalink to this definition"></a></dt>
+<dd><p>A list of all pure virtual signal names, sorted by their Factorio order.
+This list is constant, independent of mods, and is always equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;signal-everything&quot;</span><span class="p">,</span> <span class="s2">&quot;signal-anything&quot;</span><span class="p">,</span> <span class="s2">&quot;signal-each&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.data.signals.get_signal_type">
+<span class="sig-name descname"><span class="pre">get_signal_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#draftsman.data.signals.get_signal_type" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the type of the signal based on its ID string.</p>
+<p>SignalID objects in blueprints require a <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;</span></code> field when specifying
+them. However, this information is redundant most of the time, as the type
+for any signal is always the same, making writing it out arduous. This
+function conveniently gets the signal type from the signal’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>signal_name</strong> – The name of the signal.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">&quot;item&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;fluid&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;virtual&quot;</span></code></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../error.html#draftsman.error.InvalidSignalError" title="draftsman.error.InvalidSignalError"><strong>InvalidSignalError</strong></a> – If the signal name is not contained within
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">draftsman.data.signals</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="draftsman.data.signals.signal_dict">
+<span class="sig-name descname"><span class="pre">signal_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#draftsman.data.signals.signal_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a SignalID <code class="docutils literal notranslate"><span class="pre">dict</span></code> from the given signal name.</p>
+<p>Uses <a class="reference internal" href="#draftsman.data.signals.get_signal_type" title="draftsman.data.signals.get_signal_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_signal_type()</span></code></a> to get the type for the dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>signal_name</strong> – The name of the signal.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dict with the <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;</span></code> keys set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="recipes.html" class="btn btn-neutral float-left" title="recipes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tiles.html" class="btn btn-neutral float-right" title="tiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

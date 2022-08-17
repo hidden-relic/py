@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Module Index &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+ 
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="handbook/index.html">Handbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="handbook/blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handbook/blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handbook/entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handbook/entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handbook/groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handbook/groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handbook/modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handbook/modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handbook/modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/data/tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Python Module Index</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+   <h1>Python Module Index</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-d"><strong>d</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-d"><td></td><td>
+       <strong>d</strong></td><td></td></tr>
+     <tr>
+       <td><img src="_static/minus.png" class="toggler"
+              id="toggle-1" style="display: none" alt="-" /></td>
+       <td>
+       <code class="xref">draftsman</code></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/blueprintable.html#module-draftsman.blueprintable"><code class="xref">draftsman.blueprintable</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/index.html#module-draftsman.classes"><code class="xref">draftsman.classes</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/association.html#module-draftsman.classes.association"><code class="xref">draftsman.classes.association</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/blueprint.html#module-draftsman.classes.blueprint"><code class="xref">draftsman.classes.blueprint</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/blueprintbook.html#module-draftsman.classes.blueprintbook"><code class="xref">draftsman.classes.blueprintbook</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/collection.html#module-draftsman.classes.collection"><code class="xref">draftsman.classes.collection</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/collisionset.html#module-draftsman.classes.collisionset"><code class="xref">draftsman.classes.collisionset</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/entity.html#module-draftsman.classes.entity"><code class="xref">draftsman.classes.entity</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/entitylike.html#module-draftsman.classes.entitylike"><code class="xref">draftsman.classes.entitylike</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/entitylist.html#module-draftsman.classes.entitylist"><code class="xref">draftsman.classes.entitylist</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/group.html#module-draftsman.classes.group"><code class="xref">draftsman.classes.group</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/index.html#module-draftsman.classes.mixins"><code class="xref">draftsman.classes.mixins</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/circuit_condition.html#module-draftsman.classes.mixins.circuit_condition"><code class="xref">draftsman.classes.mixins.circuit_condition</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/circuit_connectable.html#module-draftsman.classes.mixins.circuit_connectable"><code class="xref">draftsman.classes.mixins.circuit_connectable</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/circuit_read_contents.html#module-draftsman.classes.mixins.circuit_read_contents"><code class="xref">draftsman.classes.mixins.circuit_read_contents</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/circuit_read_hand.html#module-draftsman.classes.mixins.circuit_read_hand"><code class="xref">draftsman.classes.mixins.circuit_read_hand</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/circuit_read_resource.html#module-draftsman.classes.mixins.circuit_read_resource"><code class="xref">draftsman.classes.mixins.circuit_read_resource</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/color.html#module-draftsman.classes.mixins.color"><code class="xref">draftsman.classes.mixins.color</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/control_behavior.html#module-draftsman.classes.mixins.control_behavior"><code class="xref">draftsman.classes.mixins.control_behavior</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/directional.html#module-draftsman.classes.mixins.directional"><code class="xref">draftsman.classes.mixins.directional</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/double_grid_aligned.html#module-draftsman.classes.mixins.double_grid_aligned"><code class="xref">draftsman.classes.mixins.double_grid_aligned</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/eight_way_directional.html#module-draftsman.classes.mixins.eight_way_directional"><code class="xref">draftsman.classes.mixins.eight_way_directional</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/enable_disable.html#module-draftsman.classes.mixins.enable_disable"><code class="xref">draftsman.classes.mixins.enable_disable</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/filters.html#module-draftsman.classes.mixins.filters"><code class="xref">draftsman.classes.mixins.filters</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/inventory.html#module-draftsman.classes.mixins.inventory"><code class="xref">draftsman.classes.mixins.inventory</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/inventory_filter.html#module-draftsman.classes.mixins.inventory_filter"><code class="xref">draftsman.classes.mixins.inventory_filter</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/io_type.html#module-draftsman.classes.mixins.io_type"><code class="xref">draftsman.classes.mixins.io_type</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/logistic_condition.html#module-draftsman.classes.mixins.logistic_condition"><code class="xref">draftsman.classes.mixins.logistic_condition</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/mode_of_operation.html#module-draftsman.classes.mixins.mode_of_operation"><code class="xref">draftsman.classes.mixins.mode_of_operation</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/modules.html#module-draftsman.classes.mixins.modules"><code class="xref">draftsman.classes.mixins.modules</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/orientation.html#module-draftsman.classes.mixins.orientation"><code class="xref">draftsman.classes.mixins.orientation</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/power_connectable.html#module-draftsman.classes.mixins.power_connectable"><code class="xref">draftsman.classes.mixins.power_connectable</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/read_rail_signal.html#module-draftsman.classes.mixins.read_rail_signal"><code class="xref">draftsman.classes.mixins.read_rail_signal</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/recipe.html#module-draftsman.classes.mixins.recipe"><code class="xref">draftsman.classes.mixins.recipe</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/request_filters.html#module-draftsman.classes.mixins.request_filters"><code class="xref">draftsman.classes.mixins.request_filters</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/request_items.html#module-draftsman.classes.mixins.request_items"><code class="xref">draftsman.classes.mixins.request_items</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/mixins/stack_size.html#module-draftsman.classes.mixins.stack_size"><code class="xref">draftsman.classes.mixins.stack_size</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/spatial_data_structure.html#module-draftsman.classes.spatial_data_structure"><code class="xref">draftsman.classes.spatial_data_structure</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/spatial_hashmap.html#module-draftsman.classes.spatial_hashmap"><code class="xref">draftsman.classes.spatial_hashmap</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/spatiallike.html#module-draftsman.classes.spatiallike"><code class="xref">draftsman.classes.spatiallike</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/tile.html#module-draftsman.classes.tile"><code class="xref">draftsman.classes.tile</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/tilelist.html#module-draftsman.classes.tilelist"><code class="xref">draftsman.classes.tilelist</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/transformable.html#module-draftsman.classes.transformable"><code class="xref">draftsman.classes.transformable</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/classes/vector.html#module-draftsman.classes.vector"><code class="xref">draftsman.classes.vector</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/constants.html#module-draftsman.constants"><code class="xref">draftsman.constants</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/data/index.html#module-draftsman.data"><code class="xref">draftsman.data</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/entity.html#module-draftsman.entity"><code class="xref">draftsman.entity</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/env.html#module-draftsman.env"><code class="xref">draftsman.env</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/error.html#module-draftsman.error"><code class="xref">draftsman.error</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/index.html#module-draftsman.prototypes"><code class="xref">draftsman.prototypes</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/accumulator.html#module-draftsman.prototypes.accumulator"><code class="xref">draftsman.prototypes.accumulator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/arithmetic_combinator.html#module-draftsman.prototypes.arithmetic_combinator"><code class="xref">draftsman.prototypes.arithmetic_combinator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/artillery_wagon.html#module-draftsman.prototypes.artillery_wagon"><code class="xref">draftsman.prototypes.artillery_wagon</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/assembling_machine.html#module-draftsman.prototypes.assembling_machine"><code class="xref">draftsman.prototypes.assembling_machine</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/beacon.html#module-draftsman.prototypes.beacon"><code class="xref">draftsman.prototypes.beacon</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/boiler.html#module-draftsman.prototypes.boiler"><code class="xref">draftsman.prototypes.boiler</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/burner_generator.html#module-draftsman.prototypes.burner_generator"><code class="xref">draftsman.prototypes.burner_generator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/cargo_wagon.html#module-draftsman.prototypes.cargo_wagon"><code class="xref">draftsman.prototypes.cargo_wagon</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/constant_combinator.html#module-draftsman.prototypes.constant_combinator"><code class="xref">draftsman.prototypes.constant_combinator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/container.html#module-draftsman.prototypes.container"><code class="xref">draftsman.prototypes.container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/curved_rail.html#module-draftsman.prototypes.curved_rail"><code class="xref">draftsman.prototypes.curved_rail</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/decider_combinator.html#module-draftsman.prototypes.decider_combinator"><code class="xref">draftsman.prototypes.decider_combinator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/electric_energy_interface.html#module-draftsman.prototypes.electric_energy_interface"><code class="xref">draftsman.prototypes.electric_energy_interface</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/electric_pole.html#module-draftsman.prototypes.electric_pole"><code class="xref">draftsman.prototypes.electric_pole</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/filter_inserter.html#module-draftsman.prototypes.filter_inserter"><code class="xref">draftsman.prototypes.filter_inserter</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/fluid_wagon.html#module-draftsman.prototypes.fluid_wagon"><code class="xref">draftsman.prototypes.fluid_wagon</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/furnace.html#module-draftsman.prototypes.furnace"><code class="xref">draftsman.prototypes.furnace</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/gate.html#module-draftsman.prototypes.gate"><code class="xref">draftsman.prototypes.gate</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/generator.html#module-draftsman.prototypes.generator"><code class="xref">draftsman.prototypes.generator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/heat_interface.html#module-draftsman.prototypes.heat_interface"><code class="xref">draftsman.prototypes.heat_interface</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/heat_pipe.html#module-draftsman.prototypes.heat_pipe"><code class="xref">draftsman.prototypes.heat_pipe</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/infinity_container.html#module-draftsman.prototypes.infinity_container"><code class="xref">draftsman.prototypes.infinity_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/infinity_pipe.html#module-draftsman.prototypes.infinity_pipe"><code class="xref">draftsman.prototypes.infinity_pipe</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/inserter.html#module-draftsman.prototypes.inserter"><code class="xref">draftsman.prototypes.inserter</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/lab.html#module-draftsman.prototypes.lab"><code class="xref">draftsman.prototypes.lab</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/lamp.html#module-draftsman.prototypes.lamp"><code class="xref">draftsman.prototypes.lamp</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/land_mine.html#module-draftsman.prototypes.land_mine"><code class="xref">draftsman.prototypes.land_mine</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/linked_belt.html#module-draftsman.prototypes.linked_belt"><code class="xref">draftsman.prototypes.linked_belt</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/linked_container.html#module-draftsman.prototypes.linked_container"><code class="xref">draftsman.prototypes.linked_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/loader.html#module-draftsman.prototypes.loader"><code class="xref">draftsman.prototypes.loader</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/locomotive.html#module-draftsman.prototypes.locomotive"><code class="xref">draftsman.prototypes.locomotive</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/logistic_active_container.html#module-draftsman.prototypes.logistic_active_container"><code class="xref">draftsman.prototypes.logistic_active_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/logistic_buffer_container.html#module-draftsman.prototypes.logistic_buffer_container"><code class="xref">draftsman.prototypes.logistic_buffer_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/logistic_passive_container.html#module-draftsman.prototypes.logistic_passive_container"><code class="xref">draftsman.prototypes.logistic_passive_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/logistic_request_container.html#module-draftsman.prototypes.logistic_request_container"><code class="xref">draftsman.prototypes.logistic_request_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/logistic_storage_container.html#module-draftsman.prototypes.logistic_storage_container"><code class="xref">draftsman.prototypes.logistic_storage_container</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/mining_drill.html#module-draftsman.prototypes.mining_drill"><code class="xref">draftsman.prototypes.mining_drill</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/offshore_pump.html#module-draftsman.prototypes.offshore_pump"><code class="xref">draftsman.prototypes.offshore_pump</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/pipe.html#module-draftsman.prototypes.pipe"><code class="xref">draftsman.prototypes.pipe</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/power_switch.html#module-draftsman.prototypes.power_switch"><code class="xref">draftsman.prototypes.power_switch</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/programmable_speaker.html#module-draftsman.prototypes.programmable_speaker"><code class="xref">draftsman.prototypes.programmable_speaker</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/pump.html#module-draftsman.prototypes.pump"><code class="xref">draftsman.prototypes.pump</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/radar.html#module-draftsman.prototypes.radar"><code class="xref">draftsman.prototypes.radar</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/rail_chain_signal.html#module-draftsman.prototypes.rail_chain_signal"><code class="xref">draftsman.prototypes.rail_chain_signal</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/rail_signal.html#module-draftsman.prototypes.rail_signal"><code class="xref">draftsman.prototypes.rail_signal</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/reactor.html#module-draftsman.prototypes.reactor"><code class="xref">draftsman.prototypes.reactor</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/roboport.html#module-draftsman.prototypes.roboport"><code class="xref">draftsman.prototypes.roboport</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/rocket_silo.html#module-draftsman.prototypes.rocket_silo"><code class="xref">draftsman.prototypes.rocket_silo</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/solar_panel.html#module-draftsman.prototypes.solar_panel"><code class="xref">draftsman.prototypes.solar_panel</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/splitter.html#module-draftsman.prototypes.splitter"><code class="xref">draftsman.prototypes.splitter</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/storage_tank.html#module-draftsman.prototypes.storage_tank"><code class="xref">draftsman.prototypes.storage_tank</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/straight_rail.html#module-draftsman.prototypes.straight_rail"><code class="xref">draftsman.prototypes.straight_rail</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/train_stop.html#module-draftsman.prototypes.train_stop"><code class="xref">draftsman.prototypes.train_stop</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/transport_belt.html#module-draftsman.prototypes.transport_belt"><code class="xref">draftsman.prototypes.transport_belt</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/turret.html#module-draftsman.prototypes.turret"><code class="xref">draftsman.prototypes.turret</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/underground_belt.html#module-draftsman.prototypes.underground_belt"><code class="xref">draftsman.prototypes.underground_belt</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/underground_pipe.html#module-draftsman.prototypes.underground_pipe"><code class="xref">draftsman.prototypes.underground_pipe</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/prototypes/wall.html#module-draftsman.prototypes.wall"><code class="xref">draftsman.prototypes.wall</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/signatures.html#module-draftsman.signatures"><code class="xref">draftsman.signatures</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/tile.html#module-draftsman.tile"><code class="xref">draftsman.tile</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/utils.html#module-draftsman.utils"><code class="xref">draftsman.utils</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/warning.html#module-draftsman.warning"><code class="xref">draftsman.warning</code></a></td><td>
+       <em></em></td></tr>
+   </table>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

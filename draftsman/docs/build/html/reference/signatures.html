@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>signatures &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tile" href="tile.html" />
+    <link rel="prev" title="error" href="error.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handbook/modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../handbook/modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data/entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data/tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Reference</a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/signatures.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-draftsman.signatures">
+<span id="signatures"></span><h1><a class="reference internal" href="#module-draftsman.signatures" title="draftsman.signatures"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a><a class="headerlink" href="#module-draftsman.signatures" title="Permalink to this heading"></a></h1>
+<p>Module of data formats, implemented as <code class="docutils literal notranslate"><span class="pre">Schema</span></code> objects. Used to validate and
+normalize data. Each one raises a <code class="docutils literal notranslate"><span class="pre">SchemaError</span></code> if the passed in data does not 
+match the data format specified, which is usually wrapped with <code class="docutils literal notranslate"><span class="pre">DraftsmanError</span></code>.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INTEGER">
+<span class="sig-name descname"><span class="pre">INTEGER</span></span><a class="headerlink" href="#draftsman.signatures.INTEGER" title="Permalink to this definition"></a></dt>
+<dd><p>Accepts an integer.
+Normalizes the type to <code class="docutils literal notranslate"><span class="pre">futureint</span></code> on Python 2.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INTEGER_OR_NONE">
+<span class="sig-name descname"><span class="pre">INTEGER_OR_NONE</span></span><a class="headerlink" href="#draftsman.signatures.INTEGER_OR_NONE" title="Permalink to this definition"></a></dt>
+<dd><p>Accepts an integer, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+Normalizes the type to <code class="docutils literal notranslate"><span class="pre">futureint</span></code> on Python 2.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.STRING">
+<span class="sig-name descname"><span class="pre">STRING</span></span><a class="headerlink" href="#draftsman.signatures.STRING" title="Permalink to this definition"></a></dt>
+<dd><p>Accepts a string.
+Normalizes the type to a <code class="docutils literal notranslate"><span class="pre">unicode</span></code> string on Python 2.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.STRING_OR_NONE">
+<span class="sig-name descname"><span class="pre">STRING_OR_NONE</span></span><a class="headerlink" href="#draftsman.signatures.STRING_OR_NONE" title="Permalink to this definition"></a></dt>
+<dd><p>Accepts a string, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+Normalizes the type to a <code class="docutils literal notranslate"><span class="pre">unicode</span></code> string on Python 2.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.AABB">
+<span class="sig-name descname"><span class="pre">AABB</span></span><a class="headerlink" href="#draftsman.signatures.AABB" title="Permalink to this definition"></a></dt>
+<dd><p>Accepts data of the format <code class="docutils literal notranslate"><span class="pre">[[float,</span> <span class="pre">float],</span> <span class="pre">[float,</span> <span class="pre">float]]</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+Used to store an axis-aligned bounding box where the first pair is the minimum coordinate and the second pair is the maximum coordinate.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.COLOR">
+<span class="sig-name descname"><span class="pre">COLOR</span></span><a class="headerlink" href="#draftsman.signatures.COLOR" title="Permalink to this definition"></a></dt>
+<dd><p>Used to store color data for Blueprint labels, Locomotive colors, etc.
+Accepts data of the format</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">{&quot;r&quot;:</span> <span class="pre">float,</span> <span class="pre">&quot;g&quot;:</span> <span class="pre">float,</span> <span class="pre">&quot;b&quot;:</span> <span class="pre">float,</span> <span class="pre">Optional(&quot;a&quot;):</span> <span class="pre">float}</span></code></p>
+</div></blockquote>
+<p>or</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">[float,</span> <span class="pre">float,</span> <span class="pre">float,</span> <span class="pre">Optional(float)]</span></code></p>
+</div></blockquote>
+<p>or <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The second format is automatically normalized to the first.
+Raises an error if any of the floating point values are not in the range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">255.0]</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SIGNAL_ID">
+<span class="sig-name descname"><span class="pre">SIGNAL_ID</span></span><a class="headerlink" href="#draftsman.signatures.SIGNAL_ID" title="Permalink to this definition"></a></dt>
+<dd><p>The name and type of a signal, used for either circuits or item filters.
+Accepts data of the format</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">{&quot;name&quot;:</span> <span class="pre">signal_name,</span> <span class="pre">&quot;type&quot;:</span> <span class="pre">Or(&quot;item&quot;,</span> <span class="pre">&quot;fluid&quot;,</span> <span class="pre">&quot;virtual&quot;)}</span></code></p>
+</div></blockquote>
+<p>or just the <code class="docutils literal notranslate"><span class="pre">signal_name</span></code>.
+All members are normalized to <code class="docutils literal notranslate"><span class="pre">unicode</span></code> strings on Python 2.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SIGNAL_ID_OR_NONE">
+<span class="sig-name descname"><span class="pre">SIGNAL_ID_OR_NONE</span></span><a class="headerlink" href="#draftsman.signatures.SIGNAL_ID_OR_NONE" title="Permalink to this definition"></a></dt>
+<dd><p>Same as <a class="reference internal" href="#draftsman.signatures.SIGNAL_ID" title="draftsman.signatures.SIGNAL_ID"><code class="xref py py-data docutils literal notranslate"><span class="pre">SIGNAL_ID</span></code></a>, but can also be <code class="docutils literal notranslate"><span class="pre">None</span></code> instead.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SIGNAL_ID_OR_CONSTANT">
+<span class="sig-name descname"><span class="pre">SIGNAL_ID_OR_CONSTANT</span></span><a class="headerlink" href="#draftsman.signatures.SIGNAL_ID_OR_CONSTANT" title="Permalink to this definition"></a></dt>
+<dd><p>Same as <a class="reference internal" href="#draftsman.signatures.SIGNAL_ID" title="draftsman.signatures.SIGNAL_ID"><code class="xref py py-data docutils literal notranslate"><span class="pre">SIGNAL_ID</span></code></a>, but can also be a 32-bit <code class="docutils literal notranslate"><span class="pre">int</span></code> instead.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.COMPARATOR">
+<span class="sig-name descname"><span class="pre">COMPARATOR</span></span><a class="headerlink" href="#draftsman.signatures.COMPARATOR" title="Permalink to this definition"></a></dt>
+<dd><p>The comparison operations, used in circuit conditions and <a class="reference internal" href="prototypes/decider_combinator.html#draftsman.prototypes.decider_combinator.DeciderCombinator" title="draftsman.prototypes.decider_combinator.DeciderCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeciderCombinator</span></code></a>.
+Can be one of:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s2">&quot;≥&quot;</span><span class="p">,</span> <span class="s2">&quot;≤&quot;</span><span class="p">,</span> <span class="s2">&quot;≠&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>or expressed as Python language equivalents:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;!=&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Entries in the second format are automatically converted to the first format.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.OPERATION">
+<span class="sig-name descname"><span class="pre">OPERATION</span></span><a class="headerlink" href="#draftsman.signatures.OPERATION" title="Permalink to this definition"></a></dt>
+<dd><p>The arithmetic operations, used in <a class="reference internal" href="prototypes/arithmetic_combinator.html#draftsman.prototypes.arithmetic_combinator.ArithmeticCombinator" title="draftsman.prototypes.arithmetic_combinator.ArithmeticCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArithmeticCombinator</span></code></a>.
+Can be one of:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;AND&quot;</span><span class="p">,</span> <span class="s2">&quot;OR&quot;</span><span class="p">,</span> <span class="s2">&quot;XOR&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Strings specified in lowercase are automatically converted to uppercase on validation.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.CONDITION">
+<span class="sig-name descname"><span class="pre">CONDITION</span></span><a class="headerlink" href="#draftsman.signatures.CONDITION" title="Permalink to this definition"></a></dt>
+<dd><p>A general circuit condition, used for circuit conditions and logistic conditions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;first_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;second_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;comparator&quot;</span><span class="p">):</span> <span class="n">COMPARATOR</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.ICON">
+<span class="sig-name descname"><span class="pre">ICON</span></span><a class="headerlink" href="#draftsman.signatures.ICON" title="Permalink to this definition"></a></dt>
+<dd><p>The format of a Blueprint or BlueprintBook icon, which helps visually distinguish them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Raises an error if <code class="docutils literal notranslate"><span class="pre">&quot;index&quot;</span></code> is not in the range <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">4]</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.ICONS">
+<span class="sig-name descname"><span class="pre">ICONS</span></span><a class="headerlink" href="#draftsman.signatures.ICONS" title="Permalink to this definition"></a></dt>
+<dd><p>A list of <a class="reference internal" href="#draftsman.signatures.ICON" title="draftsman.signatures.ICON"><code class="xref py py-data docutils literal notranslate"><span class="pre">ICON</span></code></a> objects, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+Can be specified as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">signal_name</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">signal_type</span><span class="p">}},</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Or more succinctly as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">signal_name</span><span class="p">,</span> <span class="n">signal_name</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where the signal types are inferred and their index is the signal’s position in the original list.
+Raises an error if the length of the list is greater than 4.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.ASSOCIATION">
+<span class="sig-name descname"><span class="pre">ASSOCIATION</span></span><a class="headerlink" href="#draftsman.signatures.ASSOCIATION" title="Permalink to this definition"></a></dt>
+<dd><p>A way of specifying a reference between two entities.
+Used primarily in wire/circuit connections, but also used in Locomotive train schedules as well.
+Specified as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Or</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">EntityLike</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The Factorio blueprint string format uses <code class="docutils literal notranslate"><span class="pre">ints</span></code> to determine what entity it’s talking about, where the value represents the index of the entity in the master entities list.
+However, this is not very flexible when actively creating a blueprint, as inserting an entity at the beginning of the list destroys the meaning of all connections after it.
+Alternatively, Draftsman supports association by reference, where you pass the <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> that you want to link to directly.
+This solves the aforementioned problem, and allows you to query the connected entity in such a way that it always stays up to date.
+When a Blueprint is exported, these associations are converted to regular integers just-in-time to comply with the format.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.CIRCUIT_CONNECTION_POINT">
+<span class="sig-name descname"><span class="pre">CIRCUIT_CONNECTION_POINT</span></span><a class="headerlink" href="#draftsman.signatures.CIRCUIT_CONNECTION_POINT" title="Permalink to this definition"></a></dt>
+<dd><p>A single circuit connection object.
+Must point to another entity via <code class="docutils literal notranslate"><span class="pre">&quot;entity_id&quot;</span></code>; can optionally specify what side of the entity that it connects to, if that entity has multiple connection points.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;entity_id&quot;</span><span class="p">:</span> <span class="n">ASSOCIATION</span><span class="p">,</span> <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_id&quot;</span><span class="p">):</span> <span class="n">Or</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.POWER_CONNECTION_POINT">
+<span class="sig-name descname"><span class="pre">POWER_CONNECTION_POINT</span></span><a class="headerlink" href="#draftsman.signatures.POWER_CONNECTION_POINT" title="Permalink to this definition"></a></dt>
+<dd><p>A single power connection object.
+Used exclusively for <code class="docutils literal notranslate"><span class="pre">PowerSwitch</span></code> in the base game, as copper wire connections.
+Must point to an entity via <code class="docutils literal notranslate"><span class="pre">&quot;entity_id&quot;</span></code>; can optionally specify what power side of the target entity is connected to, though in practice this is always <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;entity_id&quot;</span><span class="p">:</span> <span class="n">ASSOCIATION</span><span class="p">,</span> <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;wire_id&quot;</span><span class="p">):</span> <span class="n">Or</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because copper wire connections exist in the connections structure, they actually dont count towards power pole neighbours.
+This means that you can have as many copper wire connection points as you want, even if a power pole is already connected to 5 others.</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.CONNECTIONS">
+<span class="sig-name descname"><span class="pre">CONNECTIONS</span></span><a class="headerlink" href="#draftsman.signatures.CONNECTIONS" title="Permalink to this definition"></a></dt>
+<dd><p>The format of an entity’s circuit connections.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">):</span> <span class="p">{</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">):</span>   <span class="p">[</span><span class="n">CIRCUIT_CONNECTION_POINT</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">):</span> <span class="p">[</span><span class="n">CIRCUIT_CONNECTION_POINT</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">):</span> <span class="p">{</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">):</span>   <span class="p">[</span><span class="n">CIRCUIT_CONNECTION_POINT</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">):</span> <span class="p">[</span><span class="n">CIRCUIT_CONNECTION_POINT</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;Cu0&quot;</span><span class="p">):</span> <span class="p">[</span><span class="n">POWER_CONNECTION_POINT</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;Cu1&quot;</span><span class="p">):</span> <span class="p">[</span><span class="n">POWER_CONNECTION_POINT</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;2&quot;</span></code> specifies the side of the host entity that is connected; this defaults to <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code> on entities that have only one connection point.
+<code class="docutils literal notranslate"><span class="pre">&quot;red&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;green&quot;</span></code> specify the color of the connected wire on that particular side.
+Each entry is a list of one or more connection points, as specified above.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code> is passed in, the validation will default to an empty <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.NEIGHBOURS">
+<span class="sig-name descname"><span class="pre">NEIGHBOURS</span></span><a class="headerlink" href="#draftsman.signatures.NEIGHBOURS" title="Permalink to this definition"></a></dt>
+<dd><p>The format of an entity’s power-pole neighbours. This is only used in <a class="reference internal" href="prototypes/electric_pole.html#draftsman.prototypes.electric_pole.ElectricPole" title="draftsman.prototypes.electric_pole.ElectricPole"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectricPole</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ASSOCIATION</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code> is passed in, the validation will default to an empty <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SIGNAL_FILTER">
+<span class="sig-name descname"><span class="pre">SIGNAL_FILTER</span></span><a class="headerlink" href="#draftsman.signatures.SIGNAL_FILTER" title="Permalink to this definition"></a></dt>
+<dd><p>Format for signal values, used by <a class="reference internal" href="prototypes/constant_combinator.html#draftsman.prototypes.constant_combinator.ConstantCombinator" title="draftsman.prototypes.constant_combinator.ConstantCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantCombinator</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>           <span class="c1"># The location of the entry</span>
+    <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>    <span class="c1"># Which signal</span>
+    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">int</span>            <span class="c1"># Value of the signal</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SIGNAL_FILTERS">
+<span class="sig-name descname"><span class="pre">SIGNAL_FILTERS</span></span><a class="headerlink" href="#draftsman.signatures.SIGNAL_FILTERS" title="Permalink to this definition"></a></dt>
+<dd><p>Format for a set of signal values, used by <a class="reference internal" href="prototypes/constant_combinator.html#draftsman.prototypes.constant_combinator.ConstantCombinator" title="draftsman.prototypes.constant_combinator.ConstantCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantCombinator</span></code></a>.
+Can be specified in the format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">SIGNAL_FILTER</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Or, more succinctly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">signal_name</span><span class="p">,</span> <span class="n">signal_count</span><span class="p">),</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal notranslate"><span class="pre">&quot;index&quot;</span></code> of an entry defaults to the index of the tuple in the list.
+Validation of the second format gets converted to the first format.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INFINITY_FILTER">
+<span class="sig-name descname"><span class="pre">INFINITY_FILTER</span></span><a class="headerlink" href="#draftsman.signatures.INFINITY_FILTER" title="Permalink to this definition"></a></dt>
+<dd><p>A filter entry in a <a class="reference internal" href="prototypes/infinity_container.html#draftsman.prototypes.infinity_container.InfinityContainer" title="draftsman.prototypes.infinity_container.InfinityContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfinityContainer</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>   <span class="c1"># Which slot in the container</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">STRING</span><span class="p">,</span> <span class="c1"># Name of the item</span>
+    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>   <span class="c1"># Amount of the item</span>
+    <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="s2">&quot;at-least&quot;</span><span class="p">,</span> <span class="s2">&quot;at-most&quot;</span><span class="p">,</span> <span class="s2">&quot;exactly&quot;</span><span class="p">)</span> <span class="c1"># Mode of behavior</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;index&quot;</span></code> is the location in the container, <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> is the name of the item to filter, <code class="docutils literal notranslate"><span class="pre">&quot;count&quot;</span></code> is the amount, and <code class="docutils literal notranslate"><span class="pre">&quot;mode&quot;</span></code> is the manner in which the particular filter behaves.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INFINITY_FILTERS">
+<span class="sig-name descname"><span class="pre">INFINITY_FILTERS</span></span><a class="headerlink" href="#draftsman.signatures.INFINITY_FILTERS" title="Permalink to this definition"></a></dt>
+<dd><p>A set of filter entries in a <a class="reference internal" href="prototypes/infinity_container.html#draftsman.prototypes.infinity_container.InfinityContainer" title="draftsman.prototypes.infinity_container.InfinityContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfinityContainer</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">INFINITY_FILTER</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INFINITY_CONTAINER">
+<span class="sig-name descname"><span class="pre">INFINITY_CONTAINER</span></span><a class="headerlink" href="#draftsman.signatures.INFINITY_CONTAINER" title="Permalink to this definition"></a></dt>
+<dd><p>Data format specifically for the <a class="reference internal" href="prototypes/infinity_container.html#draftsman.prototypes.infinity_container.InfinityContainer" title="draftsman.prototypes.infinity_container.InfinityContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfinityContainer</span></code></a> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;remove_unfiltered_items&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;filters&quot;</span><span class="p">):</span> <span class="n">INFINITY_FILTERS</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INFINITY_PIPE">
+<span class="sig-name descname"><span class="pre">INFINITY_PIPE</span></span><a class="headerlink" href="#draftsman.signatures.INFINITY_PIPE" title="Permalink to this definition"></a></dt>
+<dd><p>Data format specifically for the <a class="reference internal" href="prototypes/infinity_pipe.html#draftsman.prototypes.infinity_pipe.InfinityPipe" title="draftsman.prototypes.infinity_pipe.InfinityPipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfinityPipe</span></code></a> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">):</span> <span class="n">STRING</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;percentage&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span> <span class="c1"># Where 100 is 100%</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">):</span> <span class="n">Or</span><span class="p">(</span><span class="s2">&quot;at-least&quot;</span><span class="p">,</span> <span class="s2">&quot;at-most&quot;</span><span class="p">,</span> <span class="s2">&quot;exactly&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;remove&quot;</span><span class="p">),</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span> <span class="c1"># In the range [0, 1000]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.PARAMETERS">
+<span class="sig-name descname"><span class="pre">PARAMETERS</span></span><a class="headerlink" href="#draftsman.signatures.PARAMETERS" title="Permalink to this definition"></a></dt>
+<dd><p>Parameters structure for <a class="reference internal" href="prototypes/programmable_speaker.html#draftsman.prototypes.programmable_speaker.ProgrammableSpeaker" title="draftsman.prototypes.programmable_speaker.ProgrammableSpeaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammableSpeaker</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;playback_volume&quot;</span><span class="p">):</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;playback_globally&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;allow_polyphony&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span> <span class="c1"># Allows multiple sounds to play at once</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.ALERT_PARAMETERS">
+<span class="sig-name descname"><span class="pre">ALERT_PARAMETERS</span></span><a class="headerlink" href="#draftsman.signatures.ALERT_PARAMETERS" title="Permalink to this definition"></a></dt>
+<dd><p>Alert parameters structure for <a class="reference internal" href="prototypes/programmable_speaker.html#draftsman.prototypes.programmable_speaker.ProgrammableSpeaker" title="draftsman.prototypes.programmable_speaker.ProgrammableSpeaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammableSpeaker</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;show_alert&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;show_on_map&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;icon_signal_id&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span> <span class="c1"># Icon to show on alert</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;alert_message&quot;</span><span class="p">):</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.CONTROL_BEHAVIOR">
+<span class="sig-name descname"><span class="pre">CONTROL_BEHAVIOR</span></span><a class="headerlink" href="#draftsman.signatures.CONTROL_BEHAVIOR" title="Permalink to this definition"></a></dt>
+<dd><p>Control behavior structure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently this is used for all entities with a control behavior.
+Ideally a each entity type would have a unique control behavior constant, but for now they exist as a single constant.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="c1"># Circuit condition</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_enable_disable&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_condition&quot;</span><span class="p">):</span> <span class="n">CONDITION</span><span class="p">,</span>
+    <span class="c1"># Logistic condition</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;connect_to_logistic_network&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;logistic_condition&quot;</span><span class="p">):</span> <span class="n">CONDITION</span><span class="p">,</span>
+    <span class="c1"># Transport Belts</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_read_hand_contents&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="c1"># Mining Drills</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_read_resources&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="c1"># Inserters</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_contents_read_mode&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_hand_read_mode&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="c1"># Filter inserters</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_mode_of_operation&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_set_stack_size&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;stack_control_input_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="c1"># Train Stops</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;read_from_train&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;read_stopped_train&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;train_stopped_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;set_trains_limit&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;trains_limit_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;read_trains_count&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;trains_count_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="c1"># Rail signals</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;red_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;yellow_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;green_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;blue_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="c1"># Roboports</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;read_logistics&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;read_robot_stats&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;available_logistic_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;total_logistic_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;available_construction_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;total_construction_output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="c1"># Lamps</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;use_colors&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="c1"># Arithmetic Combinators</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;arithmetic_conditions&quot;</span><span class="p">):</span> <span class="p">{</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;first_constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;first_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;operation&quot;</span><span class="p">):</span> <span class="n">OPERATION</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;second_constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;second_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="c1"># Decider Combinators</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;decider_conditions&quot;</span><span class="p">):</span> <span class="p">{</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;first_constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;first_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;comparator&quot;</span><span class="p">):</span> <span class="n">COMPARATOR</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;second_constant&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;second_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;copy_count_from_input&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="c1"># Constant Combinators</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;filters&quot;</span><span class="p">):</span> <span class="n">SIGNAL_FILTERS</span><span class="p">,</span>
+    <span class="c1"># Programmable Speakers</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;circuit_parameters&quot;</span><span class="p">):</span> <span class="p">{</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;signal_value_is_pitch&quot;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;instrument_id&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;note_id&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="c1"># Accumulators</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;output_signal&quot;</span><span class="p">):</span> <span class="n">SIGNAL_ID</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.FILTER_ENTRY">
+<span class="sig-name descname"><span class="pre">FILTER_ENTRY</span></span><a class="headerlink" href="#draftsman.signatures.FILTER_ENTRY" title="Permalink to this definition"></a></dt>
+<dd><p>Item filter entry. Used in <a class="reference internal" href="prototypes/filter_inserter.html#draftsman.prototypes.filter_inserter.FilterInserter" title="draftsman.prototypes.filter_inserter.FilterInserter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterInserter</span></code></a> and <a class="reference internal" href="prototypes/loader.html#draftsman.prototypes.loader.Loader" title="draftsman.prototypes.loader.Loader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">STRING</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.FILTERS">
+<span class="sig-name descname"><span class="pre">FILTERS</span></span><a class="headerlink" href="#draftsman.signatures.FILTERS" title="Permalink to this definition"></a></dt>
+<dd><p>Set of item filters. Used in <a class="reference internal" href="prototypes/filter_inserter.html#draftsman.prototypes.filter_inserter.FilterInserter" title="draftsman.prototypes.filter_inserter.FilterInserter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterInserter</span></code></a> and <a class="reference internal" href="prototypes/loader.html#draftsman.prototypes.loader.Loader" title="draftsman.prototypes.loader.Loader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code></a>.
+Can be specified in the format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">FILTER_ENTRY</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Or, more succinctly as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">item_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where the filter’s <code class="docutils literal notranslate"><span class="pre">&quot;index&quot;</span></code> is determined by it’s position in the list.
+Validation of the second format is automatically converted to the first format.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.INVENTORY_FILTER">
+<span class="sig-name descname"><span class="pre">INVENTORY_FILTER</span></span><a class="headerlink" href="#draftsman.signatures.INVENTORY_FILTER" title="Permalink to this definition"></a></dt>
+<dd><p>Set of item filters for an inventory object, used in <a class="reference internal" href="prototypes/cargo_wagon.html#draftsman.prototypes.cargo_wagon.CargoWagon" title="draftsman.prototypes.cargo_wagon.CargoWagon"><code class="xref py py-class docutils literal notranslate"><span class="pre">CargoWagon</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;filters&quot;</span><span class="p">):</span> <span class="n">FILTERS</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code> is passed in, the validation will default to an empty <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.REQUEST_FILTERS">
+<span class="sig-name descname"><span class="pre">REQUEST_FILTERS</span></span><a class="headerlink" href="#draftsman.signatures.REQUEST_FILTERS" title="Permalink to this definition"></a></dt>
+<dd><p>List of request filters.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is most likely to change in a future version.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">STRING</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.WAIT_CONDITION">
+<span class="sig-name descname"><span class="pre">WAIT_CONDITION</span></span><a class="headerlink" href="#draftsman.signatures.WAIT_CONDITION" title="Permalink to this definition"></a></dt>
+<dd><p>A train schedule wait-condition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span>
+        <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inactivity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;full&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;empty&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;item_count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;circuit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;robots_inactive&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fluid_count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;passenger_present&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;passenger_not_present&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;compare_type&quot;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="s2">&quot;or&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">),</span>    <span class="c1"># Comparison with the previous wait-condition</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;ticks&quot;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>             <span class="c1"># Amount of time to wait if specified</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;condition&quot;</span><span class="p">):</span> <span class="n">CONDITION</span><span class="p">,</span>   <span class="c1"># Circuit condition if specified</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SCHEDULE">
+<span class="sig-name descname"><span class="pre">SCHEDULE</span></span><a class="headerlink" href="#draftsman.signatures.SCHEDULE" title="Permalink to this definition"></a></dt>
+<dd><p>A train schedule.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;locomotives&quot;</span><span class="p">):</span> <span class="p">[</span><span class="n">ASSOCIATION</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="s2">&quot;schedule&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;station&quot;</span><span class="p">:</span> <span class="n">STRING</span><span class="p">,</span>
+            <span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;wait_conditions&quot;</span><span class="p">):</span> <span class="p">[</span><span class="n">WAIT_CONDITION</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.signatures.SCHEDULES">
+<span class="sig-name descname"><span class="pre">SCHEDULES</span></span><a class="headerlink" href="#draftsman.signatures.SCHEDULES" title="Permalink to this definition"></a></dt>
+<dd><p>A set of train schedules.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">SCHEDULE</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="error.html" class="btn btn-neutral float-left" title="error" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tile.html" class="btn btn-neutral float-right" title="tile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

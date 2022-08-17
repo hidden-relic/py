@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>entities &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="instruments" href="instruments.html" />
+    <link rel="prev" title="data" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../handbook/index.html">Handbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../handbook/modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../handbook/modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+          <li><a href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/data/entities.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entities">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code><a class="headerlink" href="#entities" title="Permalink to this heading"></a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><a class="headerlink" href="#draftsman.data.entities.raw" title="Permalink to this definition"></a></dt>
+<dd><p>A dictionary indexed with all of the valid entity names.
+The dict contains all entities, regardless of type, which provides a convenient place to query data about any entity.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://wiki.factorio.com/Prototype/Entity">https://wiki.factorio.com/Prototype/Entity</a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">draftsman.data</span> <span class="kn">import</span> <span class="n">entities</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="s2">&quot;small-electric-pole&quot;</span><span class="p">],</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Note: not all key-value pairs are represented for brevity
+{
+    &quot;fast_replaceable_group&quot;: &quot;electric-pole&quot;,
+    &quot;collision_box&quot;: [
+        [
+            -0.15,
+            -0.15
+        ],
+        [
+            0.15,
+            0.15
+        ]
+    ],
+    &quot;name&quot;: &quot;small-electric-pole&quot;,
+    &quot;flags&quot;: [
+        &quot;placeable-neutral&quot;,
+        &quot;player-creation&quot;,
+        &quot;fast-replaceable-no-build-while-moving&quot;
+    ],
+    &quot;type&quot;: &quot;electric-pole&quot;,
+    &quot;dying_explosion&quot;: &quot;small-electric-pole-explosion&quot;,
+    &quot;minable&quot;: {
+        &quot;result&quot;: &quot;small-electric-pole&quot;,
+        &quot;mining_time&quot;: 0.1
+    },
+    &quot;icon_size&quot;: 64,
+    &quot;selection_box&quot;: [
+        [
+            -0.4,
+            -0.4
+        ],
+        [
+            0.4,
+            0.4
+        ]
+    ],
+    &quot;track_coverage_during_build_by_moving&quot;: true,
+    &quot;corpse&quot;: &quot;small-electric-pole-remnants&quot;,
+    &quot;connection_points&quot;: [...],
+    &quot;icon&quot;: &quot;__base__/graphics/icons/small-electric-pole.png&quot;,
+    &quot;supply_area_distance&quot;: 2.5,
+    &quot;maximum_wire_distance&quot;: 7.5,
+    &quot;max_health&quot;: 100,
+    &quot;order&quot;: &quot;a[energy]-a[small-electric-pole]&quot;,
+    &quot;subgroup&quot;: &quot;energy-pipe-distribution&quot;
+    # and so on
+    # ...
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.containers">
+<span class="sig-name descname"><span class="pre">containers</span></span><a class="headerlink" href="#draftsman.data.entities.containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/container.html#draftsman.prototypes.container.Container" title="draftsman.prototypes.container.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">Container</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.storage_tanks">
+<span class="sig-name descname"><span class="pre">storage_tanks</span></span><a class="headerlink" href="#draftsman.data.entities.storage_tanks" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/storage_tank.html#draftsman.prototypes.storage_tank.StorageTank" title="draftsman.prototypes.storage_tank.StorageTank"><code class="xref py py-class docutils literal notranslate"><span class="pre">StorageTank</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.transport_belts">
+<span class="sig-name descname"><span class="pre">transport_belts</span></span><a class="headerlink" href="#draftsman.data.entities.transport_belts" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/transport_belt.html#draftsman.prototypes.transport_belt.TransportBelt" title="draftsman.prototypes.transport_belt.TransportBelt"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransportBelt</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.underground_belts">
+<span class="sig-name descname"><span class="pre">underground_belts</span></span><a class="headerlink" href="#draftsman.data.entities.underground_belts" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/underground_belt.html#draftsman.prototypes.underground_belt.UndergroundBelt" title="draftsman.prototypes.underground_belt.UndergroundBelt"><code class="xref py py-class docutils literal notranslate"><span class="pre">UndergroundBelt</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.splitters">
+<span class="sig-name descname"><span class="pre">splitters</span></span><a class="headerlink" href="#draftsman.data.entities.splitters" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/splitter.html#draftsman.prototypes.splitter.Splitter" title="draftsman.prototypes.splitter.Splitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Splitter</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.inserters">
+<span class="sig-name descname"><span class="pre">inserters</span></span><a class="headerlink" href="#draftsman.data.entities.inserters" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/inserter.html#draftsman.prototypes.inserter.Inserter" title="draftsman.prototypes.inserter.Inserter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inserter</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.filter_inserters">
+<span class="sig-name descname"><span class="pre">filter_inserters</span></span><a class="headerlink" href="#draftsman.data.entities.filter_inserters" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/filter_inserter.html#draftsman.prototypes.filter_inserter.FilterInserter" title="draftsman.prototypes.filter_inserter.FilterInserter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterInserter</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.loaders">
+<span class="sig-name descname"><span class="pre">loaders</span></span><a class="headerlink" href="#draftsman.data.entities.loaders" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/loader.html#draftsman.prototypes.loader.Loader" title="draftsman.prototypes.loader.Loader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.electric_poles">
+<span class="sig-name descname"><span class="pre">electric_poles</span></span><a class="headerlink" href="#draftsman.data.entities.electric_poles" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/electric_pole.html#draftsman.prototypes.electric_pole.ElectricPole" title="draftsman.prototypes.electric_pole.ElectricPole"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectricPole</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.pipes">
+<span class="sig-name descname"><span class="pre">pipes</span></span><a class="headerlink" href="#draftsman.data.entities.pipes" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/pipe.html#draftsman.prototypes.pipe.Pipe" title="draftsman.prototypes.pipe.Pipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipe</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.underground_pipes">
+<span class="sig-name descname"><span class="pre">underground_pipes</span></span><a class="headerlink" href="#draftsman.data.entities.underground_pipes" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/underground_pipe.html#draftsman.prototypes.underground_pipe.UndergroundPipe" title="draftsman.prototypes.underground_pipe.UndergroundPipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">UndergroundPipe</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.pumps">
+<span class="sig-name descname"><span class="pre">pumps</span></span><a class="headerlink" href="#draftsman.data.entities.pumps" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/pump.html#draftsman.prototypes.pump.Pump" title="draftsman.prototypes.pump.Pump"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pump</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.straight_rails">
+<span class="sig-name descname"><span class="pre">straight_rails</span></span><a class="headerlink" href="#draftsman.data.entities.straight_rails" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/straight_rail.html#draftsman.prototypes.straight_rail.StraightRail" title="draftsman.prototypes.straight_rail.StraightRail"><code class="xref py py-class docutils literal notranslate"><span class="pre">StraightRail</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.curved_rails">
+<span class="sig-name descname"><span class="pre">curved_rails</span></span><a class="headerlink" href="#draftsman.data.entities.curved_rails" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/curved_rail.html#draftsman.prototypes.curved_rail.CurvedRail" title="draftsman.prototypes.curved_rail.CurvedRail"><code class="xref py py-class docutils literal notranslate"><span class="pre">CurvedRail</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.train_stops">
+<span class="sig-name descname"><span class="pre">train_stops</span></span><a class="headerlink" href="#draftsman.data.entities.train_stops" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/train_stop.html#draftsman.prototypes.train_stop.TrainStop" title="draftsman.prototypes.train_stop.TrainStop"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrainStop</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.rail_signals">
+<span class="sig-name descname"><span class="pre">rail_signals</span></span><a class="headerlink" href="#draftsman.data.entities.rail_signals" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/rail_signal.html#draftsman.prototypes.rail_signal.RailSignal" title="draftsman.prototypes.rail_signal.RailSignal"><code class="xref py py-class docutils literal notranslate"><span class="pre">RailSignal</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.rail_chain_signals">
+<span class="sig-name descname"><span class="pre">rail_chain_signals</span></span><a class="headerlink" href="#draftsman.data.entities.rail_chain_signals" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/rail_chain_signal.html#draftsman.prototypes.rail_chain_signal.RailChainSignal" title="draftsman.prototypes.rail_chain_signal.RailChainSignal"><code class="xref py py-class docutils literal notranslate"><span class="pre">RailChainSignal</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.locomotives">
+<span class="sig-name descname"><span class="pre">locomotives</span></span><a class="headerlink" href="#draftsman.data.entities.locomotives" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/locomotive.html#draftsman.prototypes.locomotive.Locomotive" title="draftsman.prototypes.locomotive.Locomotive"><code class="xref py py-class docutils literal notranslate"><span class="pre">Locomotive</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.cargo_wagons">
+<span class="sig-name descname"><span class="pre">cargo_wagons</span></span><a class="headerlink" href="#draftsman.data.entities.cargo_wagons" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/cargo_wagon.html#draftsman.prototypes.cargo_wagon.CargoWagon" title="draftsman.prototypes.cargo_wagon.CargoWagon"><code class="xref py py-class docutils literal notranslate"><span class="pre">CargoWagon</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.fluid_wagons">
+<span class="sig-name descname"><span class="pre">fluid_wagons</span></span><a class="headerlink" href="#draftsman.data.entities.fluid_wagons" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/fluid_wagon.html#draftsman.prototypes.fluid_wagon.FluidWagon" title="draftsman.prototypes.fluid_wagon.FluidWagon"><code class="xref py py-class docutils literal notranslate"><span class="pre">FluidWagon</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.artillery_wagons">
+<span class="sig-name descname"><span class="pre">artillery_wagons</span></span><a class="headerlink" href="#draftsman.data.entities.artillery_wagons" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/artillery_wagon.html#draftsman.prototypes.artillery_wagon.ArtilleryWagon" title="draftsman.prototypes.artillery_wagon.ArtilleryWagon"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArtilleryWagon</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.logistic_passive_containers">
+<span class="sig-name descname"><span class="pre">logistic_passive_containers</span></span><a class="headerlink" href="#draftsman.data.entities.logistic_passive_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/logistic_passive_container.html#draftsman.prototypes.logistic_passive_container.LogisticPassiveContainer" title="draftsman.prototypes.logistic_passive_container.LogisticPassiveContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticPassiveContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.logistic_active_containers">
+<span class="sig-name descname"><span class="pre">logistic_active_containers</span></span><a class="headerlink" href="#draftsman.data.entities.logistic_active_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/logistic_active_container.html#draftsman.prototypes.logistic_active_container.LogisticActiveContainer" title="draftsman.prototypes.logistic_active_container.LogisticActiveContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticActiveContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.logistic_storage_containers">
+<span class="sig-name descname"><span class="pre">logistic_storage_containers</span></span><a class="headerlink" href="#draftsman.data.entities.logistic_storage_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/logistic_storage_container.html#draftsman.prototypes.logistic_storage_container.LogisticStorageContainer" title="draftsman.prototypes.logistic_storage_container.LogisticStorageContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticStorageContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.logistic_buffer_containers">
+<span class="sig-name descname"><span class="pre">logistic_buffer_containers</span></span><a class="headerlink" href="#draftsman.data.entities.logistic_buffer_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/logistic_buffer_container.html#draftsman.prototypes.logistic_buffer_container.LogisticBufferContainer" title="draftsman.prototypes.logistic_buffer_container.LogisticBufferContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticBufferContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.logistic_request_containers">
+<span class="sig-name descname"><span class="pre">logistic_request_containers</span></span><a class="headerlink" href="#draftsman.data.entities.logistic_request_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/logistic_request_container.html#draftsman.prototypes.logistic_request_container.LogisticRequestContainer" title="draftsman.prototypes.logistic_request_container.LogisticRequestContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRequestContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.roboports">
+<span class="sig-name descname"><span class="pre">roboports</span></span><a class="headerlink" href="#draftsman.data.entities.roboports" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">Roboports</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.lamps">
+<span class="sig-name descname"><span class="pre">lamps</span></span><a class="headerlink" href="#draftsman.data.entities.lamps" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/lamp.html#draftsman.prototypes.lamp.Lamp" title="draftsman.prototypes.lamp.Lamp"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lamp</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.arithmetic_combinators">
+<span class="sig-name descname"><span class="pre">arithmetic_combinators</span></span><a class="headerlink" href="#draftsman.data.entities.arithmetic_combinators" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/arithmetic_combinator.html#draftsman.prototypes.arithmetic_combinator.ArithmeticCombinator" title="draftsman.prototypes.arithmetic_combinator.ArithmeticCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArithmeticCombinator</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.decider_combinators">
+<span class="sig-name descname"><span class="pre">decider_combinators</span></span><a class="headerlink" href="#draftsman.data.entities.decider_combinators" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/decider_combinator.html#draftsman.prototypes.decider_combinator.DeciderCombinator" title="draftsman.prototypes.decider_combinator.DeciderCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeciderCombinator</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.constant_combinators">
+<span class="sig-name descname"><span class="pre">constant_combinators</span></span><a class="headerlink" href="#draftsman.data.entities.constant_combinators" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/constant_combinator.html#draftsman.prototypes.constant_combinator.ConstantCombinator" title="draftsman.prototypes.constant_combinator.ConstantCombinator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantCombinator</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.power_switches">
+<span class="sig-name descname"><span class="pre">power_switches</span></span><a class="headerlink" href="#draftsman.data.entities.power_switches" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/power_switch.html#draftsman.prototypes.power_switch.PowerSwitch" title="draftsman.prototypes.power_switch.PowerSwitch"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerSwitch</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.programmable_speakers">
+<span class="sig-name descname"><span class="pre">programmable_speakers</span></span><a class="headerlink" href="#draftsman.data.entities.programmable_speakers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/programmable_speaker.html#draftsman.prototypes.programmable_speaker.ProgrammableSpeaker" title="draftsman.prototypes.programmable_speaker.ProgrammableSpeaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammableSpeaker</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.boilers">
+<span class="sig-name descname"><span class="pre">boilers</span></span><a class="headerlink" href="#draftsman.data.entities.boilers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/boiler.html#draftsman.prototypes.boiler.Boiler" title="draftsman.prototypes.boiler.Boiler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Boiler</span></code></a>.
+Boilers convert a fuel to heat a fluid (usually water) into another (usually steam).</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.generators">
+<span class="sig-name descname"><span class="pre">generators</span></span><a class="headerlink" href="#draftsman.data.entities.generators" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/generator.html#draftsman.prototypes.generator.Generator" title="draftsman.prototypes.generator.Generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>.
+Generators convert a fluid (usually steam) into electricity.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.solar_panels">
+<span class="sig-name descname"><span class="pre">solar_panels</span></span><a class="headerlink" href="#draftsman.data.entities.solar_panels" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/solar_panel.html#draftsman.prototypes.solar_panel.SolarPanel" title="draftsman.prototypes.solar_panel.SolarPanel"><code class="xref py py-class docutils literal notranslate"><span class="pre">SolarPanel</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.accumulators">
+<span class="sig-name descname"><span class="pre">accumulators</span></span><a class="headerlink" href="#draftsman.data.entities.accumulators" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/accumulator.html#draftsman.prototypes.accumulator.Accumulator" title="draftsman.prototypes.accumulator.Accumulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Accumulator</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.reactors">
+<span class="sig-name descname"><span class="pre">reactors</span></span><a class="headerlink" href="#draftsman.data.entities.reactors" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/reactor.html#draftsman.prototypes.reactor.Reactor" title="draftsman.prototypes.reactor.Reactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactor</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.heat_pipes">
+<span class="sig-name descname"><span class="pre">heat_pipes</span></span><a class="headerlink" href="#draftsman.data.entities.heat_pipes" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/heat_pipe.html#draftsman.prototypes.heat_pipe.HeatPipe" title="draftsman.prototypes.heat_pipe.HeatPipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeatPipe</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.mining_drills">
+<span class="sig-name descname"><span class="pre">mining_drills</span></span><a class="headerlink" href="#draftsman.data.entities.mining_drills" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/mining_drill.html#draftsman.prototypes.mining_drill.MiningDrill" title="draftsman.prototypes.mining_drill.MiningDrill"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiningDrill</span></code></a>.
+This includes pumpjacks and any other extraction machine.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.offshore_pumps">
+<span class="sig-name descname"><span class="pre">offshore_pumps</span></span><a class="headerlink" href="#draftsman.data.entities.offshore_pumps" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/offshore_pump.html#draftsman.prototypes.offshore_pump.OffshorePump" title="draftsman.prototypes.offshore_pump.OffshorePump"><code class="xref py py-class docutils literal notranslate"><span class="pre">OffshorePump</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.furnaces">
+<span class="sig-name descname"><span class="pre">furnaces</span></span><a class="headerlink" href="#draftsman.data.entities.furnaces" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">Furnaces</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.assembling_machines">
+<span class="sig-name descname"><span class="pre">assembling_machines</span></span><a class="headerlink" href="#draftsman.data.entities.assembling_machines" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/assembling_machine.html#draftsman.prototypes.assembling_machine.AssemblingMachine" title="draftsman.prototypes.assembling_machine.AssemblingMachine"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssemblingMachine</span></code></a>.
+This includes chemical plants, oil refineries, and centrifuges.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.labs">
+<span class="sig-name descname"><span class="pre">labs</span></span><a class="headerlink" href="#draftsman.data.entities.labs" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/lab.html#draftsman.prototypes.lab.Lab" title="draftsman.prototypes.lab.Lab"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lab</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.beacons">
+<span class="sig-name descname"><span class="pre">beacons</span></span><a class="headerlink" href="#draftsman.data.entities.beacons" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/beacon.html#draftsman.prototypes.beacon.Beacon" title="draftsman.prototypes.beacon.Beacon"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beacon</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.rocket_silos">
+<span class="sig-name descname"><span class="pre">rocket_silos</span></span><a class="headerlink" href="#draftsman.data.entities.rocket_silos" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/rocket_silo.html#draftsman.prototypes.rocket_silo.RocketSilo" title="draftsman.prototypes.rocket_silo.RocketSilo"><code class="xref py py-class docutils literal notranslate"><span class="pre">RocketSilo</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.land_mines">
+<span class="sig-name descname"><span class="pre">land_mines</span></span><a class="headerlink" href="#draftsman.data.entities.land_mines" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/land_mine.html#draftsman.prototypes.land_mine.LandMine" title="draftsman.prototypes.land_mine.LandMine"><code class="xref py py-class docutils literal notranslate"><span class="pre">LandMine</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.walls">
+<span class="sig-name descname"><span class="pre">walls</span></span><a class="headerlink" href="#draftsman.data.entities.walls" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/wall.html#draftsman.prototypes.wall.Wall" title="draftsman.prototypes.wall.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.gates">
+<span class="sig-name descname"><span class="pre">gates</span></span><a class="headerlink" href="#draftsman.data.entities.gates" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/gate.html#draftsman.prototypes.gate.Gate" title="draftsman.prototypes.gate.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.turrets">
+<span class="sig-name descname"><span class="pre">turrets</span></span><a class="headerlink" href="#draftsman.data.entities.turrets" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/turret.html#draftsman.prototypes.turret.Turret" title="draftsman.prototypes.turret.Turret"><code class="xref py py-class docutils literal notranslate"><span class="pre">Turret</span></code></a>.
+Includes the contents of Factorio’s <code class="docutils literal notranslate"><span class="pre">AmmoTurret</span></code>, <code class="docutils literal notranslate"><span class="pre">EnergyTurret</span></code>, <code class="docutils literal notranslate"><span class="pre">FluidTurret</span></code>, and <code class="docutils literal notranslate"><span class="pre">ArtilleryTurret</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.radars">
+<span class="sig-name descname"><span class="pre">radars</span></span><a class="headerlink" href="#draftsman.data.entities.radars" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/radar.html#draftsman.prototypes.radar.Radar" title="draftsman.prototypes.radar.Radar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Radar</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.electric_energy_interfaces">
+<span class="sig-name descname"><span class="pre">electric_energy_interfaces</span></span><a class="headerlink" href="#draftsman.data.entities.electric_energy_interfaces" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/electric_energy_interface.html#draftsman.prototypes.electric_energy_interface.ElectricEnergyInterface" title="draftsman.prototypes.electric_energy_interface.ElectricEnergyInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectricEnergyInterface</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.linked_containers">
+<span class="sig-name descname"><span class="pre">linked_containers</span></span><a class="headerlink" href="#draftsman.data.entities.linked_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/linked_container.html#draftsman.prototypes.linked_container.LinkedContainer" title="draftsman.prototypes.linked_container.LinkedContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinkedContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.heat_interfaces">
+<span class="sig-name descname"><span class="pre">heat_interfaces</span></span><a class="headerlink" href="#draftsman.data.entities.heat_interfaces" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/heat_interface.html#draftsman.prototypes.heat_interface.HeatInterface" title="draftsman.prototypes.heat_interface.HeatInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeatInterface</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.linked_belts">
+<span class="sig-name descname"><span class="pre">linked_belts</span></span><a class="headerlink" href="#draftsman.data.entities.linked_belts" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/linked_belt.html#draftsman.prototypes.linked_belt.LinkedBelt" title="draftsman.prototypes.linked_belt.LinkedBelt"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinkedBelt</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.infinity_containers">
+<span class="sig-name descname"><span class="pre">infinity_containers</span></span><a class="headerlink" href="#draftsman.data.entities.infinity_containers" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/infinity_container.html#draftsman.prototypes.infinity_container.InfinityContainer" title="draftsman.prototypes.infinity_container.InfinityContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfinityContainer</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.infinity_pipes">
+<span class="sig-name descname"><span class="pre">infinity_pipes</span></span><a class="headerlink" href="#draftsman.data.entities.infinity_pipes" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/infinity_pipe.html#draftsman.prototypes.infinity_pipe.InfinityPipe" title="draftsman.prototypes.infinity_pipe.InfinityPipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfinityPipe</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="draftsman.data.entities.burner_generators">
+<span class="sig-name descname"><span class="pre">burner_generators</span></span><a class="headerlink" href="#draftsman.data.entities.burner_generators" title="Permalink to this definition"></a></dt>
+<dd><p>A sorted list of all instances of <a class="reference internal" href="../prototypes/burner_generator.html#draftsman.prototypes.burner_generator.BurnerGenerator" title="draftsman.prototypes.burner_generator.BurnerGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BurnerGenerator</span></code></a>.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="instruments.html" class="btn btn-neutral float-right" title="instruments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

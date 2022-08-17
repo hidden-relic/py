@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to use mods with Draftsman &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Reference" href="../reference/index.html" />
+    <link rel="prev" title="Groups" href="groups.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Handbook</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="entities.html">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="entities.html#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entities.html#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entities.html#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entities.html#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="entities.html#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Handbook</a> &raquo;</li>
+      <li>How to use mods with Draftsman</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/modding.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-use-mods-with-draftsman">
+<h1>How to use mods with Draftsman<a class="headerlink" href="#how-to-use-mods-with-draftsman" title="Permalink to this heading"></a></h1>
+<section id="installing-mods">
+<h2>Installing mods<a class="headerlink" href="#installing-mods" title="Permalink to this heading"></a></h2>
+<p>Adding mods to Draftsman is about as easy as installing mods for Factorio itself.
+First, we need to determine exactly which mods we want to work with.
+Mods can be downloaded directly from <a class="reference external" href="https://mods.factorio.com/">https://mods.factorio.com/</a>, but an easier method is to use Factorio’s in-game mod browser itself:</p>
+<img alt="Factorio's in-game mod browser." src="../_images/in_game_factorio_browser.png" />
+<p>Select the mods that you want, then press the Install button to automatically download and install the mods and their dependencies.
+You can also setup any user configuration that you want, such as enabling or disabling specific mods, or changing mod specific settings; these changes will be reflected in Draftsman. (As long as they affect the data stage only!)</p>
+<img alt="Factorio's mod settings, available in Settings &gt; Mod Settings" src="../_images/factorio_mod_settings.png" />
+<p>Then, navigate to the Factorio mods folder. This is usually located somewhere in your home directory.
+For example, on Windows your mods should be located in <code class="docutils literal notranslate"><span class="pre">C:\Users\your_name\AppData\Roaming\Factorio\mods</span></code>:</p>
+<img alt="The local mods folder for Factorio." src="../_images/factorio_mods_folder.png" />
+<p>Next, determine where your Draftsman installation is located.
+If you installed Draftsman in a virtual environment it should be located in a <code class="docutils literal notranslate"><span class="pre">Lib/site-packages</span></code> folder somewhere in your development directory.
+If you installed it to your computer’s python installation, check to see where that’s installed (depending on your OS) and look for the same <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> folder.
+You should make sure that the version of Draftsman that you’re using corresponds the the installation location you put the mods, if you have multiple instances of Draftsman installed.</p>
+<p>In that folder you should find a folder titled <code class="docutils literal notranslate"><span class="pre">draftsman</span></code>, and inside that a folder named <code class="docutils literal notranslate"><span class="pre">factorio-mods</span></code>:</p>
+<img alt="A depiction of the draftsman mods folder." src="../_images/draftsman_mods_folder.png" />
+<p>Copy and paste the contents from your Factorio mods folder to the <code class="docutils literal notranslate"><span class="pre">factorio-mods</span></code> folder in <code class="docutils literal notranslate"><span class="pre">draftsman</span></code>.
+You should include the <code class="docutils literal notranslate"><span class="pre">mod-settings.dat</span></code> and <code class="docutils literal notranslate"><span class="pre">mod-list.json</span></code> files, as they hold the mod configuration settings you specified in Factorio.
+Any other file that does not end with <code class="docutils literal notranslate"><span class="pre">.zip</span></code> will be ignored.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Factorio, mods can be loaded as either a zip file, or as a folder.
+Currently, Draftsman can only properly load zip files, though it will be able to load mod folders as well in the future.
+A workaround for now is to simply wrap the mod folder in a zip file, according the the <a class="reference external" href="https://wiki.factorio.com/Tutorial:Mod_structure#Mod_folder_and_file_structure">mod naming conventions</a>.</p>
+</div>
+<p>Then, to resolve these changes simply run <code class="docutils literal notranslate"><span class="pre">draftsman-update</span></code>.
+Again, make sure you’re running the correct <code class="docutils literal notranslate"><span class="pre">draftsman-update</span></code> for the version of Draftsman that you installed the mods into.
+You can use the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> or <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag to get more information about the load process.
+The following is the verbose output of the modlist above:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(.venv)</span> <span class="gp">$ </span>draftsman-update --verbose
+<span class="go">aai-containers 0.2.10</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">aai-industry 0.5.14</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">        ? aai-containers &gt;= 0.1.1</span>
+<span class="go">        ? InserterFuelLeech &gt;= 0.2.6</span>
+<span class="go">        ? angelsrefining</span>
+<span class="go">        ? IndustrialRevolution &gt;= 2.2.3</span>
+<span class="go">aai-signal-transmission 0.4.4</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">Aircraft 1.8.4</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">        ? bobplates &gt;= 1.1.0</span>
+<span class="go">        ? bobelectronics &gt;= 1.1.0</span>
+<span class="go">        ? boblibrary &gt;= 1.1.0</span>
+<span class="go">        ? bobwarfare &gt;= 1.1.0</span>
+<span class="go">        ? bobvehicleequipment &gt;= 1.1.0</span>
+<span class="go">        ! traintunnels &lt;= 0.0.11</span>
+<span class="go">alien-biomes 0.6.7</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">        ? alien-biomes-hr-terrain &gt;= 0.3.1</span>
+<span class="go">ArmouredBiters 1.1.5</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.1</span>
+<span class="go">        ? alien-biomes</span>
+<span class="go">cargo-ships-graphics 0.1.0</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1</span>
+<span class="go">        ~ cargo-ships &gt;= 0.1.0</span>
+<span class="go">cargo-ships 0.1.16</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1</span>
+<span class="go">        cargo-ships-graphics &gt;= 0.1.0</span>
+<span class="go">        ? factorio-world &gt;= 1.0.2</span>
+<span class="go">        ? NewIslands &gt;= 0.1.0</span>
+<span class="go">        ? islands_world &gt;= 1.1.0</span>
+<span class="go">        ? SeaBlock &gt;= 0.5.5</span>
+<span class="go">        ? Hovercraft &gt;= 0.0.1</span>
+<span class="go">        ? Hovercrafts &gt;= 1.1.0</span>
+<span class="go">        ? angelspetrochem &gt;= 0.9.17</span>
+<span class="go">        ? ctg &gt;= 0.4.3</span>
+<span class="go">        ? Krastorio2 &gt;= 1.0.18</span>
+<span class="go">        ! cargo-ships-seraph</span>
+<span class="go">        ? rso-mod</span>
+<span class="go">CleanedConcrete 1.0.2</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 0.18.0</span>
+<span class="go">flib 0.10.1</span>
+<span class="go">dependencies:</span>
+<span class="go">        ? base &gt;= 1.1.35</span>
+<span class="go">helmod 0.12.9</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1</span>
+<span class="go">informatron 0.2.2</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">islands_world 1.1.0</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 0.15</span>
+<span class="go">jetpack 0.3.1</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">        ? PickerTweaks</span>
+<span class="go">LogisticTrainNetwork 1.16.7</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.46</span>
+<span class="go">        flib &gt;= 0.6.0</span>
+<span class="go">        ? cargo-ships</span>
+<span class="go">Noxys_Swimming 0.4.2</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">Noxys_Waterfill 0.4.3</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.50</span>
+<span class="go">recursive-blueprints 1.2.6</span>
+<span class="go">dependencies:</span>
+<span class="go">        base</span>
+<span class="go">robot_attrition 0.5.12</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">shield-projector 0.1.3</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">space-exploration-graphics-2 0.1.2</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">space-exploration-graphics-3 0.1.1</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">space-exploration-graphics-4 0.1.1</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">space-exploration-graphics-5 0.1.2</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">space-exploration-graphics 0.5.15</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">space-exploration-postprocess 0.5.29</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.0</span>
+<span class="go">        ? space-exploration &gt;= 0.5.104</span>
+<span class="go">        ? angelsbioprocessing</span>
+<span class="go">        ? angelsindustries</span>
+<span class="go">        ? angelspetrochem</span>
+<span class="go">        ? angelsrefining</span>
+<span class="go">        ? angelssmelting</span>
+<span class="go">        ? bobassembly</span>
+<span class="go">        ? bobelectronics</span>
+<span class="go">        ? bobenemies</span>
+<span class="go">        ? bobgreenhouse</span>
+<span class="go">        ? bobinserters</span>
+<span class="go">        ? boblogistics</span>
+<span class="go">        ? bobmining</span>
+<span class="go">        ? bobmodules</span>
+<span class="go">        ? bobores</span>
+<span class="go">        ? bobplates</span>
+<span class="go">        ? bobpower</span>
+<span class="go">        ? bobrevamp</span>
+<span class="go">        ? bobtech</span>
+<span class="go">        ? bobvehicleequipment</span>
+<span class="go">        ? bobwarfare</span>
+<span class="go">        ? Darkstar_utilities</span>
+<span class="go">        ? Darkstar_utilities_Low_Spec-0_17-Port</span>
+<span class="go">        ? Decktorio</span>
+<span class="go">        ? k2se-compatibility</span>
+<span class="go">        ? Krastorio2 &gt;= 1.2.22</span>
+<span class="go">        ? NPUtils</span>
+<span class="go">        ? qol_research</span>
+<span class="go">        ? reverse-factory &gt;= 6.0.5</span>
+<span class="go">        ? SpaceMod</span>
+<span class="go">        ? Yuoki</span>
+<span class="go">space-exploration 0.5.112</span>
+<span class="go">dependencies:</span>
+<span class="go">        base &gt;= 1.1.50</span>
+<span class="go">        aai-industry &gt;= 0.5.3</span>
+<span class="go">        alien-biomes &gt;= 0.6.4</span>
+<span class="go">        jetpack &gt;= 0.2.6</span>
+<span class="go">        robot_attrition &gt;= 0.5.9</span>
+<span class="go">        shield-projector &gt;= 0.1.2</span>
+<span class="go">        space-exploration-graphics &gt;= 0.5.15</span>
+<span class="go">        space-exploration-graphics-2 &gt;= 0.1.2</span>
+<span class="go">        space-exploration-graphics-3 &gt;= 0.1.1</span>
+<span class="go">        space-exploration-graphics-4 &gt;= 0.1.1</span>
+<span class="go">        space-exploration-graphics-5 &gt;= 0.1.2</span>
+<span class="go">        ~ space-exploration-postprocess &gt;= 0.5.28</span>
+<span class="go">        informatron &gt;= 0.2.1</span>
+<span class="go">        aai-signal-transmission &gt;= 0.4.1</span>
+<span class="go">        ? aai-containers &gt;= 0.2.7</span>
+<span class="go">        ? bullet-trails &gt;= 0.6.1</span>
+<span class="go">        ? grappling-gun &gt;= 0.3.1</span>
+<span class="go">        ? combat-mechanics-overhaul &gt;= 0.6.15</span>
+<span class="go">        ? equipment-gantry &gt;= 0.1.1</span>
+<span class="go">        ! angelsindustries</span>
+<span class="go">        ! angelspetrochem</span>
+<span class="go">        ! angelsrefining</span>
+<span class="go">        ! angelssmelting</span>
+<span class="go">        ! bobelectronics</span>
+<span class="go">        ! bobores</span>
+<span class="go">        ! bobplates</span>
+<span class="go">        ! bobpower</span>
+<span class="go">        ! bobrevamp</span>
+<span class="go">        ! bobtech</span>
+<span class="go">        ! bobvehicleequipment</span>
+<span class="go">        ! bobwarfare</span>
+<span class="go">        ! Yuoki</span>
+<span class="go">        ! pycoalprocessing</span>
+<span class="go">        ! pyindustry</span>
+<span class="go">        ! pyhightech</span>
+<span class="go">        ! ab_logisticscenter</span>
+<span class="go">        ! angelsinfiniteores</span>
+<span class="go">        ! BasicSeaBlock</span>
+<span class="go">        ! BitersBegone</span>
+<span class="go">        ! BitersBegoneUpdated</span>
+<span class="go">        ! bobmodules</span>
+<span class="go">        ! bulkteleport</span>
+<span class="go">        ! Clockwork</span>
+<span class="go">        ! dangOreus</span>
+<span class="go">        ! Darkstar_utilities</span>
+<span class="go">        ! dark-matter-replicators</span>
+<span class="go">        ! dark-matter-replicators-0_17-port</span>
+<span class="go">        ! DeepMine</span>
+<span class="go">        ! endlessresources</span>
+<span class="go">        ! ExplosiveExcavation</span>
+<span class="go">        ! FactorioExtended-Core</span>
+<span class="go">        ! FactorioExtended-Plus-Core</span>
+<span class="go">        ! IndustrialRevolution</span>
+<span class="go">        ! IndustrialRevolution2</span>
+<span class="go">        ! inf_res</span>
+<span class="go">        ! infinite-resources-depletion</span>
+<span class="go">        ! ItemTeleportation</span>
+<span class="go">        ! LandfillPainting</span>
+<span class="go">        ! Li-Quarry</span>
+<span class="go">        ! modmash</span>
+<span class="go">        ! MoreScience</span>
+<span class="go">        ! MoreSciencePacks</span>
+<span class="go">        ! omnimatter</span>
+<span class="go">        ! OnlyReds</span>
+<span class="go">        ! PersonalTeleporter</span>
+<span class="go">        ! pickerextended</span>
+<span class="go">        ! pickerinventorytools</span>
+<span class="go">        ! PlacePump</span>
+<span class="go">        ! PumpAnywhere</span>
+<span class="go">        ! PyBlock</span>
+<span class="go">        ! quarry</span>
+<span class="go">        ! quarry-edit</span>
+<span class="go">        ! railgun_revival</span>
+<span class="go">        ! rso-mod</span>
+<span class="go">        ! SeaBlock</span>
+<span class="go">        ! SchallMachineScaling</span>
+<span class="go">        ! SchallOreConversion</span>
+<span class="go">        ! sonaxaton-infinite-resources</span>
+<span class="go">        ! Space-Exploration-Modpack</span>
+<span class="go">        ! SpaceMod</span>
+<span class="go">        ! TagToTeleport</span>
+<span class="go">        ! TeamCoop</span>
+<span class="go">        ! Teleportation_Redux</span>
+<span class="go">        ! traintunnels</span>
+<span class="go">        ! Unlimited-Resources</span>
+<span class="go">        ! UnlimitedProductivity</span>
+<span class="go">        ! vtk-deep-core-mining</span>
+<span class="go">        ! warptorio</span>
+<span class="go">Load order:</span>
+<span class="go">[&#39;base&#39;, &#39;Aircraft&#39;, &#39;CleanedConcrete&#39;, &#39;Noxys_Swimming&#39;, &#39;Noxys_Waterfill&#39;, &#39;aai-containers&#39;,</span>
+<span class="go">&#39;aai-signal-transmission&#39;, &#39;alien-biomes&#39;, &#39;cargo-ships-graphics&#39;, &#39;flib&#39;, &#39;helmod&#39;, &#39;informatron&#39;,</span>
+<span class="go">&#39;islands_world&#39;, &#39;jetpack&#39;, &#39;recursive-blueprints&#39;, &#39;robot_attrition&#39;, &#39;shield-projector&#39;,</span>
+<span class="go">&#39;space-exploration-graphics&#39;, &#39;space-exploration-graphics-2&#39;, &#39;space-exploration-graphics-3&#39;,</span>
+<span class="go">&#39;space-exploration-graphics-4&#39;, &#39;space-exploration-graphics-5&#39;, &#39;ArmouredBiters&#39;, &#39;aai-industry&#39;,</span>
+<span class="go">&#39;cargo-ships&#39;, &#39;LogisticTrainNetwork&#39;, &#39;space-exploration&#39;, &#39;space-exploration-postprocess&#39;]</span>
+<span class="go">SETTINGS.LUA:</span>
+<span class="go">        mod: Aircraft</span>
+<span class="go">        mod: Noxys_Swimming</span>
+<span class="go">        mod: Noxys_Waterfill</span>
+<span class="go">        mod: aai-containers</span>
+<span class="go">        mod: alien-biomes</span>
+<span class="go">        mod: flib</span>
+<span class="go">        mod: helmod</span>
+<span class="go">        mod: informatron</span>
+<span class="go">        mod: jetpack</span>
+<span class="go">        mod: recursive-blueprints</span>
+<span class="go">        mod: robot_attrition</span>
+<span class="go">        mod: ArmouredBiters</span>
+<span class="go">        mod: aai-industry</span>
+<span class="go">        mod: cargo-ships</span>
+<span class="go">        mod: LogisticTrainNetwork</span>
+<span class="go">        mod: space-exploration</span>
+<span class="go">SETTINGS-UPDATES.LUA:</span>
+<span class="go">        mod: cargo-ships</span>
+<span class="go">SETTINGS-FINAL-FIXES.LUA:</span>
+<span class="go">DATA.LUA:</span>
+<span class="go">        mod: base</span>
+<span class="go">        mod: Aircraft</span>
+<span class="go">        mod: CleanedConcrete</span>
+<span class="go">        mod: Noxys_Swimming</span>
+<span class="go">        mod: Noxys_Waterfill</span>
+<span class="go">        mod: aai-containers</span>
+<span class="go">        mod: aai-signal-transmission</span>
+<span class="go">        mod: alien-biomes</span>
+<span class="go">        mod: flib</span>
+<span class="go">        mod: helmod</span>
+<span class="go">        mod: informatron</span>
+<span class="go">        mod: islands_world</span>
+<span class="go">        mod: jetpack</span>
+<span class="go">        mod: recursive-blueprints</span>
+<span class="go">        mod: robot_attrition</span>
+<span class="go">        mod: shield-projector</span>
+<span class="go">        mod: ArmouredBiters</span>
+<span class="go">        mod: aai-industry</span>
+<span class="go">        mod: cargo-ships</span>
+<span class="go">        mod: LogisticTrainNetwork</span>
+<span class="go">        mod: space-exploration</span>
+<span class="go">        mod: space-exploration-postprocess</span>
+<span class="go">DATA-UPDATES.LUA:</span>
+<span class="go">        mod: base</span>
+<span class="go">        mod: Aircraft</span>
+<span class="go">        mod: Noxys_Waterfill</span>
+<span class="go">        mod: alien-biomes</span>
+<span class="go">        mod: islands_world</span>
+<span class="go">        mod: recursive-blueprints</span>
+<span class="go">        mod: robot_attrition</span>
+<span class="go">        mod: aai-industry</span>
+<span class="go">        mod: cargo-ships</span>
+<span class="go">        mod: space-exploration</span>
+<span class="go">DATA-FINAL-FIXES.LUA:</span>
+<span class="go">        mod: aai-containers</span>
+<span class="go">        mod: alien-biomes</span>
+<span class="go">        mod: jetpack</span>
+<span class="go">        mod: robot_attrition</span>
+<span class="go">        mod: aai-industry</span>
+<span class="go">        mod: cargo-ships</span>
+<span class="go">        mod: LogisticTrainNetwork</span>
+<span class="go">        mod: space-exploration</span>
+<span class="go">        mod: space-exploration-postprocess</span>
+<span class="go">Extracted mods...</span>
+<span class="go">Extracted entities...</span>
+<span class="go">Extracted instruments...</span>
+<span class="go">Extracted items...</span>
+<span class="go">Extracted modules...</span>
+<span class="go">Extracted recipes...</span>
+<span class="go">Extracted signals...</span>
+<span class="go">Extracted tiles...</span>
+<span class="go">Update finished.</span>
+<span class="go">hella slick; nothing broke!</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-scripts-with-mods">
+<h2>Writing scripts with mods<a class="headerlink" href="#writing-scripts-with-mods" title="Permalink to this heading"></a></h2>
+<p>After the command has finished, all the correct data and prototypes should be loaded.
+This means that you can create new instances of modded entities exactly as if they were vanilla ones:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draftsman.entity</span> <span class="kn">import</span> <span class="n">new_entity</span>
+<span class="kn">from</span> <span class="nn">draftsman.data</span> <span class="kn">import</span> <span class="n">entities</span>
+
+<span class="c1"># For example, let create the &quot;blueprint-deployer&quot; entity from Recursive Blueprints</span>
+<span class="n">deployer</span> <span class="o">=</span> <span class="n">new_entity</span><span class="p">(</span><span class="s2">&quot;blueprint-deployer&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deployer</span><span class="p">)</span>
+<span class="c1"># &lt;Container&gt;{&#39;name&#39;: &#39;blueprint-deployer&#39;, &#39;position&#39;: {&#39;x&#39;: 0.5, &#39;y&#39;: 0.5}}</span>
+<span class="k">assert</span> <span class="n">deployer</span><span class="o">.</span><span class="n">inventory_size</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">deployer</span><span class="o">.</span><span class="n">inventory_bar_enabled</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="c1"># deployer.bar = 10 # DraftsmanError: This entity does not have bar control</span>
+
+<span class="c1"># Lets see what the new list of containers are, now that we include mods</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">containers</span><span class="p">)</span>
+<span class="c1"># [&#39;steel-chest&#39;, &#39;iron-chest&#39;, &#39;wooden-chest&#39;, &#39;aai-strongbox&#39;, &#39;aai-storehouse&#39;,</span>
+<span class="c1"># &#39;aai-warehouse&#39;, &#39;blueprint-deployer&#39;, &#39;se-rocket-launch-pad&#39;, &#39;se-rocket-landing-pad&#39;,</span>
+<span class="c1"># &#39;se-delivery-cannon-chest&#39;, &#39;se-cargo-rocket-cargo-pod&#39;, &#39;aai-big-ship-wreck-1&#39;,</span>
+<span class="c1"># &#39;big-ship-wreck-1&#39;, &#39;aai-big-ship-wreck-2&#39;, &#39;big-ship-wreck-2&#39;, &#39;aai-big-ship-wreck-3&#39;,</span>
+<span class="c1"># &#39;big-ship-wreck-3&#39;, &#39;aai-medium-ship-wreck-1&#39;, &#39;aai-medium-ship-wreck-2&#39;, &#39;blue-chest&#39;,</span>
+<span class="c1"># &#39;red-chest&#39;, &#39;se-cartouche-chest&#39;, &#39;factorio-logo-11tiles&#39;, &#39;factorio-logo-16tiles&#39;,</span>
+<span class="c1"># &#39;factorio-logo-22tiles&#39;]</span>
+</pre></div>
+</div>
+<p>However, note that the converse is not necessarily true; If you have the mod enabled, then you can create a modded entity, but if you share that script with another user who doesn’t have those mods enabled, the script will fail with an <a class="reference internal" href="../reference/error.html#draftsman.error.InvalidEntityError" title="draftsman.error.InvalidEntityError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidEntityError</span></code></a>.</p>
+<p>To handle this case more elegantly, there exists a <code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code> module that indexes the currently enabled mods and their versions (<a class="reference external" href="https://lua-api.factorio.com/latest/Data-Lifecycle.html#:~:text=game%20provides%20the-,mods,-table%20which%20contains">similar to Factorio’s modding API</a>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draftsman.data</span> <span class="kn">import</span> <span class="n">mods</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mods</span><span class="o">.</span><span class="n">mod_list</span><span class="p">)</span>
+<span class="c1"># {</span>
+<span class="c1">#     &#39;base&#39;: (1, 1, 57, 0), # This is the Factorio version, which is treated as a &quot;mod&quot;</span>
+<span class="c1">#     &#39;aai-containers&#39;: (0, 2, 10),</span>
+<span class="c1">#     &#39;aai-industry&#39;: (0, 5, 14),</span>
+<span class="c1">#     &#39;aai-signal-transmission&#39;: (0, 4, 4),</span>
+<span class="c1">#     &#39;Aircraft&#39;: (1, 8, 4),</span>
+<span class="c1">#     &#39;alien-biomes&#39;: (0, 6, 7),</span>
+<span class="c1">#     &#39;ArmouredBiters&#39;: (1, 1, 5),</span>
+<span class="c1">#     &#39;cargo-ships-graphics&#39;: (0, 1, 0),</span>
+<span class="c1">#     &#39;cargo-ships&#39;: (0, 1, 16),</span>
+<span class="c1">#     &#39;CleanedConcrete&#39;: (1, 0, 2),</span>
+<span class="c1">#     &#39;flib&#39;: (0, 10, 1),</span>
+<span class="c1">#     &#39;helmod&#39;: (0, 12, 9),</span>
+<span class="c1">#     &#39;informatron&#39;: (0, 2, 2),</span>
+<span class="c1">#     &#39;islands_world&#39;: (1, 1, 0),</span>
+<span class="c1">#     &#39;jetpack&#39;: (0, 3, 1),</span>
+<span class="c1">#     &#39;LogisticTrainNetwork&#39;: (1, 16, 7),</span>
+<span class="c1">#     &#39;Noxys_Swimming&#39;: (0, 4, 2),</span>
+<span class="c1">#     &#39;Noxys_Waterfill&#39;: (0, 4, 3),</span>
+<span class="c1">#     &#39;recursive-blueprints&#39;: (1, 2, 6),</span>
+<span class="c1">#     &#39;robot_attrition&#39;: (0, 5, 12),</span>
+<span class="c1">#     &#39;shield-projector&#39;: (0, 1, 3),</span>
+<span class="c1">#     &#39;space-exploration-graphics-2&#39;: (0, 1, 2),</span>
+<span class="c1">#     &#39;space-exploration-graphics-3&#39;: (0, 1, 1),</span>
+<span class="c1">#     &#39;space-exploration-graphics-4&#39;: (0, 1, 1),</span>
+<span class="c1">#     &#39;space-exploration-graphics-5&#39;: (0, 1, 2),</span>
+<span class="c1">#     &#39;space-exploration-graphics&#39;: (0, 5, 15),</span>
+<span class="c1">#     &#39;space-exploration-postprocess&#39;: (0, 5, 29),</span>
+<span class="c1">#     &#39;space-exploration&#39;: (0, 5, 112)</span>
+<span class="c1"># }</span>
+</pre></div>
+</div>
+<p>You can use this to ensure that the mods needed for the script’s operation are present and of the correct version, and issue more helpful messages when they are not:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draftsman.entity</span> <span class="kn">import</span> <span class="n">Container</span>
+<span class="kn">from</span> <span class="nn">draftsman.data</span> <span class="kn">import</span> <span class="n">mods</span>
+<span class="kn">from</span> <span class="nn">draftsman.error</span> <span class="kn">import</span> <span class="n">MissingModError</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">mods</span><span class="o">.</span><span class="n">mod_list</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;recursive-blueprints&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="n">MissingModError</span><span class="p">(</span><span class="s2">&quot;The Recursive Blueprints mod is needed for this script&quot;</span><span class="p">)</span>
+
+<span class="n">deployer</span> <span class="o">=</span> <span class="n">Container</span><span class="p">(</span><span class="s2">&quot;blueprint-deployer&quot;</span><span class="p">)</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</section>
+<section id="limitations-of-mods">
+<h2>Limitations of mods<a class="headerlink" href="#limitations-of-mods" title="Permalink to this heading"></a></h2>
+<p>Draftsman (currently) only implements the Settings and Data stage of the data lifecycle.
+This means that any mod functionality that lies outside of that stage is not considered or available to the programmer.
+This includes custom hooks for placing entities, removing entities, on game load, unload, and any other per world or instance operation.</p>
+<p>A good example of this is the Cargo Rocket Launchpad from the <a class="reference external" href="https://mods.factorio.com/mod/space-exploration">Space Exploration</a> modpack; This entity has a set of metadata associated with its <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute that is generated when it is placed in the world.
+This behavior has to be manually mimicked by a script writer in order to get the intended functionality of the entity; there is currently no mechanism to “query” what should happen to the entity when it’s placed in the world, or, harder yet, integrate these attributes as part of the structure of the class.
+It would be convenient to be able to specify a <code class="docutils literal notranslate"><span class="pre">destination_location</span></code> attribute for rocket launchpad, but at the moment this relies on the user to implement a custom <code class="docutils literal notranslate"><span class="pre">Container</span></code> entity with this behavior, and is not something to be expected to be automatically generated by Draftsman.</p>
+</section>
+<section id="potential-errors">
+<h2>Potential Errors<a class="headerlink" href="#potential-errors" title="Permalink to this heading"></a></h2>
+<p>Draftsman’s loading process was designed with how Factorio loads it’s data in mind, with the intention of being identical.
+However, this implementation is most likely incomplete across a number of edge cases, and I have only been able to test it’s functionality with a handful of mods.
+If you use Draftsman and come across an error that does not happen when loading the same mods with the same configuration in Factorio itself, please leave a <a class="reference external" href="https://github.com/redruin1/factorio-draftsman/issues">issue so I can track and resolve it</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="groups.html" class="btn btn-neutral float-left" title="Groups" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

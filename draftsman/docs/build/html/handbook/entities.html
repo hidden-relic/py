@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entities &mdash; factorio-draftsman 0.3.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/draftsman_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Groups" href="groups.html" />
+    <link rel="prev" title="Blueprints" href="blueprints.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> factorio-draftsman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#creating-a-blueprint">Creating a Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Handbook</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blueprints.html">Blueprints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="blueprints.html#differences-between-a-blueprint-object-and-a-json-dict">Differences between a Blueprint object and a JSON dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blueprints.html#manipulating-entities-inside-of-blueprints">Manipulating Entities inside of Blueprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entity-attributes">Entity Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-ids">Entity IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-associations">Entity Associations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-vs-entitylike"><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-merging">Entity Merging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="groups.html">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#outline-of-the-problem">Outline of the problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#structure-of-the-solution">Structure of the Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html#implementation-overview">Implementation Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modding.html">How to use mods with Draftsman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modding.html#installing-mods">Installing mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modding.html#writing-scripts-with-mods">Writing scripts with mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modding.html#limitations-of-mods">Limitations of mods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modding.html#potential-errors">Potential Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/blueprintable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/constants.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/env.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/signatures.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signatures</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#abstract-shape-classes">Abstract Shape Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#encoding-decoding-operations">Encoding/Decoding Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#vector-operations">Vector Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#collision-functions">Collision Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/warning.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/classes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">classes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/association.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">association</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/blueprint.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/blueprintbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blueprintbook</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/collection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/collisionset.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collisionset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/entity.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/entitylike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/entitylist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entitylist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/group.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">group</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/spatial_data_structure.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_data_structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/spatial_hashmap.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatial_hashmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/spatiallike.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spatiallike</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/tile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/tilelist.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tilelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/transformable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transformable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/vector.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/classes/mixins/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mixins</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_read_contents.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_contents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_read_hand.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_hand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/circuit_read_resource.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">circuit_read_resource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/color.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/control_behavior.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control_behavior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/double_grid_aligned.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">double_grid_aligned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/eight_way_directional.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eight_way_directional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/enable_disable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enable_disable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/inventory_filter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/inventory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/io_type.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/logistic_condition.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_condition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/mode_of_operation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mode_of_operation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/orientation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/power_connectable.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_connectable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/read_rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_rail_signal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/recipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/request_filters.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/request_items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">request_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/classes/mixins/stack_size.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stack_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/entities.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">entities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/instruments.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">instruments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/items.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/mods.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mods</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/modules.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/recipes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">recipes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/signals.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/data/tiles.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tiles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/prototypes/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prototypes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/accumulator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">accumulator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/arithmetic_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetic_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/artillery_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">artillery_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/assembling_machine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">assembling_machine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/beacon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">beacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/boiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">boiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/burner_generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">burner_generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/cargo_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cargo_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/constant_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">constant_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/curved_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curved_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/decider_combinator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decider_combinator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/electric_energy_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_energy_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/electric_pole.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">electric_pole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/filter_inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filter_inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/fluid_wagon.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fluid_wagon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/furnace.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">furnace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/gate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/generator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/heat_interface.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_interface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/heat_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heat_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/infinity_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/infinity_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">infinity_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/inserter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">inserter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/lab.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/lamp.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/land_mine.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">land_mine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/linked_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/linked_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linked_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/loader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/locomotive.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">locomotive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_active_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_active_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_buffer_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_buffer_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_passive_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_passive_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_request_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_request_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/logistic_storage_container.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logistic_storage_container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/mining_drill.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mining_drill</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/offshore_pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">offshore_pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/power_switch.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">power_switch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/programmable_speaker.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">programmable_speaker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/pump.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/radar.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/rail_chain_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_chain_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/rail_signal.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rail_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/reactor.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reactor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/roboport.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">roboport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/rocket_silo.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">rocket_silo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/solar_panel.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solar_panel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/splitter.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">splitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/storage_tank.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">storage_tank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/straight_rail.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">straight_rail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/train_stop.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">train_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/transport_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">transport_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/turret.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">turret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/underground_belt.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_belt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/underground_pipe.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">underground_pipe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/prototypes/wall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">factorio-draftsman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Handbook</a> &raquo;</li>
+      <li>Entities</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/entities.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entities">
+<span id="handbook-entities-differences"></span><h1>Entities<a class="headerlink" href="#entities" title="Permalink to this heading"></a></h1>
+<p>Entities are organized roughly equivalently to the types of <a class="reference external" href="https://wiki.factorio.com/Prototype/EntityWithOwner">Prototypes</a> found in Factorio.
+Only the entity types that are blueprintable are extracted, and most are identical in name and purpose.
+There are a few notable exceptions:</p>
+<ol class="arabic simple">
+<li><p>Factorio <code class="docutils literal notranslate"><span class="pre">Inserter</span></code> is split into two classes, Draftsman <a class="reference internal" href="../reference/prototypes/inserter.html#draftsman.prototypes.inserter.Inserter" title="draftsman.prototypes.inserter.Inserter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inserter</span></code></a> and <a class="reference internal" href="../reference/prototypes/filter_inserter.html#draftsman.prototypes.filter_inserter.FilterInserter" title="draftsman.prototypes.filter_inserter.FilterInserter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterInserter</span></code></a>.</p></li>
+<li><p>Factorio <code class="docutils literal notranslate"><span class="pre">LogisticContainer</span></code> is split into its five subtypes, <a class="reference internal" href="../reference/prototypes/logistic_passive_container.html#draftsman.prototypes.logistic_passive_container.LogisticPassiveContainer" title="draftsman.prototypes.logistic_passive_container.LogisticPassiveContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticPassiveContainer</span></code></a>, <a class="reference internal" href="../reference/prototypes/logistic_active_container.html#draftsman.prototypes.logistic_active_container.LogisticActiveContainer" title="draftsman.prototypes.logistic_active_container.LogisticActiveContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticActiveContainer</span></code></a>, <a class="reference internal" href="../reference/prototypes/logistic_storage_container.html#draftsman.prototypes.logistic_storage_container.LogisticStorageContainer" title="draftsman.prototypes.logistic_storage_container.LogisticStorageContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticStorageContainer</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRequesterContainer</span></code>, and <a class="reference internal" href="../reference/prototypes/logistic_buffer_container.html#draftsman.prototypes.logistic_buffer_container.LogisticBufferContainer" title="draftsman.prototypes.logistic_buffer_container.LogisticBufferContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticBufferContainer</span></code></a>.</p></li>
+<li><p>Factorio <code class="docutils literal notranslate"><span class="pre">AmmoTurret</span></code>, <code class="docutils literal notranslate"><span class="pre">ElectricTurret</span></code>, and <code class="docutils literal notranslate"><span class="pre">FluidTurret</span></code> are joined together in Draftsman as the <a class="reference internal" href="../reference/prototypes/turret.html#draftsman.prototypes.turret.Turret" title="draftsman.prototypes.turret.Turret"><code class="xref py py-class docutils literal notranslate"><span class="pre">Turret</span></code></a> class.</p></li>
+</ol>
+<p>In Factorio, there are also a number of abstract prototypes that exist to collectivize similar entity types; <code class="docutils literal notranslate"><span class="pre">CraftingMachine</span></code> superclasses <code class="docutils literal notranslate"><span class="pre">AssemblingMachine</span></code>, <code class="docutils literal notranslate"><span class="pre">RocketSilo</span></code>, and <code class="docutils literal notranslate"><span class="pre">Furnace</span></code>, for example.
+Currently, Draftsman does <em>not</em> mimic these intemediary classes, though in the future it might be a good idea to implement classes more directly in-line with what Factorio defines.</p>
+<section id="entity-attributes">
+<h2>Entity Attributes<a class="headerlink" href="#entity-attributes" title="Permalink to this heading"></a></h2>
+<p>Most attributes on entities are implemented as properties with custom getters and setters.
+This allows for a clean API, inline type checking, as well as ensuring that certain values are read only and not (easily) deletable.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">Container</span><span class="p">()</span>
+<span class="n">container</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="s2">&quot;incorrect&quot;</span>  <span class="c1"># Raises TypeError</span>
+</pre></div>
+</div>
+<p>However, there might be some circumstance where you would still like to use an Entity class, but would like to forgo Factorio-safety (or regular safety) for efficiency or some other functionality.
+In that case, all <em>root level</em> attributes have their underlying value as their name prepended with a single underscore:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">Container</span><span class="p">()</span>
+<span class="n">container</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="s2">&quot;incorrect&quot;</span>  <span class="c1"># Raises TypeError</span>
+<span class="n">container</span><span class="o">.</span><span class="n">_bar</span> <span class="o">=</span> <span class="s2">&quot;incorrect&quot;</span> <span class="c1"># Won&#39;t be a problem unless you import into Factorio</span>
+</pre></div>
+</div>
+<p>The not all attributes are specified as root level however, so specifying them becomes trickier.
+Take the <code class="docutils literal notranslate"><span class="pre">enable_disable</span></code> attribute for example, which determines whether or not a condition is used to stop or start function of the Entity:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">belt</span> <span class="o">=</span> <span class="n">TransportBelt</span><span class="p">()</span>
+<span class="n">belt</span><span class="o">.</span><span class="n">enable_disable</span> <span class="o">=</span> <span class="s2">&quot;incorrect&quot;</span>  <span class="c1"># Raises TypeError</span>
+<span class="n">belt</span><span class="o">.</span><span class="n">_enable_disable</span> <span class="o">=</span> <span class="s2">&quot;incorrect&quot;</span> <span class="c1"># Raises AttributeError</span>
+<span class="n">belt</span><span class="o">.</span><span class="n">_control_behavior</span><span class="p">[</span><span class="s2">&quot;circuit_enable_disable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;incorrect&quot;</span> <span class="c1"># Fine until import</span>
+</pre></div>
+</div>
+<p>Here, you can see the <code class="docutils literal notranslate"><span class="pre">enable_disable</span></code> parameter is actually an optional entry in the entity’s <code class="docutils literal notranslate"><span class="pre">control_behavior</span></code> dictionary, and the attribute simply aliases that value.
+The structure of Entity classes are designed to live as close to possible to their exported state to reduce the amount of effort encoding and decoding them.
+This means that if you want to go this route you’ll need full knowledge of the internal structure of the entity in order to manipulate it properly, so it’s advised that you ‘know what you’re doing’™.</p>
+</section>
+<section id="entity-ids">
+<h2>Entity IDs<a class="headerlink" href="#entity-ids" title="Permalink to this heading"></a></h2>
+<p>Draftsman allows you to access the <code class="docutils literal notranslate"><span class="pre">entities</span></code> lists of any <a class="reference internal" href="../reference/classes/collection.html#draftsman.classes.collection.EntityCollection" title="draftsman.classes.collection.EntityCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityCollection</span></code></a>, allowing you to access <code class="docutils literal notranslate"><span class="pre">Entity</span></code> instances that are already placed inside a Blueprint, so you can modify them on the fly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">)</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">read_hand_contents</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># The first inserter?</span>
+</pre></div>
+</div>
+<p>However, using numeric index to access an entity is often cumbersome, due to the fact that its position can rapidly change, and that the number itself is rarely descriptive of the entity you’re trying to access.</p>
+<p>Instead, Draftsman allows you to specify string IDs to entities to provide more meaning to what they are, and then access them by those string IDs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;first_inserter&quot;</span><span class="p">)</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;second_inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="s2">&quot;first_inserter&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read_hand_contents</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Ah, the first inserter!</span>
+</pre></div>
+</div>
+<p>In Blueprints, IDs must be unique, or else a <a class="reference internal" href="../reference/error.html#draftsman.error.DuplicateIDError" title="draftsman.error.DuplicateIDError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateIDError</span></code></a> will be raised:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;same&quot;</span><span class="p">)</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;same&quot;</span><span class="p">)</span> <span class="c1"># DuplicateIDError: &#39;same&#39;</span>
+
+<span class="c1"># Outside of blueprints, this rule is only enforced when added to a</span>
+<span class="c1"># blueprint with the id already taken</span>
+<span class="n">outside_inserter</span> <span class="o">=</span> <span class="n">Inserter</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;same&quot;</span><span class="p">)</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outside_inserter</span><span class="p">)</span> <span class="c1"># DuplicateIDError: &#39;same&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="entity-associations">
+<span id="handbook-entities-entity-associations"></span><h2>Entity Associations<a class="headerlink" href="#entity-associations" title="Permalink to this heading"></a></h2>
+<p>In normal Factorio blueprint strings, associations between entities are usually indicated by an integer, which is the index of the entity in the master blueprint’s <code class="docutils literal notranslate"><span class="pre">entities</span></code> list.
+Consider this hypothetical example, where we specify a circuit connection between two inserters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">()</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># entity[0]</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># entity[1]</span>
+
+<span class="c1"># Add a red wire connection between entity number 0 and entity number 1</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">add_circuit_connection</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Keep in mind, according to the blueprint string format &quot;entity_id&quot; is 1-indexed</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+<span class="c1"># {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: 2}]}}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+<span class="c1"># {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: 1}]}}</span>
+</pre></div>
+</div>
+<p>However, <code class="docutils literal notranslate"><span class="pre">blueprint.entities</span></code> at this point is by no means static, and the indices of each entity is subject to change at any point.
+If one of the connected entities is deleted, the connection would fail without warning because the opposite side would have no knowledge that its pair has been removed.
+Even worse, if there were other entities in the blueprint when the entity was removed, and another entity occipies the index that the deleted entity used to exist in, the connection might attempt to join to an entirely different entity!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Continuing on from above:</span>
+<span class="c1"># If we insert a new entity inbetween the two inserters</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wooden-chest&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># After translating into 0-indexed space, we now have:</span>
+<span class="c1"># [0]: &quot;inserter&quot;: connected to entities[1]</span>
+<span class="c1"># [1]: &quot;wooden-chest&quot;: No connections</span>
+<span class="c1"># [2]: &quot;inserter&quot;: connected to entities[0]</span>
+
+<span class="c1"># This breaks at least one connection, and both would have broken if we inserted</span>
+<span class="c1"># the wooden-chest at the beginning instead of the middle.</span>
+</pre></div>
+</div>
+<p>Clearly, static integers are not enough to keep track of an entity’s associations with each other.
+What other options do we have?</p>
+<p>We could iterate over each connection and fix any connections that change when the index of the entity it references changes, but this is hard to keep track of and computationally expensive.</p>
+<p>We could store some immutable identifier, such as a string ID and use that as a connection point, but the same problem as before arises if you change the ID of an entity midway through. This also plays poorly with Groups, as the only way to keep connections consistent is to specify them in “global” terms, and change them every time their global position changes, which is also computationally expensive.</p>
+<p>We could prohibit adding connections and wait until all entities are placed in a blueprint before making connections, but this is neither flexible nor desirable.</p>
+<p>The solution that Draftsman uses is <code class="docutils literal notranslate"><span class="pre">Associations</span></code>, which are loose wrappers around <code class="docutils literal notranslate"><span class="pre">weakref.ref</span></code> that point to other <code class="docutils literal notranslate"><span class="pre">Entity</span></code> objects.
+By using direct references, we alleviate the problem of constantly changing connections every time the parent order changes, as the reference points to the data itself instead of a seperate marker:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># What you would actually see in Draftsman:</span>
+<span class="n">blueprint</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">()</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">add_circuit_connection</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wooden-chest&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+<span class="c1"># {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: &lt;Association to Inserter&gt;}]}}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+<span class="c1"># {}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+<span class="c1"># {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: &lt;Association to Inserter&gt;}]}}</span>
+</pre></div>
+</div>
+<p>Using references also keeps associated entities perfectly up to date with their connections, as they point to the same data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draftsman.classes.association</span> <span class="kn">import</span> <span class="n">Association</span>
+
+<span class="n">blueprint</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">()</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">add_circuit_connection</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Lets change one of the attributes of the first inserter</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+
+<span class="c1"># Now lets check the association of the second inserter</span>
+<span class="n">association</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">][</span><span class="s2">&quot;red&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;entity_id&quot;</span><span class="p">]</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">association</span><span class="p">,</span> <span class="n">Association</span><span class="p">)</span>
+
+<span class="c1"># Associations behave just like weakref.ref, calling it points to the original object</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">assocition</span><span class="p">(),</span> <span class="n">Inserter</span><span class="p">)</span>
+
+<span class="c1"># We can query the ID of the entity, and we find it&#39;s up to date</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">association</span><span class="p">()</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="c1"># &quot;test&quot;</span>
+</pre></div>
+</div>
+<p>By using <code class="docutils literal notranslate"><span class="pre">weakrefs</span></code> instead of direct references, a connection cannot keep an Entity from being deleted even when it still has other entities that associate with it.
+This prevents connections that should no longer be valid from being made by connecting to entities that are kept “alive” by the connection itself.
+This also has the benefit of keeping memory usage as small as possible.
+Associations default to <code class="docutils literal notranslate"><span class="pre">None</span></code> when the entity it should point to was collected, which rightfully throws an error when attempting to export:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">()</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;inserter&quot;</span><span class="p">,</span> <span class="n">tile_position</span> <span class="o">=</span> <span class="p">[</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">add_circuit_connection</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">del</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+<span class="c1"># {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: Association to None}]}}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="c1"># InvalidConnectionError: &#39;inserter&#39; entity at {&#39;x&#39;: -0.5, &#39;y&#39;: 0.5} is connected to an entity that</span>
+<span class="c1"># no longer exists</span>
+</pre></div>
+</div>
+<p>When exporting to Factorio, Associations are converted to their numeric index in the exported object to comply with the blueprint string format.
+This process also works the other way; connections in imported blueprint strings are automatically converted to Associations on import:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basically identical to the blueprint above, two inserters connected with a red wire</span>
+<span class="n">blueprint</span><span class="o">.</span><span class="n">load_from_string</span><span class="p">(</span><span class="s2">&quot;0eNqdkN0KgzAMhd8l150s1bKtrzJk+BNGQaO0dUyk7762uxG8GbsJOeXkfGk2aIeFZmvYg97AdBM70PcNnHlyM6Q3v84EGoynEQRwM2bFjqwnC0HEvqc3aAy1AGJvvKFvRhbrg5exjU6Nx2kB8+TiwMSJFENKxEIJWEGfEKtCxfi4ElOXPC6ZMBVL/Z5gopKhDiGIA1X+RC3/pGKmxo/n8+jdNQW8yLrMkFesLjd5URWW6qxC+ABGinpP&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># &lt;Inserter&gt;{&#39;name&#39;: &#39;inserter&#39;, &#39;position&#39;: {&#39;x&#39;: 311.5, &#39;y&#39;: -114.5}, &#39;connections&#39;: {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: &lt;Association to Inserter&gt;}]}}}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># &lt;Inserter&gt;{&#39;name&#39;: &#39;inserter&#39;, &#39;position&#39;: {&#39;x&#39;: 313.5, &#39;y&#39;: -114.5}, &#39;connections&#39;: {&#39;1&#39;: {&#39;red&#39;: [{&#39;entity_id&#39;: &lt;Association to Inserter&gt;}]}}}</span>
+</pre></div>
+</div>
+</section>
+<section id="entity-vs-entitylike">
+<h2><code class="docutils literal notranslate"><span class="pre">Entity</span></code> vs. <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code><a class="headerlink" href="#entity-vs-entitylike" title="Permalink to this heading"></a></h2>
+<p>In Draftsman, for extensibility there is a distinction between the <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code>.
+The basic distinction is this:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Entity</span></code> is for any entity type <strong>understood by Factorio</strong>, which includes all vanilla and modded entities; basically anything that can be actually placed in-game.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> is for any custom entity type for scripting functionality, and is defined more broadly and flexibly to accomodate this.</p></li>
+</ul>
+<p>If the object is an instance of <code class="docutils literal notranslate"><span class="pre">Entity</span></code>, the implicit assumption is that it must exist in Factorio in some form or another; Think assembling machines, pumps, drills, as well as entities that tend to act as frameworks for other entities, like <a class="reference internal" href="../reference/prototypes/electric_energy_interface.html#draftsman.prototypes.electric_energy_interface.ElectricEnergyInterface" title="draftsman.prototypes.electric_energy_interface.ElectricEnergyInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectricEnergyInterface</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">EntityLikes</span></code> are more flexible: EntityLikes can do anything, as long as it’s <code class="docutils literal notranslate"><span class="pre">get()</span></code> method resolves itself to one or more <code class="docutils literal notranslate"><span class="pre">Entity</span></code> objects.
+This <code class="docutils literal notranslate"><span class="pre">get</span></code> function allows an <code class="docutils literal notranslate"><span class="pre">EntityLike</span></code> that’s placed inside a <code class="docutils literal notranslate"><span class="pre">Blueprint</span></code> to be exported properly in a format understood by Factorio.
+A <code class="docutils literal notranslate"><span class="pre">Group</span></code> object is resolved to the entities it contains, a <code class="docutils literal notranslate"><span class="pre">RailPlanner</span></code> is resolved to the tracks it laid, etc.</p>
+<p>This allows the user to specify user classes that do some useful function that can be specified in the abstract before being resolved to entities.
+An examples could be a <code class="docutils literal notranslate"><span class="pre">Grid</span></code> class, that places a specific entity at an X and Y interval, such as for making large regular power grids:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draftsman.classes.blueprint</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+<span class="kn">from</span> <span class="nn">draftsman.classes.entitylike</span> <span class="kn">import</span> <span class="n">EntityLike</span>
+<span class="kn">from</span> <span class="nn">draftsman.entity</span> <span class="kn">import</span> <span class="n">new_entity</span>
+
+<span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="n">EntityLike</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Regular grid of substations spaced at their max distance.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="o">=</span><span class="s2">&quot;substation&quot;</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">dim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">off</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">)):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EntityLike</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity_name</span> <span class="o">=</span> <span class="n">entity_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">dimension</span>
+
+        <span class="k">if</span> <span class="s2">&quot;direction&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span> <span class="c1"># Optional</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of entities evenly spaced apart when resolved inside a Blueprint.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">entity</span> <span class="o">=</span> <span class="n">new_entity</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">entity_name</span><span class="p">,</span>
+                    <span class="n">tile_position</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">off</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">off</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="p">)</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+
+        <span class="c1"># TODO: connect each entity to it&#39;s neighbour</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">()</span>
+    <span class="n">blueprint</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">()</span>
+
+    <span class="n">blueprint</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Grid</span><span class="p">(</span><span class="s2">&quot;medium-electric-pole&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">off</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+
+    <span class="c1"># ...</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The code above is provided as a simple example, and does not take into account things like overlapping entities.
+It’s provided merely as a suggestion of the possiblities that structuring the module in this way provides.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The code above is under heavy development while I try to make it more intuitive and easier for users to specify thier own custom classes.
+Keep this in mind that behavior might change drastically from version to version while I iron out the details.</p>
+</div>
+</section>
+<section id="entity-merging">
+<span id="handbook-entities-entity-merging"></span><h2>Entity Merging<a class="headerlink" href="#entity-merging" title="Permalink to this heading"></a></h2>
+<p>When playing Factorio, the game allows you to place certian entities of similar types on top of other entities, which combines their attributes in specific ways. As now intruduced in version <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>, a subset of this behavior is now also supported in Draftsman.</p>
+<p>To be more specific, <em>entity merging</em> is defined with the following criteria:</p>
+<ol class="arabic simple">
+<li><p>Be an instance of the same class (<code class="docutils literal notranslate"><span class="pre">Container</span></code>, <code class="docutils literal notranslate"><span class="pre">TransportBelt</span></code>, <code class="docutils literal notranslate"><span class="pre">ElectricPole</span></code>, etc.)</p></li>
+<li><p>Have the exact same <a class="reference internal" href="../reference/classes/entity.html#draftsman.classes.entity.Entity.name" title="draftsman.classes.entity.Entity.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a></p></li>
+<li><p>Have the same <a class="reference internal" href="../reference/classes/entity.html#draftsman.classes.entity.Entity.id" title="draftsman.classes.entity.Entity.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">id</span></code></a> (can be <code class="docutils literal notranslate"><span class="pre">None</span></code>, but both must be <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p></li>
+<li><p>Occupy the exact same <a class="reference internal" href="../reference/classes/entity.html#draftsman.classes.entity.Entity.global_position" title="draftsman.classes.entity.Entity.global_position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">global_position</span></code></a></p></li>
+<li><p>Be facing the exact same <a class="reference internal" href="../reference/classes/mixins/directional.html#draftsman.classes.mixins.directional.DirectionalMixin.direction" title="draftsman.classes.mixins.directional.DirectionalMixin.direction"><code class="xref py py-attr docutils literal notranslate"><span class="pre">direction</span></code></a> (if applicable)</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Entity merging does <strong>NOT</strong> include <em>replacing</em>, such as defined under Factorio’s fast-replacable-group. This is why entity merging is described as a subset of Factorio’s behavior, as replacing entities with entities with different names is not (currently) implemented.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to technical reasons, merging power switches with power-wire connections (either “Cu0” or “Cu1”) right now is <strong>prohibited</strong>. Bascially, these wire connections are abnormal in that they are 1-directional, which makes the order in which entities merge important to the final outcome of the merging result, as there is no way to check from the entity that is being pointed to back to the power switch that points to it to update it’s connections. Fixing this is possible, but it requires a deliberate decision, and since this happens to be a minimal edge case and the merging of wire connections is already complex enough, this is the current behavior.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="blueprints.html" class="btn btn-neutral float-left" title="Blueprints" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="groups.html" class="btn btn-neutral float-right" title="Groups" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, redruin1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
