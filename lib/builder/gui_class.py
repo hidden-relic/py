@@ -24,7 +24,7 @@ class Framing:
 		self.offset=16
 		self.roof_data=[]
 		self.deck_data=[]
-		self.resetData()
+	;	self.resetData()
 
 		self.buildNotebooks()
 		self.buildRoofTab()
@@ -35,33 +35,9 @@ class Framing:
 	def applyScale(self, t):
 		return (t[0]*self.scale, t[1]*self.scale)
 	def fix(self, t):
-		return self.applyOffset(self.applyScale(t))
+		return self.applyScale(t)
 
 
-	def f(self, n):
-		self.t.forward(self.fix(n))
-	def b(self, n):
-		self.t.backward(self.fix(n))
-			
-	def l(self, d):
-		self.t.left(d)
-	def r(self, d):
-		self.t.right(d)
-	
-	def g(self, x, y):
-		self.u()
-		self.t.goto(x, y)
-		self.d()
-
-	def u(self):
-		self.t.penup()
-	def d(self):
-		self.t.pendown()
-	
-	def x(self, n):
-		self.g(self.t.xcor()+n, self.t.ycor())
-	def y(self, n):
-		self.g(self.t.xcor(), self.t.ycor()+n)
 
 	def buildMeasurementInput(self, parent, text, ft=True, inch=True, fr=True, defFt=0, defIn=0):
 		o = {"ft": False, "in": False, "fr": False}
@@ -168,6 +144,51 @@ class Framing:
 	def getLeg(self, a, b):
 		return math.sqrt((a**2)+(b**2))
 
+	def f(self, n):
+		self.t.forward(n)
+	def b(self, n):
+		self.t.backward(n)
+			
+	def l(self, d):
+		self.t.left(d)
+	def r(self, d):
+		self.t.right(d)
+	
+	def g(self, x, y):
+		self.u()
+		self.t.goto(x, y)
+		self.d()
+
+	def u(self):
+		self.t.penup()
+	def d(self):
+		self.t.pendown()
+	
+	def x(self, n):
+		self.g(self.t.xcor()+n, self.t.ycor())
+	def y(self, n):
+		self.g(self.t.xcor(), self.t.ycor()+n)
+
+	def north(self):
+		self.t.seth(90)
+	def south(self):
+		self.t.seth(270)
+	def east(self):
+		self.t.seth(0)
+	def west(self):
+		self.t.seth(180)
+
+	def drawRect(self, orient, width, length):
+		self.east()
+		_=self.f(width) if orient=='v' else self.f(length)
+		self.south()
+		_=self.f(length) if orient=='v' else self.f(width)
+		self.west()
+		_=self.f(width) if orient=='v' else self.f(length)
+		self.north()
+		_=self.f(length) if orient=='v' else self.f(width)
+
+
 	def buildNotebooks(self):
 		def mainNotebook(self):
 			self.main_notebook=ttk.Notebook(self.root, style='Main.TNotebook')
@@ -245,12 +266,12 @@ class Framing:
 			self.roof_draw_frame.pack(fill='both', expand=True)
 			self.roof_canvas=tk.Canvas(self.roof_draw_frame, width=1.0, height=1.0)
 			self.roof_canvas.pack(fill='both', expand=True)
-			self.t=RawTurtle(self.roof_canvas)
-			self.screen=self.t.getscreen()
-			self.cv=self.screen.getcanvas()
+			self.roof_t=RawTurtle(self.roof_canvas)
+			self.roof_screen=self.roof_t.getscreen()
+			self.cv=self.roof_screen.getcanvas()
 
-			self.screen.reset()
-			self.t.reset()
+			self.roof_screen.reset()
+			self.roof_t.reset()
 		buildRoofInput(self)
 		buildRoofData(self)
 		buildRoofDraw(self)
@@ -261,7 +282,7 @@ class Framing:
 		self.roof_depth_inches=self.toInch(self.roof_depth)
 		self.roof_ridge_inches=self.toInch(self.roof_ridge)
 		self.roof_pitch_inches=self.toInch(self.roof_pitch)
-		self.roof_soffit_inches=self.toInch(self.roof_soffit)
+		self.roof_soff/******************+++++++++++++++++++++++++++++++++++++++++++++++++++++++++9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990o///////////////////////////////////////////it_inches=self.toInch(self.roof_soffit)
 
 		self.run=(self.roof_width_inches/2)-(self.roof_ridge_inches/2)
 		self.rise=(self.run/12)*self.roof_pitch_inches
@@ -285,7 +306,8 @@ class Framing:
 		self.roof_data_leg.set(str(self.fromInch(self.leg)))
 
 	def roofDraw(self):
-		pass
+		self.t.x((self.root.winfo_screenwidth/2)-self.toScale(self.roof_ridge_inches))
+		self.drawRect(orient='v', width=self.toScale(self.roof_ridge_inches), length=self.toScale(12*12))
 
 	################
 
