@@ -2,18 +2,18 @@ from turtle import *
 # import tkcap
 from time import sleep
 
-tracer(56, 0)
+tracer(500, 0)
 
 tur = Turtle()
 # cap=tkcap.CAP(root)
 tur.getscreen().bgcolor("black")
 # tur.penup()
-# tur.goto((-200, -500))
+tur.goto((-200, 500))
 # tur.pendown()
 
 def star(turtle, size):
     turtle.pendown()
-    t=10
+    t=1
     if size <= 2:
         return
     else:
@@ -22,10 +22,10 @@ def star(turtle, size):
             # t*=0.9
             turtle.forward(size)
             turtle.penup()
-            star(turtle, size/2)
+            star(turtle, ((size/3)*2))
   
 
-            turtle.left(30)
+            turtle.left(36)
 t = 0.5
 for i in range(0, 1000, 10):
     tur.speed(0)
